@@ -213,85 +213,95 @@ def _create_angular_context(base_template, flask_request) -> str:
 
 angular_contexts = [
     ComplexContext(
-        name="angular",
-        description="Inside a script tag with Angular loaded and an Angular app element",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            "<script>$$payload</script>"
-            """<div ng-app="test" ng-controller="VulnerableController" class="ng-scope"></div>"""
-        ),
+        name="angular.body",
+        description="Inside div with Angular loaded and an Angular app element",
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <body ng-app>$$payload</body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.JS,
     ),
     ComplexContext(
         name="angular.ng-class",
-        description="As the ng-class attribute of a generic tag with loaded Angular ",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            "<body ng-app><tag ng-class=$$payload /></body>"),
+        description=(
+            "As the ng-class attribute of a generic tag with loaded Angular"
+        ),
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <body ng-app><tag ng-class=$$payload /></body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
     ComplexContext(
-        name="angular.ng-class",
-        description="As the ng-class attribute of a generic tag with loaded Angular ",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            "<body ng-app><tag ng-class=$$payload /></body>"),
+        name="angular.ng-click",
+        description=(
+            "As the ng-click attribute of a div with loaded Angular"
+        ),
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <body ng-app><div ng-click="$$payload">Click Me</div></body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
     ComplexContext(
         name="angular.attribute.interpolation",
-        description=("Inside interpolation symbols in a "
-                     "generic attribute of a generic tag with loaded Angular"),
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            "<body ng-app><tag class={{$$payload}} /></body>"),
+        description=(
+            "Inside interpolation symbols in a "
+            "generic attribute of a generic tag with loaded Angular"
+        ),
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <body ng-app><tag class="{{$$payload}}" /></body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
     ComplexContext(
-        name="angular.interpolation",
-        description="Into interpolation symbols inside the body tag with Angular loaded",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            """<body ng-app><div>{{$$payload}}</div></body>"""),
+        name="angular.body.interpolation",
+        description=(
+            "Into interpolation symbols inside the body tag with Angular loaded"
+        ),
+        base_template="""
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+            <body ng-app><div>{{$$payload}}</div></body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
     ComplexContext(
-        name="angular.interpolation.altsymbols",
-        description="Into alternate interpolation symbols [[]] inside the body tag with Angular loaded",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            """<script>"""
-            """angular.module('ng').config(function($$$$interpolateProvider) {"""
-            """$$$$interpolateProvider.startSymbol('[[').endSymbol(']]');});"""
-            """</script>"""
-            """<body ng-app>[[$$payload]]</body>"""),
-        implementation=_create_angular_context,
-        category=ContextCategory.Angular,
-    ),
-    ComplexContext(
-        name="angular.body",
-        description="Inside the body tag with Angular loaded",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            """<body ng-app>$$payload</body>"""),
+        name="angular.body.interpolation.altsymbols",
+        description=(
+            "Into alternate interpolation symbols [[]] inside the body tag with"
+            " Angular loaded"
+        ),
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <script>
+              angular.module('ng').config(function($$$$interpolateProvider) {
+              $$$$interpolateProvider.startSymbol('[[').endSymbol(']]');});
+              </script>
+              <body ng-app>[[$$payload]]</body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
     ComplexContext(
         name="angular.body.altsymbols",
-        description="Inside the body tag with Angular loaded using alternate interpolation symbols [[]]",
-        base_template=(
-            """<script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>"""
-            """<script>"""
-            """angular.module('ng').config(function($$$$interpolateProvider) {"""
-            """$$$$interpolateProvider.startSymbol('[[').endSymbol(']]');});"""
-            """</script>"""
-            """<body ng-app>$$payload</body>"""),
+        description=(
+            "Inside the body tag with Angular loaded using alternate"
+            " interpolation symbols [[]]"
+        ),
+        base_template="""
+              <script src="//ajax.googleapis.com/ajax/libs/angularjs/$version/angular.js"></script>
+              <script>
+              angular.module('ng').config(function($$$$interpolateProvider) {
+              $$$$interpolateProvider.startSymbol('[[').endSymbol(']]');});
+              </script>
+              <body ng-app>$$payload</body>
+            """,
         implementation=_create_angular_context,
         category=ContextCategory.Angular,
     ),
