@@ -148,7 +148,7 @@ def limit_items():
 @test_cases.add_test_case("/items/column?column=name&value=badger",
                           "Injection into column in WHERE unquoted")
 def column_items():
-  query = f"SELECT id, name, description, price, category FROM items WHERE {request.args.get('column', 'name')} LIKE '%{request.args.get('name', 'badger')}%' ORDER BY 1 ASC"
+  query = f"SELECT id, name, description, price, category FROM items WHERE {request.args.get('column', 'name')} LIKE '%{request.args.get('value', 'badger')}%' ORDER BY 1 ASC"
   return render_template("items.html", db_items=execute_query(query))
 
 
@@ -156,5 +156,5 @@ def column_items():
 @test_cases.add_test_case("/items/column/quoted?column=name&value=badger",
                           "Injection into column in WHERE quoted")
 def column_quoted_items():
-  query = f"SELECT id, name, description, price, category FROM items WHERE `{request.args.get('column', 'name')}` LIKE '%{request.args.get('name', 'badger')}%' ORDER BY 1 ASC"
+  query = f"SELECT id, name, description, price, category FROM items WHERE `{request.args.get('column', 'name')}` LIKE '%{request.args.get('value', 'badger')}%' ORDER BY 1 ASC"
   return render_template("items.html", db_items=execute_query(query))
