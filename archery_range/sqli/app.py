@@ -16,6 +16,7 @@
 import os
 from flask import Flask
 from flask import render_template
+from blueprints.googlesql.googlesql import googlesql_blueprint
 from blueprints.mysql.mysql import mysql_blueprint
 from blueprints.postgresql.postgresql import postgresql_blueprint
 from custom_message_error import CustomMessageError
@@ -24,7 +25,7 @@ from googlesql_database.db_init import *
 app = Flask(__name__)
 app.register_blueprint(postgresql_blueprint, url_prefix="/sqli/postgresql")
 app.register_blueprint(mysql_blueprint, url_prefix="/sqli/mysql")
-
+app.register_blueprint(googlesql_blueprint, url_prefix="/sqli/googlesql")
 
 @app.route("/")
 @app.route("/sqli/")
