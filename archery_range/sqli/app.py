@@ -19,6 +19,7 @@ from flask import render_template
 from blueprints.mysql.mysql import mysql_blueprint
 from blueprints.postgresql.postgresql import postgresql_blueprint
 from custom_message_error import CustomMessageError
+from googlesql_database.db_init import *
 
 app = Flask(__name__)
 app.register_blueprint(postgresql_blueprint, url_prefix="/sqli/postgresql")
@@ -38,4 +39,5 @@ def custom_message_error_handler(e):
       error_message=e.message), e.status_code
 
 if __name__ == "__main__":
+  initialize_googlesql_db()
   app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
