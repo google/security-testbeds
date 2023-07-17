@@ -1,25 +1,33 @@
 import os
 from google.cloud import spanner
-import csv
+import csv,ast
 from google3.pyglib import resources
 OPERATION_TIMEOUT_SECONDS = 200
 
-instance_id = os.environ.get("SPANNER_INSTANCE_ID", "tfgen-spanid-20230712060131434")
+instance_id = os.environ.get(
+    "SPANNER_INSTANCE_ID", "tfgen-spanid-20230712060131434"
+)
 database_id = "archery_range"
 
 def get_data_from_csv(filename):
   filepath = resources.GetResourceFilename("google3/third_party/archery_range/sqli/sqli_server/googlesql_database/csv_files/"+filename)
   data = []
-  with open(filename,'r') as csvfile:
-    for row in csvfile:
-      data.append(tuple(row))
+  with open(filepath,'r') as csvfile:
+    for row in csv.reader(csvfile,quotechar='"'):
+      actual_row = []
+      for entry in row:
+        try:
+          actual_row.append(ast.literal_eval(str(entry)))
+        except:
+          actual_row.append(str(entry))
+      data.append(tuple(actual_row))
   return data
 
 def build_db(database):
   operation = database.update_ddl(
       ddl_statements=[
           """ CREATE TABLE IF NOT EXISTS `users` (`username` STRING(1024) NOT NULL,`color` STRING(1024) NOT NULL,`email` STRING(1024) NOT NULL ) PRIMARY KEY (`username`) """,
-          """ CREATE TABLE IF NOT EXISTS `items` (`id` INT64 NOT NULL, `name` STRING(1024) NOT NULL, `description` STRING(1024) NOT NULL, `price` NUMERIC NOT NULL, `category` STRING(1024), `is_available` BOOL NOT NULL ) PRIMARY KEY(`id`) """,
+          """ CREATE TABLE IF NOT EXISTS `items` (`id` INT64 NOT NULL, `name` STRING(1024) NOT NULL, `description` STRING(1024) NOT NULL, `price` FLOAT64 NOT NULL, `category` STRING(1024), `is_available` BOOL NOT NULL ) PRIMARY KEY(`id`) """,
           """ CREATE TABLE IF NOT EXISTS `carts` (`id` INT64 NOT NULL, `username` STRING(1024) NOT NULL) PRIMARY KEY (`id`) """,
           """ CREATE TABLE IF NOT EXISTS `cartitems` (`id` INT64 NOT NULL, `item_id` INT64 NOT NULL, `quantity` INT64 NOT NULL, `cart_id` INT64 NOT NULL) PRIMARY KEY(`id`) """,
       ],
