@@ -22,10 +22,14 @@ def get_data_from_csv(filename):
           actual_row.append(str(entry))
       data.append(tuple(actual_row))
   return data
-
+#TODO : Rollback the Drop statements once the schema of tables are updated
 def build_db(database):
   operation = database.update_ddl(
       ddl_statements=[
+          """DROP TABLE IF EXISTS `users`""",
+          """DROP TABLE IF EXISTS `items`""",
+          """DROP TABLE IF EXISTS `carts`""",
+          """DROP TABLE IF EXISTS `cartitems`""",
           """ CREATE TABLE IF NOT EXISTS `users` (`username` STRING(1024) NOT NULL,`color` STRING(1024) NOT NULL,`email` STRING(1024) NOT NULL ) PRIMARY KEY (`username`) """,
           """ CREATE TABLE IF NOT EXISTS `items` (`id` INT64 NOT NULL, `name` STRING(1024) NOT NULL, `description` STRING(1024) NOT NULL, `price` FLOAT64 NOT NULL, `category` STRING(1024), `is_available` BOOL NOT NULL ) PRIMARY KEY(`id`) """,
           """ CREATE TABLE IF NOT EXISTS `carts` (`id` INT64 NOT NULL, `username` STRING(1024) NOT NULL) PRIMARY KEY (`id`) """,
