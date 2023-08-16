@@ -1,7 +1,7 @@
 import os
 from google.cloud import spanner
 import csv,ast
-from google3.pyglib import resources
+# resources dependency
 OPERATION_TIMEOUT_SECONDS = 200
 
 instance_id = os.environ.get(
@@ -10,7 +10,7 @@ instance_id = os.environ.get(
 database_id = "archery_range"
 
 def get_data_from_csv(filename):
-  filepath = resources.GetResourceFilename("google3/third_party/archery_range/sqli/sqli_server/googlesql_database/csv_files/"+filename)
+  filepath = str("./googlesql_database/csv_files/"+filename)
   data = []
   with open(filepath,'r') as csvfile:
     for row in csv.reader(csvfile,quotechar='"'):
