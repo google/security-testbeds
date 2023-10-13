@@ -7,9 +7,13 @@
 
 2. Connect to the Selenium dashboard: https://localhost:4444/
 
-3. Verify Selenium Grid is working as intended by requesting a sample website (google.com): 
+3. Verify Selenium Grid is working as intended by requesting a sample website (google.com) by running the python3 script below: 
 
-`from selenium import webdriver
+```python
+# selenium_test.py
+# Run with:
+# python3 selenium_test.py
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 options = ChromeOptions()
@@ -21,5 +25,7 @@ if not "Google" in driver.title:
     raise Exception("Unable to load google page!")
 else:
     print("All good, google.com page loaded!")
-driver.quit()`
+driver.quit()
+```
+
 
