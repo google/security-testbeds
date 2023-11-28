@@ -1,13 +1,13 @@
 # Selenium Grid Chrome
 # Setup
 
-1. Create docker image with this command: 
+1. Create docker image with this command:
 
 `docker run -d --platform linux/amd64 --name selenium-chrome -p 4444:4444 --shm-size="2g" selenium/standalone-chrome:latest`
 
 2. Connect to the Selenium dashboard: http://localhost:4444/
 
-3. Verify Selenium Grid is working as intended by requesting a sample website (google.com) by running the python3 script below: 
+3. Verify Selenium Grid is working as intended by requesting a sample website (google.com) by running the python3 script below:
 
 ```python
 # selenium_test.py
