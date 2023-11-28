@@ -27,5 +27,3 @@ else:
     print("All good, google.com page loaded!")
 driver.quit()
 ```
-
-
