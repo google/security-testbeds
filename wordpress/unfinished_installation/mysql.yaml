@@ -1,0 +1,64 @@
+# The k8s service exposing the MySQL service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: pre-setup-wp-mysql
+  labels:
+    app: pre-setup-wp
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: pre-setup-wp
+    tier: pre-setup-wp-mysql
+  clusterIP: None
+---
+# The PVC required by the MySQL app.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: pre-setup-wp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+# The MySQL app.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pre-setup-wp-mysql
+  labels:
+    app: pre-setup-wp
+spec:
+  selector:
+    matchLabels:
+      app: pre-setup-wp
+      tier: pre-setup-wp-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pre-setup-wp
+        tier: pre-setup-wp-mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: pre-setup-wp-mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: ${db_password}
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: pre-setup-wp-mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: pre-setup-wp-mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim

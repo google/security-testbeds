@@ -1,0 +1,67 @@
+# The k8s service exposing the WordPress app.
+apiVersion: v1
+kind: Service
+metadata:
+  name: pre-setup-wp
+  labels:
+    app: pre-setup-wp
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: pre-setup-wp
+    tier: frontend
+  type: LoadBalancer
+---
+# The PVC required by the WordPress app.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pre-setup-wp-pv-claim
+  labels:
+    app: pre-setup-wp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+# WordPress application.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pre-setup-wp
+  labels:
+    app: pre-setup-wp
+spec:
+  selector:
+    matchLabels:
+      app: pre-setup-wp
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pre-setup-wp
+        tier: frontend
+    spec:
+      # By default the wordpress image is in the pre-setup state.
+      containers:
+      - image: wordpress
+        name: pre-setup-wp
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: pre-setup-wp-mysql
+        - name: WORDPRESS_DB_PASSWORD
+          value: ${db_password}
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: pre-setup-wp-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: pre-setup-wp-persistent-storage
+        persistentVolumeClaim:
+          claimName: pre-setup-wp-pv-claim
