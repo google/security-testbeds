@@ -1,6 +1,6 @@
 FROM rocker/rstudio:latest
 
-ENV DEFAULT_USER=rstudio
+ENV USER=adm
 ENV PASSWORD=ashley
 
 EXPOSE 8787
