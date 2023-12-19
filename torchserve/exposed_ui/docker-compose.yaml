@@ -1,0 +1,76 @@
+# TorchServe testbed for detecting exposed management interface
+#
+# The risks of exposing TorchServe management interface to the Internet
+# were initially demonstrated in the "ShellTorch" attack
+# (https://www.oligo.security/shelltorch) that allowed arbitrary code
+# execution by chaining CVE-2023-43654 and CVE-2022-1471.
+#
+# Although TorchServe versions 0.8.2 and later are not vulnerable to
+# insecure deserialization (CVE-2022-1471), they still allow arbitrary
+# code execution via the management interface, if the `allowed_urls`
+# configuration option is not sufficiently restricted.
+#
+# This testbed builds three TorchServe containers:
+#
+#   - torchserve-081: 0.8.1, vulnerable to ShellTorch attack
+#   - torchserve-082: 0.8.2, with ShellTorch mitigations, but still vulnerable
+#   - torchserve-safe: 0.8.2, with `allowed_urls` correctly restricted
+#   - torchserve-latest: latest version, with default settings (currently 0.9.0, vulnerable)
+
+# Shared configuration for TorchServe containers
+x-torchserve-common: &torchserve-common
+  platform: linux/amd64 # TorchServe doesn't support ARM at the moment
+  #ports:
+  #  - "8080"
+  #  - "8081"
+  #  - "8082"
+  #  - "7070"
+  #  - "7071"
+  networks:
+    - torchserve-network
+
+services:
+  # 0.8.1 is the last version that is vulnerable to ShellTorch attack
+  torchserve-081:
+    container_name: torchserve-081
+    <<: *torchserve-common  # Inherits common settings
+    image: pytorch/torchserve:0.8.1-cpu
+
+  # 0.8.2 with default `allowed_urls` configuration - still vulnerable
+  torchserve-082:
+    container_name: torchserve-082
+    <<: *torchserve-common
+    image: pytorch/torchserve:0.8.2-cpu
+
+  # 0.8.2 with restricted `allowed_urls` configuration - safe
+  torchserve-safe:
+    container_name: torchserve-safe
+    <<: *torchserve-common
+    image: pytorch/torchserve:0.8.2-cpu
+    entrypoint: >
+      /bin/sh -c '
+        (cat config.properties; echo "allowed_urls = http://localhost/*") > safe_config.properties;
+        torchserve --start --ts-config safe_config.properties;
+        tail -f /dev/null'
+
+  # Latest version with default `allowed_urls` configuration (atm 0.9.0, still vulnerable)
+  torchserve-latest:
+    container_name: torchserve-latest
+    <<: *torchserve-common  # Inherits common settings
+    image: pytorch/torchserve:latest-cpu  # Latest version tag
+
+  # Tsunami container
+  tsunami:
+    container_name: tsunami
+    build: ./tsunami/
+    networks:
+      - torchserve-network
+    environment:
+      - USE_CUSTOM_PLUGINS  # Include custom plugins; set to 'true' to include
+      - USE_DEFAULT_PLUGINS # Include default plugins; set to 'false' to exclude
+    logging:
+      driver: none
+
+networks:
+  torchserve-network:
+    driver: bridge
