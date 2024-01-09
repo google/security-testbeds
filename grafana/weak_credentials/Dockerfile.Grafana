@@ -1,0 +1,12 @@
+FROM grafana/grafana:10.0.0
+
+ENV GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+
+# override some default values
+ENV GF_SECURITY_ADMIN_USER=admin
+ENV GF_SECURITY_ADMIN_PASSWORD=qwertyuiop
+ENV GF_SECURITY_DISABLE_BRUTE_FORCE_LOGIN_PROTECTION=TRUE
+
+HEALTHCHECK CMD curl --fail http://localhost:3000/ || exit
+
+EXPOSE 3000

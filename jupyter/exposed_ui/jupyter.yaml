@@ -1,0 +1,48 @@
+# k8s LoadBalancer Service exposing the Jupyter Notebook app.
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+    version: ${jupyter_version}
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8888
+  selector:
+    app: jupyter
+    version: ${jupyter_version}
+  type: LoadBalancer
+---
+# The Jupyter Notebook app.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+    version: ${jupyter_version}
+spec:
+  selector:
+    matchLabels:
+      app: jupyter
+      version: ${jupyter_version}
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jupyter
+        tier: frontend
+        version: ${jupyter_version}
+    spec:
+      containers:
+      - name: jupyter
+        image: jupyter/base-notebook:${jupyter_version}
+        ports:
+        - containerPort: 8888
+        command: [ "start-notebook.sh" ]
+        args: [ "--NotebookApp.token='${notebook_token}'" ]

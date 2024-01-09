@@ -1,0 +1,52 @@
+# k8s LoadBalancer Service exposing the vulnerable Apache Flink service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache-flink
+  labels:
+    app: apache-flink
+    version: ${flink_version}
+spec:
+  ports:
+  - protocol: TCP
+    port: 8080
+    name: http
+    targetPort: 8081
+  selector:
+    app: apache-flink
+    version: ${flink_version}
+    tier: frontend
+  type: LoadBalancer
+---
+# The vulnerable Apache Flink service.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-flink
+  labels:
+    app: apache-flink
+    version: ${flink_version}
+spec:
+  selector:
+    matchLabels:
+      app: apache-flink
+      version: ${flink_version}
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: apache-flink
+        version: ${flink_version}
+        tier: frontend
+    spec:
+      containers:
+      - name: apache-flink
+        image: flink:${flink_version}
+        ports:
+        - containerPort: 8081
+        args: [ "jobmanager" ]
+        env:
+        - name: FLINK_PROPERTIES
+          value: "jobmanager.rpc.address: jobmanager"

@@ -1,0 +1,46 @@
+# k8s LoadBalancer Service exposing the Zeppelin Notebook app.
+apiVersion: v1
+kind: Service
+metadata:
+  name: apachezeppelin
+  labels:
+    app: zeppelin
+    version: ${zeppelin_version}
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8080
+  selector:
+    app: zeppelin
+    version: ${zeppelin_version}
+  type: LoadBalancer
+---
+# The Zeppelin Notebook app.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeppelin
+  labels:
+    app: zeppelin
+    version: ${zeppelin_version}
+spec:
+  selector:
+    matchLabels:
+      app: zeppelin
+      version: ${zeppelin_version}
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zeppelin
+        tier: frontend
+        version: ${zeppelin_version}
+    spec:
+      containers:
+      - name: zeppelin
+        image: apache/zeppelin:${zeppelin_version}
+        ports:
+        - containerPort: 8080

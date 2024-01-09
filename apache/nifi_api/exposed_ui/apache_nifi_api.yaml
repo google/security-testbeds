@@ -1,0 +1,43 @@
+# k8s LoadBalancer Service exposing the unprotected Apache NiFI API service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache-nifi-api
+  labels:
+    app: apache-nifi-api
+spec:
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 8080
+  selector:
+    app: apache-nifi-api
+  type: LoadBalancer
+---
+# The vulnerable Apache NiFI API service with exposed UI.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-nifi-api
+  labels:
+    app: apache-nifi-api
+spec:
+  selector:
+    matchLabels:
+      app: apache-nifi-api
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: apache-nifi-api
+        tier: frontend
+    spec:
+      containers:
+        - name: apache-nifi-api
+          image: apache/nifi:1.12.0
+          ports:
+            - containerPort: 8080
+          command: ["../scripts/start.sh"]
