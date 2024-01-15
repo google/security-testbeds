@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-jupyter
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 9000
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: kind/healthcheck:2c72078b03cea50e32652395e77e14642ebb4755614b0b32d99f76e0f736788e
+  image: kind/challenge:66f6bba4ad67c69da4f89fd8320a1a7c4bb6a82b92afe3de2031fa3ca0096d88
