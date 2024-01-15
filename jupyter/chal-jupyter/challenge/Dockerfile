@@ -23,11 +23,14 @@ RUN pip3 install jupyter
 
 RUN mkdir -p /home/user
 
-COPY flag / 
+
+#COPY jupyter_server_config.json /home/user/.jupyter/jupyter_server_config.json
+
+RUN sed -i '27i FLAG' /usr/local/lib/python3.8/dist-packages/jupyter_server/templates/page.html
 
 COPY start.sh /home/user/start.sh
 RUN chmod +777 /home/user/start.sh
-  
+
 FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d72ba1d8fdb6f0f9ff3757364f
 
 COPY --from=chroot / /chroot
