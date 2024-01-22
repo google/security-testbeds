@@ -11,4 +11,4 @@
    
 2. Run with:
    
-   `docker run --rm  -p 8888:80 --name phpd-app --platform linux/amd64 phpd-app`
+   `docker run --rm  -p 8888:80 --name phpd-app --platform linux/amd64 phpd-arbitrary-file-write`
