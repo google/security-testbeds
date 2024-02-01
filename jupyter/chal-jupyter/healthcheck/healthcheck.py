@@ -16,7 +16,7 @@
 
 import pwnlib.util.web
 
-if b"FLAG" in pwnlib.util.web.wget("http://localhost:9000/login?next=%2Ftree%3F"):
+if b"Jupyter" in pwnlib.util.web.wget("http://localhost:9000/login?next=%2Ftree%3F"):
       exit(0)
 
 exit(1)
