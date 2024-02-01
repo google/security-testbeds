@@ -1,7 +1,13 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: jupyter-exposed-ui
+---
 apiVersion: kctf.dev/v1
 kind: Challenge
 metadata:
-  name: chal-jupyter
+  name: challenge
+  namespace: jupyter-exposed-ui
 spec:
   deployed: true
   powDifficultySeconds: 0
@@ -10,8 +16,23 @@ spec:
     ports:
       - protocol: "TCP"
         targetPort: 9000
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: /chroot/flag
+                readOnly: true
+        volumes:
+          - name: flag-volume
+            secret:
+              defaultMode: 0555
+              secretName: flag-secret
+              optional: true
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: kind/healthcheck:2c72078b03cea50e32652395e77e14642ebb4755614b0b32d99f76e0f736788e
-  image: kind/challenge:66f6bba4ad67c69da4f89fd8320a1a7c4bb6a82b92afe3de2031fa3ca0096d88
+    image: kind/healthcheck:638853d938b417b702da1a2d97961ef5569863d95a2e1921f2369825b9104996
+  image: kind/challenge:bba08fae31ed191bc304173ac49bdc62e261fcaa5f9f1ef6d8e438e7ea91e19d

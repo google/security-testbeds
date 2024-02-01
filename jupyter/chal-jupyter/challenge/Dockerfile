@@ -24,10 +24,6 @@ RUN pip3 install jupyter
 RUN mkdir -p /home/user
 
 
-#COPY jupyter_server_config.json /home/user/.jupyter/jupyter_server_config.json
-
-RUN sed -i '27i FLAG' /usr/local/lib/python3.8/dist-packages/jupyter_server/templates/page.html
-
 COPY start.sh /home/user/start.sh
 RUN chmod +777 /home/user/start.sh
 
@@ -36,9 +32,12 @@ FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d
 COPY --from=chroot / /chroot
 
 RUN chown -Rc user /chroot/home/user
+RUN chown -Rc user /chroot/usr/local/lib/python3.8/dist-packages/jupyter_server/templates/
+
 VOLUME /chroot/home/user/
+VOLUME /chroot/usr/local/lib/python3.8/dist-packages/jupyter_server/templates
 
 COPY nsjail.cfg /home/user/nsjail.cfg
    
 CMD kctf_setup \
-    && kctf_drop_privs nsjail -v --config /home/user/nsjail.cfg --port 9000 /home/user/start.sh
+    && kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 9000 /home/user/start.sh
