@@ -5,7 +5,7 @@ FLAG=$( < /flag/flag)
 if ! grep -q $FLAG /usr/local/lib/python3.8/dist-packages/jupyter_server/templates/page.html; then
 	sed -i 26r/flag/flag /usr/local/lib/python3.8/dist-packages/jupyter_server/templates/page.html;
 fi
-unset flag
+unset FLAG
 
 
 # Start node web server
