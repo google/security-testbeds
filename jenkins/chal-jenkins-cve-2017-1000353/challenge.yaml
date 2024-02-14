@@ -1,0 +1,37 @@
+#kind: Namespace
+#apiVersion: v1
+#metadata:
+#  name: jenkins-rce
+#---
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-jenkins
+#  namespace: jenkins-rce
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: /chroot/flag
+                readOnly: true
+        volumes:
+          - name: flag-volume
+            secret:
+              defaultMode: 0555
+              secretName: flag-secret
+              optional: true
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: false
+  image: kind/challenge:676a83ea78cce016ccd9da390aa891134573901d4dfdb5bdf968164ff5519e66
