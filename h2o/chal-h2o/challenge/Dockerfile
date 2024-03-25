@@ -21,7 +21,7 @@ RUN apt-get update && \
 RUN wget http://h2o-release.s3.amazonaws.com/h2o/rel-3.46.0/1/h2o-3.46.0.1.zip
 RUN unzip h2o-3.46.0.1.zip
 
-ADD realm.properties /h2o-3.46.0.1
+#ADD realm.properties /h2o-3.46.0.1
 
 ADD startup.sh /
 RUN chmod +777 /startup.sh
