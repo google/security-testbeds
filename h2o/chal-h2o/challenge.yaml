@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-sample
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:9baead3a5c7735aab5998051a05255404526399ff81dd467ef70887a978f8e98
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:5ed8d98cffae4ba57520e51dfc9b8013b3f149d09f67afcf7cb396fa38aaa3de
