@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  master:
+    image: docker.io/bitnami/spark:3.4.2
+    entrypoint: ["/bin/bash", "-c", "/opt/bitnami/scripts/spark/entrypoint.sh /opt/bitnami/scripts/spark/run.sh"]
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - '8080:8080'
