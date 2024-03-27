@@ -1,0 +1,38 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: chal-apache
+  labels:
+    name: chal-apache
+---
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-apache
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: /chroot/flag
+                readOnly: true
+        volumes:
+          - name: flag-volume
+            secret:
+              defaultMode: 0555
+              secretName: flag-secret
+              optional: true
+  healthcheck:
+    enabled: true
+    image: kind/healthcheck:e7eff8dbe8a9512bfd8c3a85c481272ef455eaa24ab262839f58ed840114064d
+  image: kind/challenge:b4b56c4d9189e52c6ac389376f7ee1b23746322c144fe6550bba3694bd6637b7
