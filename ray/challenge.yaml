@@ -1,0 +1,17 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-ray
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: kind/healthcheck:aa4f8cb5c7a7b1b61f0d80443733be0658a79d0ca9aea7a87058f0919c68e9e4
+  image: kind/challenge:20dee417f57d7ea09543f30ea25626a25f5476095c6011545bf43a676e2b218b
