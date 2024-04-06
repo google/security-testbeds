@@ -47,3 +47,6 @@ curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
   --insecure
 ```
 it will response with `{"code":16,"message":"token not valid. see https://argo-workflows.readthedocs.io/en/release-3.5/faq/"}` which prove us that there is a authentication layer.
+
+
+Ref: mostly from https://spacelift.io/blog/argo-workflows and https://argo-workflows.readthedocs.io/en/stable/argo-server-auth-mode/
