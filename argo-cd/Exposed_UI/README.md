@@ -2,7 +2,7 @@
 
 ```bash
 kubectl create namespace argocdexposed
-kubectl apply -n argocdexposed -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.4/manifests/install.yaml
+kubectl apply -n argocdexposed -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl edit -n argocdexposed cm argocd-cm -o yaml
 ```
 
