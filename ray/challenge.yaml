@@ -1,7 +1,7 @@
 apiVersion: kctf.dev/v1
 kind: Challenge
 metadata:
-  name: chal-ray
+  name: challenge
 spec:
   deployed: true
   powDifficultySeconds: 0
@@ -10,8 +10,24 @@ spec:
     ports:
       - protocol: "TCP"
         targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/chroot/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: ray-exposed-ui-secret-provider
   healthcheck:
     # TIP: disable the healthcheck during development
-    enabled: true
-    image: kind/healthcheck:aa4f8cb5c7a7b1b61f0d80443733be0658a79d0ca9aea7a87058f0919c68e9e4
-  image: kind/challenge:20dee417f57d7ea09543f30ea25626a25f5476095c6011545bf43a676e2b218b
+    enabled: false
+    image: kind/healthcheck:ea4cb3777c14cc27f89d7c824a50e6634240b8c2294f8d7ecb9ec3d52e5fb008
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:c37864af168835fd250d4936417b4b02fa007bd02c741442428838cf1dd91212
