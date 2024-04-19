@@ -1,6 +1,6 @@
 FROM rocker/rstudio:latest
 
-ENV USER=adm
 ENV PASSWORD=ashley
+ENV TERM=xterm
 
 EXPOSE 8787
