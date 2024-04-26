@@ -1,0 +1,33 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-h2o
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: false
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: h2o-exposed-ui-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:d7d53d3812187a268d4e5381e1117d11e16bc1ddda17a531e66ec02522f12686
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:b9a8bd45db3b87179cc4ebbdc75dcf0130970e5f11c24e8e096650da99e08531
