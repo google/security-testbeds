@@ -61,13 +61,3 @@ CMD echo "user: MD5:$(cat /flag/pass.txt)" > /chroot/h2o/realm.properties; \
     kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/rootflag.txt) --config /nsjail.cfg --port 1337 -- /startup.sh & \
     tail -f /chroot/logs/log
 
-## To setup password:
-# $ java -cp /opt/h2oai/h2o-3/h2o.jar org.eclipse.jetty.util.security.Password user pass
-# > 19:01:51.510 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @759ms to org.eclipse.jetty.util.log.Slf4jLog
-# > pass
-# > OBF:1y0s1v1p1v2p1y0y
-# > MD5:d1da7823d2dd16df92c489d8aa5e4019
-# > CRYPT:usGhvISzyaLuU
-# $ echo 'user: MD5:d1da7823d2dd16df92c489d8aa5e4019' > realm.properties
-## Start server
-#java -jar /opt/h2oai/h2o-3/h2o.jar -hash_login -login_conf realm.properties
