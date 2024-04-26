@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Caffeine API Plugin
+Specification-Version: 3.1
+Implementation-Title: Caffeine API Plugin
+Implementation-Version: 3.1.8-133.v17b_1ff2e0599
+Group-Id: io.jenkins.plugins
+Artifact-Id: caffeine-api
+Short-Name: caffeine-api
+Long-Name: Caffeine API Plugin
+Url: https://github.com/jenkinsci/caffeine-api-plugin
+Plugin-Version: 3.1.8-133.v17b_1ff2e0599
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: Apache License v2
+Plugin-License-Url: https://www.apache.org/licenses/LICENSE-2.0.txt
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/caffeine-api-
+ plugin.git
+Plugin-ScmTag: 17b1ff2e05993c69ebde3ae97c5ce777fc4b99fd
+Plugin-ScmUrl: https://github.com/jenkinsci/caffeine-api-plugin/
+Plugin-GitHash: 17b1ff2e05993c69ebde3ae97c5ce777fc4b99fd
+Implementation-Build: 17b1ff2e05993c69ebde3ae97c5ce777fc4b99fd
+

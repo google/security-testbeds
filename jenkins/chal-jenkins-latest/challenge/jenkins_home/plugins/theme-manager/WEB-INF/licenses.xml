@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<l:dependencies xmlns:l='licenses' groupId='io.jenkins.plugins' artifactId='theme-manager' version='215.vc1ff18d67920'><l:dependency name='Theme Manager' groupId='io.jenkins.plugins' artifactId='theme-manager' version='215.vc1ff18d67920' url='https://github.com/jenkinsci/theme-manager-plugin'><l:description>The Jenkins Plugins Parent POM Project</l:description><l:license name='MIT License' url='https://opensource.org/licenses/MIT'/></l:dependency><l:dependency name='JSON in Java' groupId='org.json' artifactId='json' version='20230227' url='https://github.com/douglascrockford/JSON-java'><l:description>JSON is a light-weight, language independent, data interchange format.
+        See http://www.JSON.org/
+
+        The files in this package implement JSON encoders/decoders in Java.
+        It also includes the capability to convert between JSON and XML, HTTP
+        headers, Cookies, and CDL.
+
+        This is a reference implementation. There is a large number of JSON packages
+        in Java. Perhaps someday the Java community will standardize on one. Until
+        then, choose carefully.</l:description><l:license name='Public Domain' url='https://github.com/stleary/JSON-java/blob/master/LICENSE'/></l:dependency><l:dependency name='commons-lang3 v3.x Jenkins API Plugin' groupId='io.jenkins.plugins' artifactId='commons-lang3-api' version='3.13.0-62.v7d18e55f51e2' url='https://github.com/jenkinsci/commons-lang3-api-plugin'><l:description>The Jenkins Plugins Parent POM Project</l:description><l:license name='Apache-2.0' url='https://opensource.org/licenses/Apache-2.0'/></l:dependency><l:dependency name='Apache Commons Lang' groupId='org.apache.commons' artifactId='commons-lang3' version='3.13.0' url='https://commons.apache.org/proper/commons-lang/'><l:description>Apache Commons Lang, a package of Java utility classes for the
+  classes that are in java.lang's hierarchy, or are considered to be so
+  standard as to justify existence in java.lang.</l:description><l:license name='Apache-2.0' url='https://www.apache.org/licenses/LICENSE-2.0.txt'/></l:dependency></l:dependencies>

@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: commons-lang3 v3.x Jenkins API Plugin
+Specification-Version: 3.13
+Implementation-Title: commons-lang3 v3.x Jenkins API Plugin
+Implementation-Version: 3.13.0-62.v7d18e55f51e2
+Group-Id: io.jenkins.plugins
+Artifact-Id: commons-lang3-api
+Short-Name: commons-lang3-api
+Long-Name: commons-lang3 v3.x Jenkins API Plugin
+Url: https://github.com/jenkinsci/commons-lang3-api-plugin
+Plugin-Version: 3.13.0-62.v7d18e55f51e2
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: Apache-2.0
+Plugin-License-Url: https://opensource.org/licenses/Apache-2.0
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/commons-lang3
+ -api-plugin
+Plugin-ScmTag: 7d18e55f51e2ce25cd8253a52d957434cf1c4936
+Plugin-ScmUrl: https://github.com/jenkinsci/commons-lang3-api-plugin
+Plugin-GitHash: 7d18e55f51e2ce25cd8253a52d957434cf1c4936
+Implementation-Build: 7d18e55f51e2ce25cd8253a52d957434cf1c4936
+

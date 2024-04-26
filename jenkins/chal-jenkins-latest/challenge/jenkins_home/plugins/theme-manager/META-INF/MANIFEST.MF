@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Theme Manager
+Specification-Version: 0.0
+Implementation-Title: Theme Manager
+Implementation-Version: 215.vc1ff18d67920
+Group-Id: io.jenkins.plugins
+Artifact-Id: theme-manager
+Short-Name: theme-manager
+Long-Name: Theme Manager
+Url: https://github.com/jenkinsci/theme-manager-plugin
+Plugin-Version: 215.vc1ff18d67920
+Hudson-Version: 2.421
+Jenkins-Version: 2.421
+Plugin-Dependencies: blueocean-web:1.27.6;resolution:=optional,jackson2-
+ api:2.15.2-350.v0c2f3f8fc595
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/theme-manager
+ -plugin
+Plugin-ScmTag: c1ff18d679208a23733fcda561adf3f2d6f9e0c4
+Plugin-ScmUrl: https://github.com/jenkinsci/theme-manager-plugin
+Plugin-GitHash: c1ff18d679208a23733fcda561adf3f2d6f9e0c4
+Implementation-Build: c1ff18d679208a23733fcda561adf3f2d6f9e0c4
+
