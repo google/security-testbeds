@@ -7,7 +7,7 @@ Metasploit module: https://github.com/protectai/ai-exploits/tree/main/triton
 
 # safe version instance setup
 ```bash
-docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v ASimpleModel/:/models nvcr.io/nvidia/tritonserver:23.11-py3 tritonserver --model-repository=/models --model-control explicit
+docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v APathWithNoMedelInside/:/models nvcr.io/nvidia/tritonserver:23.11-py3 tritonserver --model-repository=/models --model-control explicit
 ```
 
 # vulnerable version instance setup
