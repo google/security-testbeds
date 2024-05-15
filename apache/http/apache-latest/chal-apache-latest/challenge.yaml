@@ -17,7 +17,7 @@ spec:
           - name: challenge
             volumeMounts:
               - name: flag-volume
-                mountPath: /flag
+                mountPath: /chroot/flag
         serviceAccountName: secret-readonly-sa
         volumes:
           - name: flag-volume
@@ -28,5 +28,5 @@ spec:
                 secretProviderClass: apache-latest-secret-provider
   healthcheck:
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:755988b227f4ff6da1a68f97486b48538beb56ce2abbcebeed2d509443239de2
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:b7127c3908cf9e41e4d75e12665ad19aa756a55d646b86a288323c110150dd3c
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:0ee21473a157ff2c8d979bc14db3f9d3ce9174d74429c0467c62146bc6ed6162
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:4dfb6e3ea5c505fbd858991a6a036d21b2532eee828d9069229f84fc871ce76f

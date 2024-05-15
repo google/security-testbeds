@@ -25,6 +25,10 @@ COPY start_apache.sh /usr/local/bin/start_apache.sh
 RUN chmod +x /usr/local/bin/start_apache.sh
 RUN mkdir -p /home/user
 
+RUN mkdir -p /logs
+RUN touch /logs/log
+RUN chmod -R +777 /logs
+
 USER root
 RUN echo 'deb http://archive.debian.org/debian/ rodete main' >> /etc/apt/sources.list
 RUN apt-get update; exit 0
@@ -33,10 +37,14 @@ RUN apt-get install socat -y --force-yes; exit 0
 FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d72ba1d8fdb6f0f9ff3757364f
 
 COPY --from=chroot / /chroot
+VOLUME /chroot/logs
 RUN chown -Rc user /chroot/home/user
 
 VOLUME /chroot/usr/local/apache2/logs
 COPY nsjail.cfg /home/user/nsjail.cfg
 
 CMD kctf_setup \
-    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /usr/local/bin/start_apache.sh)
+    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /usr/local/bin/start_apache.sh)& \
+    tail -f /chroot/logs/log
+
+    
