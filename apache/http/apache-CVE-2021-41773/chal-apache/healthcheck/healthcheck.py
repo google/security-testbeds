@@ -19,6 +19,8 @@ import requests
 response = requests.get("http://localhost:1337/index.html")
 
 if response.status_code == 200:
-    exit(0)  # Success, application is running
+    print("Apache server is healthy")
+    exit(0)  
 else:
-    exit(1)  # Failure, application is not running or index.html is not accessible
+    print("Apache server is not healthy")
+    exit(1) 
