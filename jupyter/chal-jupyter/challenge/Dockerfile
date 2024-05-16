@@ -29,6 +29,7 @@ RUN chmod +777 /start.sh
 RUN mkdir -p /logs
 RUN touch /logs/log
 RUN chmod -R +777 /logs
+RUN chmod a=w /logs/log
 
 FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d72ba1d8fdb6f0f9ff3757364f
 
@@ -41,5 +42,6 @@ COPY nsjail.cfg /home/user/nsjail.cfg
 
 CMD sed -i "27 a$(cat /flag/flag.txt)" /chroot/usr/local/lib/python3.10/dist-packages/jupyter_server/templates/page.html; \
     kctf_setup \
-    && kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag-auth.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) -E PASS=$(cat /flag/password.txt) --config /home/user/nsjail.cfg --port 1337 -- /start.sh & \
-    tail -f /chroot/logs/log
+    && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag-auth.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) -E PASS=$(cat /flag/password.txt) --config /home/user/nsjail.cfg --port 1337 -- /start.sh &) \
+    && tail -f /chroot/logs/log 
+   
