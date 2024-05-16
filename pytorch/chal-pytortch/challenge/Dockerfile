@@ -64,7 +64,7 @@ VOLUME /var/log/apache2
 VOLUME /var/run/apache2
 
 CMD kctf_setup \
-    && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) --config /home/user/nsjail.cfg --port 8081 -- /start.sh -i &) \
+    && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) --config /home/user/nsjail.cfg --port 8081 -- /start.sh &) \
     && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) --config /home/user/nsjail.cfg --port 8082 -- /start2.sh &) \
     && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
     && tail -f /chroot/home/model-server/logs/log

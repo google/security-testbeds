@@ -1,5 +1,6 @@
 #!/bin/bash
 
+chmod a=w /home/model-server/logs/log
 echo "$ROOTFLAG" > /flag/flag.txt
 
 cp /flag.mar /home/model-server/model-store/"$AUTHFLAG".mar
