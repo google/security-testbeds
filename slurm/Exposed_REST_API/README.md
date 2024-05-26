@@ -1,6 +1,7 @@
 # vulnerable setup
 ```bash
 docker compose up -d
+pip install flask requests
 python3 proxy.py
 # in another shell
 curl -k -vvvv 'http://127.0.0.1:8080/openapi/v3'
