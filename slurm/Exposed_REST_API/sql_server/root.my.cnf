@@ -1,0 +1,8 @@
+[client]
+user="root"
+password="password"
+socket=/run/mysqld/mysqld.sock
+
+[mysql]
+no-auto-rehash
+connect_timeout=2
