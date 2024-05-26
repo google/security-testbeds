@@ -1,0 +1,11 @@
+[Unit]
+After=slurmd.slice
+Requires=slurmd.slice
+[Service]
+ExecCondition=/usr/local/bin/slurmd.check.sh
+ExecStartPre=+touch /var/log/slurmd.log
+ExecStartPre=+chown slurm:slurm /var/log/slurmd.log
+ExecStartPre=+/usr/local/bin/slurmd.startup.sh
+Environment="SLURMD_OPTIONS=-b"
+Slice=slurmd.slice
+TimeoutStartUSec=0
