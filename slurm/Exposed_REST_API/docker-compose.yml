@@ -3,8 +3,8 @@ networks:
   internal:
     driver: bridge
     driver_opts:
-        com.docker.network.bridge.enable_ip_masquerade: 'true'
-        com.docker.network.bridge.enable_icc: 'true'
+      com.docker.network.bridge.enable_ip_masquerade: 'true'
+      com.docker.network.bridge.enable_icc: 'true'
     internal: false
     enable_ipv6: true
     ipam:
@@ -335,7 +335,7 @@ services:
 
   rest:
     hostname: rest
-    name: "scale-out-rest-1"
+    container_name: "scale-out-rest-1"
     image: scaleout:latest
     networks:
       internal:
