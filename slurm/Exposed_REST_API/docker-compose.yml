@@ -335,6 +335,7 @@ services:
 
   rest:
     hostname: rest
+    name: "scale-out-rest-1"
     image: scaleout:latest
     networks:
       internal:
