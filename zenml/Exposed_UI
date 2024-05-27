@@ -39,8 +39,8 @@ if __name__ == "__main__":
     run = simple_ml_pipeline()
 ```
 and run the sample pipeline:
-`pytho3 run.py`
-you will see a link generated in the output. open it and enter `default` as username and leave password empty.
+`python3 run.py`
+you will see a link generated in the output. open it, and enter `default` as the username, and leave the password empty.
 
 # setup a safe instance
 ```bash
