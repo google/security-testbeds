@@ -1,5 +1,6 @@
 
 # common steps for both safe and unsafe zenml instances
+please remember if you see an error like ` Cannot connect to the ZenML database because the ZenML server at http://127.0.0.1:8237 is not running.` you should try `zenml down` and then `zenml up` in the python environment to fix this issue.
 on an ubuntu 22.04 instance:
 ```bash
 mkdir zenml
