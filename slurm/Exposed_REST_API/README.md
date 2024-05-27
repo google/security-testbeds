@@ -40,9 +40,10 @@ docker compose up -d
 # please wait
 apt install python3-pip
 apt install python3.12-venv
+python3 -m venv venv 
 source ./venv/bin/activate
 pip install flask requests
-# if docker compose has not spinned up yet, the following will give you an error
+# If docker compose has not spun up yet, the following will give you an error
 python3 proxy.py
 # in another shell
 curl -k -vvvv 'http://127.0.0.1:8080/openapi/v3'
