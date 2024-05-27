@@ -3,7 +3,7 @@ from flask import Flask, request, Response
 import requests
 
 
-token = subprocess.check_output("docker exec docker-scale-out-rest-1 scontrol token", stderr=subprocess.STDOUT,
+token = subprocess.check_output("docker exec scale-out-rest-1 scontrol token", stderr=subprocess.STDOUT,
                                 shell=True, text=True)
 
 app = Flask(__name__)
