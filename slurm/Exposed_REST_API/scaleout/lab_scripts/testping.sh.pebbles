@@ -1,0 +1,9 @@
+#!/bin/bash
+#SBATCH -N2 -t 20
+#SBATCH -o testping-out%j.txt
+#SBATCH -e testping-err%j.txt
+#SBATCH --exclusive
+#SBATCH -A stats
+
+ping -c 20 google.com
+
