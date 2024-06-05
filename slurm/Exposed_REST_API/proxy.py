@@ -23,7 +23,7 @@ def proxy(path):
 
     # Get the headers from the incoming request and add the custom header
     headers = {key: value for key, value in request.headers if key != 'Host'}
-    headers["X-SLURM-USER-TOKEN"] = token.strip()
+    headers["X-SLURM-USER-TOKEN"] = token.strip().removeprefix("SLURM_JWT=")
     headers["X-SLURM-USER-NAME"] = "root"
 
     # Handle different methods

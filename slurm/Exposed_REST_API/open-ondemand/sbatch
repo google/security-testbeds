@@ -1,0 +1,4 @@
+#!/bin/bash
+exec 1> >(logger -s -t $(basename $0)) 2>&1
+
+exec ssh -oBatchMode=yes login sbatch $@

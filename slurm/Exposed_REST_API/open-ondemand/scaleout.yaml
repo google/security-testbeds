@@ -1,0 +1,18 @@
+---
+v2:
+  metadata:
+    title: "scaleout"
+    url: "https://www.schedmd.com/"
+    hidden: false
+  login:
+    host: "login"
+  job:
+    adapter: "slurm"
+    cluster: "cluster"
+    bin: "/usr/local/bin"
+    conf: "/etc/slurm/slurm.conf"
+    bin_overrides:
+      sbatch: "ssh -n login /usr/local/bin/sbatch"
+      squeue: "ssh -n login /usr/local/bin/squeue"
+      scontrol: "ssh -n login /usr/local/bin/scontrol"
+      scancel: "ssh -n login /usr/local/bin/scancel"
