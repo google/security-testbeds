@@ -242,8 +242,7 @@ RUN awk '{if (match($1, /^(passwd|group)/)) {print $1, "slurm", $2, $3} else {pr
 	echo -e "\nalias ..='cd ..'\n" >> /etc/bashrc && \
 	echo -e "\nalias l='ls -alF'\n" >> /etc/bashrc && \
 	echo -e "\nalias w=\"watch \\\"sinfo -Nel -pdebug ; squeue -a -o '%.18i %.9P %.8j %.8u %.8T %.10M %.9l %.6D %R %Q' | column -t\\\"\"\n" >> /etc/bashrc && \
-	mandb && \
-	mkdir -p -m 0777 /lab_scripts
+	mandb
 RUN git clone --depth 1 --single-branch -b v1.0.5 https://github.com/CLIP-HPC/SlurmCommander.git /usr/local/src/slurmcommander/ && \
 	cd /usr/local/src/slurmcommander/ && make build && make install && mkdir -p /etc/scom && \
 	echo 'prefix="/usr/local/bin"' > /etc/scom/scom.conf && cp scom /usr/local/bin/scom
@@ -316,7 +315,6 @@ RUN find /usr/local/src/slurm/patch.d -type f -name '*.patch' -print0 | \
 	fi"
 
 COPY nodelist /etc/nodelist
-COPY lab_scripts/* /lab_scripts/
 COPY slurm/ /etc/slurm/
 RUN ln -nfs /usr/local/share/pyxis/pyxis.conf /etc/slurm/plugstack.conf.d/pyxis.conf && \
 	chmod 0600 /etc/slurm/slurmdbd.conf && \
