@@ -29,11 +29,12 @@ AUTH_ROLE_PUBLIC = 'Admin'
 EOF
 ```
 
-* run `airflow standalone` and then go to http://127.0.0.1:8080/home there is no auth needed for anything you want to do.
-* go to http://127.0.0.1:8080/connection/add and select HTTP connection type, you can see the test button is enabled and so we can test out of band call to verify the exposed Dashboard/UI.
+* run `airflow standalone` and then go to http://127.0.0.1:8080/home we can see no auth is needed for anything you want to do.
+* go to http://127.0.0.1:8080/connection/add and select HTTP connection type, you can see the test button is enabled so we can test out-of-band calls to verify the exposed Dashboard/UI.
 * ref: https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/webserver-authentication.html#webserver-authentication
 
 # safe airflow instance
+In a safe setup unlike the unsafe setup, we remove `AUTH_ROLE_PUBLIC = 'Admin'` from `config/webserver_config.py file`  and Also we don't export the `export AIRFLOW__CORE__TEST_CONNECTION=Enabled` environment variable.
 
 ```bash
 # on ubuntu
@@ -48,7 +49,6 @@ pip install apache-airflow
 
 mkdir config
 export AIRFLOW_HOME="$(pwd)/config"
-export AIRFLOW__CORE__TEST_CONNECTION=Enabled
 
 # create and edit config/webserver_config.py file
 touch config/webserver_config.py
