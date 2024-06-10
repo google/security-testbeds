@@ -34,7 +34,7 @@ EOF
 * ref: https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/webserver-authentication.html#webserver-authentication
 
 # safe airflow instance
-In a safe setup unlike the unsafe setup, we remove `AUTH_ROLE_PUBLIC = 'Admin'` from `config/webserver_config.py file`  and Also we don't export the `export AIRFLOW__CORE__TEST_CONNECTION=Enabled` environment variable.
+In a safe setup unlike the unsafe setup, we remove `AUTH_ROLE_PUBLIC = 'Admin'` from `config/webserver_config.py file`  and Also we don't export the `AIRFLOW__CORE__TEST_CONNECTION=Enabled` environment variable.
 
 ```bash
 # on ubuntu
