@@ -28,7 +28,7 @@ $ docker exec -it my-openldap-container ldapadd -x -D "cn=admin,dc=example,dc=co
 open `https://localhost:6443`, login DN is `cn=admin,dc=example,dc=com` and password is `adminpassword` from `docker-compose.yml`
 
 3.edit `hive-site.xml` and replace `ldap://192.168.64.1:389` to `ldap://your_ldap_ip:389`(`localhost` or `127.0.0.1`
-is not useful, I think using the host address is better)
+is not useful, I think using the ip address of docker bridge interface is better)
 
 4.run the hive instance with `hive-site.xml`
 
@@ -40,7 +40,7 @@ $ docker run -d -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --n
 6.connect hive with correct authorization `test:test` which is from `base.ldif` for testing and it works
 
 ```shell
-$ docker exec -it hive4 beeline -u 'jdbc:hive2://localhost:10000/' -n test -p test
+$ docker exec -it hive4 beeline -u 'jdbc:hive2://localhost:10000/default' -n test -p test
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.18.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -75,7 +75,7 @@ $ docker exec -it my-openldap-container ldapadd -x -D "cn=admin,dc=example,dc=co
 open `https://localhost:6443`, login DN is `cn=admin,dc=example,dc=com` and password is `adminpassword` which is from `docker-compose.yml`
 
 3.edit `hive-site.xml` and replace `ldap://192.168.64.1:389` to `ldap://your_ldap_ip:389`(`localhost` or `127.0.0.1`
-is not useful, I think using the host address is better)
+is not useful, I think using the ip address of docker bridge interface is better)
 
 4.run the hive instance with `hive-site.xml`
 
