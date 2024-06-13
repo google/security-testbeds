@@ -19,6 +19,8 @@ kubectl -n argocd patch secret argocd-secret \
 and then give access to the server from 127.0.0.1:8082 for testing the plugin:
 `kubectl port-forward svc/argocd-server -n argocd 8082:443`
 
+enter `admin:Password1!` on the login page.
+
 
 # secure instance
 ```bash
