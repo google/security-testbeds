@@ -28,13 +28,14 @@ AUTH_TYPE = AUTH_DB
 AUTH_ROLE_PUBLIC = 'Admin'
 EOF
 ```
+1. Run `airflow standalone`. You can now navigate to `http://localhost:8080/home`. Notice that no authorization is needed to access the panel.
+2. Navigate to `http://localhost:8080/connection/add`. From there, you can select the HTTP connection type.
+3. Notice that the Test button is enabled. With it, you can test the out-of-band interaction.
 
-* run `airflow standalone` and then go to http://127.0.0.1:8080/home we can see no auth is needed for anything you want to do.
-* go to http://127.0.0.1:8080/connection/add and select HTTP connection type, you can see the test button is enabled so we can test out-of-band calls to verify the exposed Dashboard/UI.
-* ref: https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/webserver-authentication.html#webserver-authentication
+You can find the reference here: [https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/webserver-authentication.html#webserver-authentication](https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/webserver-authentication.html#webserver-authentication)
 
 # safe airflow instance
-In a safe setup unlike the unsafe setup, we remove `AUTH_ROLE_PUBLIC = 'Admin'` from `config/webserver_config.py file`  and Also we don't export the `AIRFLOW__CORE__TEST_CONNECTION=Enabled` environment variable.
+Unlike the unsafe setup, here the `AUTH_ROLE_PUBLIC = 'Admin'` is removed from the `config/webserver_config.py` file. Moreover, we don't export the `AIRFLOW__CORE__TEST_CONNECTION=Enabled` environment variable.
 
 ```bash
 # on ubuntu
@@ -62,4 +63,6 @@ WTF_CSRF_TIME_LIMIT = None
 AUTH_TYPE = AUTH_DB
 EOF
 ```
-* now run `airflow standalone` and then go to http://127.0.0.1:8080/home, you need to authenticate so that anonymous access is not enabled.
+
+1. Run `airflow standalone`. You can now navigate to [http://localhost:8080/home](http://localhost:8080/home).
+2. Notice that, this time, you need to be authenticated to hit the endpoint. As a result of this, you will be redirect to the `/login` page.
