@@ -5,6 +5,7 @@ networks:
     ipam:
       config:
         - subnet: 172.20.0.0/24
+
 services:
   airflow_unsafe:
     container_name: airflow_unsafe
