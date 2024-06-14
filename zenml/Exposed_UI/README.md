@@ -7,7 +7,6 @@ docker run -it -p 8080:8080 --name zenml ubuntu:22.04
 # inside the instance
 mkdir zenml
 cd zenml
-add-apt-repository ppa:deadsnakes/ppa
 apt update
 apt install python3.11 python3-pip python3.11-venv -y
 python3.11 -m venv .venv
@@ -42,7 +41,9 @@ EOF
 # run the sample pipeline
 python3.11 run.py
 ```
-on the host machine run `docker inspect zenml | jq -r '.[].NetworkSettings.IPAddress'` and get the zenml IP address. navigate to http://IP:8080. on the login page enter `default` as the username, and leave the password empty.
+On the host machine you can run docker inspect zenml | jq -r '.[].NetworkSettings.IPAddress' to retrieve the local ZenML IP address. You can then navigate to http://local-ip:8080/ to access the platform.
+Notice that, if your VM has a public IP assigned, the ZenML platform can be also reached by navigating to http://public-ip:8080/.
+In both cases you can login by using the default credentials, which are default for the username and an empty password.
 
 ## important
 please remember if you see an error like ` Cannot connect to the ZenML database because the ZenML server at http://127.0.0.1:8237 is not running.` you should try `zenml down` and then `zenml up` in the python environment to fix this issue.
