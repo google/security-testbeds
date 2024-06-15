@@ -1,0 +1,27 @@
+version: '2'
+
+networks:
+  zenml:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  zenml_unsafe:
+    container_name: zenml_unsafe
+    build:
+      dockerfile: DockerfileUnSafe
+    networks:
+      zenml:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "8080"
+  zenml_safe:
+    container_name: zenml_safe
+    image: zenmldocker/zenml-server:0.58.2
+    networks:
+      zenml:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "8080"
+    entrypoint: ["bash","-c","zenml up --ip-address 0.0.0.0 --port 8080 && sleep 100000"]
