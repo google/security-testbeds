@@ -24,4 +24,3 @@ services:
         ipv4_address: 172.20.0.3
     ports:
       - "8080"
-    entrypoint: ["bash","-c","zenml up --ip-address 0.0.0.0 --port 8080 && sleep 100000"]
