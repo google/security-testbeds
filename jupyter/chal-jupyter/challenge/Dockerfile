@@ -40,8 +40,23 @@ VOLUME /chroot/usr/local/lib/python3.10/dist-packages/jupyter_server/templates
 
 COPY nsjail.cfg /home/user/nsjail.cfg
 
-CMD sed -i "27 a$(cat /flag/flag.txt)" /chroot/usr/local/lib/python3.10/dist-packages/jupyter_server/templates/page.html; \
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
+CMD service rsyslog start; \
+    cron;  \
+    sed -i "27 a$(cat /flag/flag.txt)" /chroot/usr/local/lib/python3.10/dist-packages/jupyter_server/templates/page.html; \
     kctf_setup \
     && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag-auth.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) -E PASS=$(cat /flag/password.txt) --config /home/user/nsjail.cfg --port 1337 -- /start.sh &) \
-    && tail -f /chroot/logs/log 
-   
+    && tail -F /var/log/syslog 

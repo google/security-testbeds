@@ -8,11 +8,16 @@ spec:
   network:
     public: false
     ports:
-      - protocol: "TCP"
+      - port: 1337
+        protocol: "TCP"
         targetPort: 1337
   podTemplate:
     template:
       spec:
+        #        securityContext:
+        #          sysctls:
+        #            - name: "net.ipv4.ip_unprivileged_port_start"
+        #              value: "0"
         containers:
           - name: challenge
             volumeMounts:
@@ -29,5 +34,5 @@ spec:
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:b4a84a6465fd9d26eeec00ea4d8633714258d6dea4c0c0c3f14474e8c92680d6
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:7adab4761cc6f7f9a274203337bdacf61eaae2e8c922c138a430343801e42e8a
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:eeb799acca9d7c619fcaa30525b226867da568c8f860a516d2bf6d093f2ba9af
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:cc126ebd7b33267d49b760a5e23ca53d4d887fc9f8f7586279413d9897a7e822

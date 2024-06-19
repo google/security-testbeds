@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Loads password into jupyter's pass file
 mkdir /home/user/.jupyter
 
@@ -20,7 +19,7 @@ unset AUTHFLAG
 unset PASS
 
 # Start web server
-/usr/local/bin/jupyter-notebook > /logs/log 2>&1 &
+/usr/local/bin/jupyter-notebook --ServerApp.allow_remote_access=1 > /logs/$(date +%s).log 2>&1 &
 # Proxy stdin/stdout to server
 socat - TCP:127.0.0.1:8888,forever
  #/bin/bash -i
