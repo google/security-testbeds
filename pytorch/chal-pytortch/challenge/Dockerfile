@@ -60,11 +60,29 @@ RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
 
 COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
 
-VOLUME /var/log/apache2
 VOLUME /var/run/apache2
 
-CMD kctf_setup \
+#cronjob logging
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
+
+CMD service rsyslog start; \
+    cron; \
+    kctf_setup \
     && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) --config /home/user/nsjail.cfg --port 8081 -- /start.sh &) \
     && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) --config /home/user/nsjail.cfg --port 8082 -- /start2.sh &) \
     && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
-    && tail -f /chroot/home/model-server/logs/log
+    && tail -f /var/log/syslog
