@@ -14,7 +14,7 @@ unset AUTHFLAG
 unset PASS
 
 
-(/opt/java/openjdk/bin/java -jar usr/share/jenkins/jenkins.war) > /log/logs 2>&1 &
+(/opt/java/openjdk/bin/java -jar usr/share/jenkins/jenkins.war) > /log/$(date +%s).log 2>&1 &
 
 # Proxy stdin/stdout to server
 socat - TCP:127.0.0.1:8080,forever

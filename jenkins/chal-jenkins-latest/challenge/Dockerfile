@@ -43,10 +43,26 @@ VOLUME /chroot/var/jenkins_home/
 VOLUME /chroot/log
 VOLUME /chroot/flag
 
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
 
 COPY nsjail.cfg /home/user/nsjail.cfg
 
-CMD kctf_setup \
+CMD service rsyslog start; \
+    cron; \
+    kctf_setup \
     && kctf_drop_privs nsjail -E PASS=$(cat /flag/password.txt) -E ROOTFLAG=$(cat /flag/flag-root.txt) -E AUTHFLAG=$(cat /flag/flag-auth.txt) --config /home/user/nsjail.cfg --port 1337 -- /start.sh & \
-    tail -f /chroot/log/logs
-
+    tail -f /var/log/syslog

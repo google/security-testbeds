@@ -7,27 +7,8 @@ spec:
   powDifficultySeconds: 0
   network:
     public: false
-    ports:
-      - protocol: "TCP"
-        targetPort: 1337
-  podTemplate:
-    template:
-      spec:
-        containers:
-          - name: challenge
-            volumeMounts:
-              - name: flag-volume
-                mountPath: "/flag"
-        serviceAccountName: secret-readonly-sa
-        volumes:
-          - name: flag-volume
-            csi:
-              driver: secrets-store-gke.csi.k8s.io
-              readOnly: true
-              volumeAttributes:
-                secretProviderClass: jenkins-secret-provider
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:cfef261a72242ec740d9eeaa6fa3b71bb9f5de594549ef7392ba5711b9e53ff4
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:cbe12d7fd0fb340df5743aca0f093bfa07b3699705778f70a5eb8535b8578c63
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:ab81d07f234180016c419586b2d25eefce24188856e263c1c85c98df5f5cde12
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:66b7add68284ac5b979f2218af74fe4714b1ddac32672d547c88a2ad34d1a15d
