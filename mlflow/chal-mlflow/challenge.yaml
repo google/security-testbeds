@@ -6,7 +6,7 @@ spec:
   deployed: true
   powDifficultySeconds: 0
   network:
-    public: false
+    public: true
     ports:
       - protocol: "TCP"
         targetPort: 1337
@@ -17,7 +17,7 @@ spec:
           - name: challenge
             volumeMounts:
               - name: flag-volume
-                mountPath: "/flag"
+                mountPath: "/chroot/flag"
         serviceAccountName: secret-readonly-sa
         volumes:
           - name: flag-volume
@@ -29,5 +29,5 @@ spec:
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:4442a717cb946c578e20031441f1d3c9aa479b225de1e58c1b6179ae7416fc62
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:93a6348b1eb015a16f1339875572ff979370f79912822dc830ef5b4e3d701096
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:888f217b8fbff7137b960f19d71ad0fac5dfa032f88d1e8d1a2515d4e0ba9827
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:fd4f45fa89f7ca465715dc9de900a7206e381643e20dc6c70b2d1ee5e3ecfdf1
