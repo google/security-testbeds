@@ -21,6 +21,8 @@ RUN apt-get update \
 
 RUN pip3 install jupyter
 
+RUN chmod -R +777 /home/user
+
 RUN mkdir -p /flag
 
 ADD start.sh /start.sh
@@ -36,6 +38,7 @@ FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d
 COPY --from=chroot / /chroot
 
 VOLUME /chroot/logs
+VOLUME /chroot/home/user
 VOLUME /chroot/usr/local/lib/python3.10/dist-packages/jupyter_server/templates
 
 COPY nsjail.cfg /home/user/nsjail.cfg
