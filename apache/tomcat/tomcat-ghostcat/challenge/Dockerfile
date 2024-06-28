@@ -33,7 +33,6 @@ RUN apt-get install socat -y --force-yes; exit 0
 
 #GCP Logging
 RUN mkdir -p /logs
-RUN touch /logs/log
 RUN chmod -R +777 /logs
 
 # Switch to the nsjail image
@@ -42,15 +41,32 @@ FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d
 COPY --from=chroot / /chroot
 RUN chown -Rc user /chroot/home/user
 
+#Cron
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
+# Define your nsjail configuration file (nsjail.cfg) and copy it into the container
+COPY nsjail.cfg /home/user/nsjail.cfg
+
 #Declare a volume
 VOLUME /chroot/home/user/
 VOLUME /chroot/usr/local/tomcat
 VOLUME /chroot/logs
 
-# Define your nsjail configuration file (nsjail.cfg) and copy it into the container
-COPY nsjail.cfg /home/user/nsjail.cfg
-
 # Set the default command to execute nsjail with your configuration file
-CMD kctf_setup \
-    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /usr/local/bin/start.sh) & \
-    tail -f /chroot/logs/log
+CMD service rsyslog start; \
+    cron;  \
+    kctf_setup && kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /usr/local/bin/start.sh & \ 
+    tail -f /var/log/syslog

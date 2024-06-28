@@ -19,7 +19,8 @@ import requests
 response = requests.get("http://localhost:1337")
 
 if response.status_code == 200:
+    print("Challange is healthy")
     exit(0)  
-
-
-exit(1) 
+else:
+    print("Challange is not healthy")
+    exit(1) 

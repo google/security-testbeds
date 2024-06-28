@@ -1,4 +1,3 @@
-# chal-tomcat
 # Quickstart guide to writing a challenge
 
 The basic steps when preparing a challenge are:
