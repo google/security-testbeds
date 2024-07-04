@@ -9,7 +9,7 @@ spec:
     public: true
     ports:
       - protocol: "TCP"
-        targetPort: 8080
+        targetPort: 1337
   podTemplate:
     template:
       spec:
