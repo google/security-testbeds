@@ -1,0 +1,29 @@
+version: '2'
+
+networks:
+  airflow:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  airflow_unsafe:
+    container_name: airflow_unsafe
+    build:
+      dockerfile: DockerfileUnSafe
+    image: airflow_unsafe:v1
+    networks:
+      airflow:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "8080"
+  airflow_safe:
+    container_name: airflow_safe
+    build:
+      dockerfile: DockerfileSafe
+    image: airflow_safe:v1
+    networks:
+      airflow:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "8080"
