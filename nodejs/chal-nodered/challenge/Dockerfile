@@ -18,6 +18,8 @@ RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
 RUN npm install node-red-dashboard@2.23.0
 
 ADD settings.js /data/settings.js
+ADD settings.js /usr/src/node-red/.node-red/settings.js
+ADD settings.js /usr/src/node-red/node_modules/node-red/settings.js
 
 ADD start.sh /start.sh
 
@@ -28,6 +30,7 @@ RUN apk add socat
 RUN mkdir -p /logs
 RUN chmod a+wx /logs
 RUN chmod -r /logs
+RUN chmod a+w /usr/src/node-red/.node-red/
 
 FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d72ba1d8fdb6f0f9ff3757364f
 
