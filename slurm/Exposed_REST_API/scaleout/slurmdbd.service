@@ -1,0 +1,4 @@
+[Service]
+ExecStartPre=+touch /var/log/slurmdbd.log
+ExecStartPre=+chown slurm:slurm /var/log/slurmdbd.log
+ExecCondition=bash -c 'exec test $(hostname -s) = "slurmdbd"'

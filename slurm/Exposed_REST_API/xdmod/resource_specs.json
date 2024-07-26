@@ -1,0 +1,8 @@
+[
+    {
+        "resource": "scaleout",
+        "processors": 100,
+        "nodes": 10,
+        "ppn": 10
+    }
+]
