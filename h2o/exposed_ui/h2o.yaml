@@ -1,37 +1,37 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cve-2023-6018
+  name: h2o-ai
   labels:
-    app: cve-2023-6018
+    app: h2o-ai
 spec:
   ports:
   - port: 80
     name: http
     targetPort: 54321
   selector:
-    app: cve-2023-6018
+    app: h2o-ai
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cve-2023-6018
+  name: h2o-ai
   labels:
-    app: cve-2023-6018
+    app: h2o-ai
 spec:
   selector:
     matchLabels:
-      app: cve-2023-6018
+      app: h2o-ai
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: cve-2023-6018
+        app: h2o-ai
     spec:
       containers:
-      - name: cve-2023-6018
+      - name: h2o-ai
         image: h2oai/h2o-open-source-k8s:3.44.0.3@sha256:cacf09e3811f3170d70743987a3a32ccf00c0872b5e5443befd626f2ddfa1fde
         ports:
         - containerPort: 54321
