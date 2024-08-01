@@ -1,0 +1,32 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-apache-latest
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: /chroot/flag
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: apache-latest-secret-provider
+  healthcheck:
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:9a9bf2369ab6e5e904c062f9aa65ab8a1f41aeb9a2634c018453e4923761bd0d
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:91a50fcdcb2187b8f5aae0fa3efb8d8a12423c9b54382ac17b50a46d3f8f27c0
