@@ -6,7 +6,7 @@ spec:
   deployed: true
   powDifficultySeconds: 0
   network:
-    public: false
+    public: true
     ports:
       - protocol: "TCP"
         targetPort: 1337
@@ -29,5 +29,5 @@ spec:
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:92a2981e276205cbb6a76f84a5258a519ceddd3b6e451a635713110f4aff4f86
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:aeb878518706ac9aa4552fbf953ea1dfb1dbd3ba9a90f135785ab251c6fca29a
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:b32031186b95cfcb72c31455cfe95411d24c1d2541e6562b10f566fa0aadf4f2
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:829b5b98dcc6a9a0f5d893fffb4897db70c12ae79a7cdd65628c1e69e88bb725

@@ -56,11 +56,28 @@ ADD nsjail.cfg /
 
 RUN sed -i "s/version/$(cat /chroot/zipver)/g" /nsjail.cfg
 
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
 # adds password and loads flag
-CMD echo "user: MD5:$(cat /flag/pass.txt)" > /chroot/h2o/realm.properties; \
+CMD service rsyslog start; \
+    cron;  \
+    echo "user: MD5:$(cat /flag/pass.txt)" > /chroot/h2o/realm.properties; \
     sed -i "12 a$(cat /flag/uiflag.txt)" /chroot/h2o/h2o/www/flow/index.html; \
     jar cmf ./META-INF/MANIFEST.MF ../h2o.jar *; \
     kctf_setup && \
     kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/rootflag.txt) --config /nsjail.cfg --port 1337 -- /startup.sh & \
-    tail -f /chroot/logs/log
+    tail -f /var/log/syslog 
 
