@@ -14,6 +14,7 @@ do
      rm "$file"
     fi
     unset filename file_time
+    sleep 1
     cat /dev/null > /var/log/syslog
 done
 
