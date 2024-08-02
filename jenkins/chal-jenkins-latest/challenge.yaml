@@ -1,14 +1,30 @@
 apiVersion: kctf.dev/v1
 kind: Challenge
 metadata:
-  name: challenge-jenkins
+  name: chal-jenkins
 spec:
   deployed: true
   powDifficultySeconds: 0
   network:
-    public: false
+    public: true
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: jenkins-secret-provider
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:ab81d07f234180016c419586b2d25eefce24188856e263c1c85c98df5f5cde12
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:66b7add68284ac5b979f2218af74fe4714b1ddac32672d547c88a2ad34d1a15d
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:47d2c96d095b2a9070e41f1bb467fac9c3213ab7b7f55fbf5410afc4eff7a3de
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:d89381a0d1caea2d6f70bd86bb8dd89601676b2a6fe5810710a6bdfce4a67cd6
