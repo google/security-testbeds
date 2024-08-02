@@ -1,0 +1,38 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-grafana
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - port: 1337
+        protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        #        securityContext:
+        #          sysctls:
+        #            - name: "net.ipv4.ip_unprivileged_port_start"
+        #              value: "0"
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: grafana-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:724e679ef454798bc9583e6846c6a46042ef2ca6e956a6167239ec4a28b3a936
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:6742529f1f23f941738b6801626c8dc0ac049ce74519e6520c189998804cde13
