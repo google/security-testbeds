@@ -1,0 +1,25 @@
+networks:
+    geoserver:
+        ipam:
+            config:
+            - subnet: 172.20.0.0/24
+
+services:
+    safe:
+        build:
+            dockerfile: webSafe.dockerfile
+        ports:
+            - "8080"
+            - "5005"
+        networks:
+            geoserver:
+                ipv4_address: 172.20.0.2
+    vulnerable:
+        build:
+            dockerfile: webVulnerable.dockerfile
+        ports:
+            - "8080"
+            - "5005"
+        networks:
+            geoserver:
+                ipv4_address: 172.20.0.3
