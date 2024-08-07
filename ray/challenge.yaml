@@ -28,6 +28,6 @@ spec:
                 secretProviderClass: ray-cve-secret-provider
   healthcheck:
     # TIP: disable the healthcheck during development
-    enabled: false
+    enabled: true
     image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:1b144b77d6b528a850ddc71b5bc9c6918d39bf6d21b597480c3c1f5e6375971f
   image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:18bf3a155df408471ba15c02fbde4ea094c4a76beb2109478fb1a1f1190060b0
