@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  apache-apisix-defaul-api-token:
+    image: apache/apisix:2.11.0-alpine
+    restart: unless-stopped
+    ports:
+      - "9080:9080"
+    volumes:
+      - ./config_default.yml:/usr/local/apisix/conf/config.yaml:ro
+    depends_on:
+      - etcd
+  etcd:
+    image: bitnami/etcd:3.4.15
+    environment:
+      ETCD_ENABLE_V2: "true"
+      ALLOW_NONE_AUTHENTICATION: "yes"
+      ETCD_ADVERTISE_CLIENT_URLS: "http://0.0.0.0:2379"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
