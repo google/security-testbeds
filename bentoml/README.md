@@ -1,10 +1,7 @@
 # vulnerble version setup
 
-```
-apt install python3.10 python3.10-venv python3-pip 
-python3 -m venv . && source bin/activate
-pip install torch transformers bentoml==1.2.0
-bentoml serve service:Summarization
+```bash
+docker compose -f docker-compose-vulnerable.yml up
 ```
 run the exploit:
 ```
@@ -15,13 +12,9 @@ you'll receive a http request on port 1337 which means the exploit worked.
 
 # safe version setup
 
+```bash
+docker compose -f docker-compose-safe.yml up
 ```
-apt install python3.10 python3.10-venv python3-pip 
-python3 -m venv . && source bin/activate
-pip install torch transformers bentoml==1.2.5
-bentoml serve service:Summarization
-```
-
 run the exploit:
 ```
 ncat -klnv 1337
