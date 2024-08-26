@@ -27,8 +27,39 @@ spec:
               readOnly: true
               volumeAttributes:
                 secretProviderClass: nodered-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:4692a09fc5aa0bcf8684a303e499ed17090a413595409cb61f681a515ec434b1
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:cc934117a4f7a9a9cc50f0dfdbf9f8dfb8bd7b46b5ccdf314ac1417a190c9417
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:0e8b3f5dd9ed3f0d6ed9e27eacd8f016ca1ffa83c065072aa27595bf873ff6ff
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:911f76ed8e1b9f3db6f6dde8981fa92393ad4b3ff1f9066cc1fd8c6201e10b6a
