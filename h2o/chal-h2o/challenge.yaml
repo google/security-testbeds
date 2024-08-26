@@ -26,8 +26,39 @@ spec:
               readOnly: true
               volumeAttributes:
                 secretProviderClass: h2o-exposed-ui-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:b32031186b95cfcb72c31455cfe95411d24c1d2541e6562b10f566fa0aadf4f2
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:829b5b98dcc6a9a0f5d893fffb4897db70c12ae79a7cdd65628c1e69e88bb725
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:10ab993b6047275797a82ac09df280e0394328aac3494c772d942b826d7e5d28
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:93c6cf0d5f4423f47a9255d57865ecb3f0f6a1c62c19c26c21f5c37d1a8f1ee5
