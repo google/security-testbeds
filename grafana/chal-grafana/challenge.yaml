@@ -31,8 +31,39 @@ spec:
               readOnly: true
               volumeAttributes:
                 secretProviderClass: grafana-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:724e679ef454798bc9583e6846c6a46042ef2ca6e956a6167239ec4a28b3a936
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:6742529f1f23f941738b6801626c8dc0ac049ce74519e6520c189998804cde13
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:de4a5ffbc736e71501c5f260d1f2840603a8f4db4c87c84d8e948ac244f83944
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:e7410354f61229e710097a998a0deaf899be0ae0464b5d5e987931e75a58e458
