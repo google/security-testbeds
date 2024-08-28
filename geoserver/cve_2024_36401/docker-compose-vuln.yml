@@ -1,0 +1,5 @@
+services:
+  geoserver-vulnerable:
+    image: docker.osgeo.org/geoserver:2.23.2
+    ports:
+      - "8080:8080"
