@@ -27,15 +27,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer self-update
 RUN composer install --no-dev
 
+# Install Semver
+RUN composer update composer/semver ^1.4.0
 # Install Drush
-RUN composer require drush/drush
+RUN composer require drush/drush ^12.5.3 --update-with-all-dependencies
 
 # Install REST UI module
 RUN composer require drupal/restui
 
 # Install site
 RUN composer create-project drupal/recommended-project
-RUN drush site-install --db-url="sqlite://sites/default/files/.ht.sqlite" --site-name="Drupal-latest" --account-pass=XtUmoOJe8D
+RUN drush si --db-url="sqlite://sites/default/files/.ht.sqlite" --site-name="Drupal-latest" --account-pass=XtUmoOJe8D
 
 # Install Socat
 RUN apt-get install socat sqlite3 -y --force-yes; exit 0
@@ -51,7 +53,7 @@ RUN chmod +777 /start.sh
 # Copy files
 COPY files /opt/drupal/web/sites/default/files
 RUN chmod a+w -R /opt/drupal/web/sites/default/files
-
+RUN chmod a+w -R /opt/drupal/web/sites/
 # Copy auth-flag.php
 ADD auth-flag.php /opt/drupal/auth-flag.php
 RUN chmod +777 auth-flag.php /opt/drupal/auth-flag.php
