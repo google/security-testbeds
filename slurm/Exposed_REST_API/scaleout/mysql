@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$(hostname -s)" = "db" ]
+then
+	exec /usr/bin/mysql --connect_timeout=2 -S /var/run/mysqld/mysqld.sock "$@"
+else
+	exec /usr/bin/mysql --connect_timeout=2 --user=slurm --password=password --host=db "$@"
+fi
