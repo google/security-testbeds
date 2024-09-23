@@ -1,0 +1,8 @@
+services:
+  bentoml-vuln:
+    build:
+      context: .
+      args:
+        BENTOML_VERSION: 1.2.0
+    ports:
+      - "3000:3000"
