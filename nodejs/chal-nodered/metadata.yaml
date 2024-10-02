@@ -1,0 +1,44 @@
+# Human readable task name
+
+name: Node Red Dashboard 
+
+# Long form description.
+
+description: |+
+
+    This is version 1.1.2 of Node Red Dashboard.
+ 
+
+# The flag
+
+flag: 
+
+# Task category. (one of hardware, crypto, pwn, reversing, web, net, misc)
+
+category: path traversal
+
+
+
+# === the fields below will be filled by SRE or automation ===
+
+
+
+# Task label
+
+label: ''
+
+# URL for web challenges
+
+link: 'http://chal-nodered.internet-ctf.kctf.cloud:1337'
+
+# host/port for non-web challenges
+
+host: ''
+
+# the URL for attachments, to be filled in by automation
+
+attachment: ''
+
+# is this challenge released? Will be set by SREs
+
+visible: true
