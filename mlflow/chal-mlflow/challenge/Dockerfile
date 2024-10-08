@@ -32,7 +32,7 @@ RUN echo 'deb http://archive.debian.org/debian/ bullseye main' >> /etc/apt/sourc
 RUN apt-get update; exit 0
 RUN apt-get install socat sqlite3 -y --force-yes; exit 0
 
-FROM gcr.io/kctf-docker/challenge@sha256:0f7d757bcda470c3bbc063606335b915e03795d72ba1d8fdb6f0f9ff3757364f
+FROM europe-west4-docker.pkg.dev/internet-ctf/custom-images/kctf-source
 
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends cron
