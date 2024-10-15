@@ -1,6 +1,6 @@
 #!/bin/bash
 
-logFolder="/chroot/log"
+logFolder="/chroot/logs"
 
 now=$(date +%s)
 cutoff=$((now - 10*60))
