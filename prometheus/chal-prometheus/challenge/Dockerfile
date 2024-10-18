@@ -21,13 +21,18 @@ RUN apt-get update \
        curl socat jq ca-certificates
 
 RUN curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest  | jq -r '.assets[] | select(.name | endswith(".linux-amd64.tar.gz")) | .browser_download_url' | xargs curl -LO
+RUN curl -s https://api.github.com/repos/prometheus/node_exporter/releases/latest | jq -r '.assets[] | select(.name | endswith(".linux-amd64.tar.gz")) | .browser_download_url' | xargs curl -LO
 
-RUN mkdir -p /home/ubuntu/prometheus /home/ubuntu/data
+
+RUN mkdir -p /home/ubuntu/prometheus /home/ubuntu/data /home/ubuntu/node_exporter
 RUN tar -xvzf prometheus-*.tar.gz -C /home/ubuntu/prometheus --strip-components=1 && rm prometheus-*.tar.gz
-RUN chmod -R a+rx /home/ubuntu/prometheus && chmod -R a+wrx /home/ubuntu/data
+RUN tar -xvzf node_exporter-*.linux-amd64.tar.gz -C /home/ubuntu/node_exporter --strip-components=1 && rm node_exporter-*.linux-amd64.tar.gz
+ADD prometheus.yml /home/ubuntu/prometheus/prometheus.yml
+RUN chmod -R a+rx /home/ubuntu/prometheus && chmod -R a+wrx /home/ubuntu/data && chmod -R a+rx /home/ubuntu/node_exporter
 
 RUN mkdir -p /logs
 RUN chmod -R +777 /logs
+
 
 FROM europe-west4-docker.pkg.dev/internet-ctf/custom-images/kctf-source
 
