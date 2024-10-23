@@ -1,0 +1,12 @@
+dn: ou=test,dc=example,dc=com
+objectClass: organizationalUnit
+ou: test
+
+dn: uid=test,ou=test,dc=example,dc=com
+objectClass: inetOrgPerson
+uid: test
+sn: test
+givenName: test
+cn: test
+displayName: test
+userPassword: test
