@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  airflow_safe:
+    container_name: airflow_safe
+    build:
+      dockerfile: DockerfileSafe
+    image: airflow_safe:v1
+    ports:
+      - "8080:8080"
