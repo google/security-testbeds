@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ssh -oBatchMode=yes -n login scancel $@

@@ -1,0 +1,7 @@
+[
+    {
+        "resource": "scaleout",
+        "resource_type": "HPC",
+        "name": "scaleout"
+    }
+]

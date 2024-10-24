@@ -1,0 +1,7 @@
+[Unit]
+Description=slurm slice
+Before=slices.target
+[Slice]
+CPUAccounting=true
+MemoryAccounting=true
+Delegate=yes
