@@ -95,7 +95,7 @@ services:
     build:
       context: ./scaleout
       args:
-        DOCKER_FROM: almalinux:8
+        DOCKER_FROM: almalinux:8.10
         SLURM_RELEASE: master
         SUBNET: "10.11"
         SUBNET6: "2001:db8:1:1::"
