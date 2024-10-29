@@ -1,5 +1,5 @@
-#Based on https://github.com/ubccr/xdmod/blob/xdmod10.0/.circleci/config.yml
-FROM tools-ext-01.ccr.xdmod.org/xdmod-9.5.0:centos7.9-1.0
+#Based on https://github.com/ubccr/xdmod/blob/xdmod11.0/.circleci/config.yml
+FROM tools-ext-01.ccr.xdmod.org/xdmod-10.5.0-x86_64:rockylinux8.5-0.3
 RUN yum update --exclude google-chrome-* -y
 RUN yum upgrade --exclude google-chrome-* -y
 RUN systemctl enable postfix.service mariadb.service httpd.service
