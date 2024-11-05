@@ -48,6 +48,6 @@ def proxy(path):
 
 if __name__ == '__main__':
     try:
-        app.run(port=8082)
+        app.run(host="0.0.0.0",port=8082)
     except KeyboardInterrupt:
         print("\nKeyboard interrupt received, shutting down the server.")

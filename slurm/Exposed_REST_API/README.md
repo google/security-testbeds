@@ -65,6 +65,10 @@ EOFF
 ```
 bash start.sh
 ```
+## setup quick start
+```
+bash start_quick.sh
+```
 ## test the RCE
 ```bash
 curl -k -vvvv 'http://127.0.0.1:8082/openapi/v3' 
