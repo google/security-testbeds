@@ -12,8 +12,8 @@ EOF
 make clean && make && (
   cd ../authProxy || exit
   apt install python3-pip -y
-  apt install python3.12-venv -y
-  python3.11 -m venv venv
+  apt install python3-venv -y
+  python3 -m venv venv
   source ./venv/bin/activate
   pip install flask requests
   python3 proxy.py "$(docker exec docker-scale-out-rest-1  scontrol token)" "$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' docker-scale-out-rest-1)"
