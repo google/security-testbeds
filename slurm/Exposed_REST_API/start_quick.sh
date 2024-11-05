@@ -3,8 +3,8 @@ docker compose up -d
 
 cd ../authProxy || exit
 apt install python3-pip -y
-apt install python3.11-venv -y
-python3.11 -m venv venv
+apt install python3-venv -y
+python3 -m venv venv
 source ./venv/bin/activate
 pip install flask requests --break-system-packages
 python3 proxy.py "$(docker exec start_quick-rest-1  scontrol token)" "$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' start_quick-rest-1)"
