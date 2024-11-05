@@ -11,8 +11,8 @@ node01 cluster 10.11.5.11 2001:db8:1:1::5:11
 EOF
 make clean && make && (
   cd ../authProxy || exit
-  apt install python3-pip
-  apt install python3.12-venv
+  apt install python3-pip -y
+  apt install python3.12-venv -y
   python3.11 -m venv venv
   source ./venv/bin/activate
   pip install flask requests
