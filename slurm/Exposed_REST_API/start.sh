@@ -1,7 +1,7 @@
 export DISABLE_XDMOD=1
 export NODELIST=scaleout/nodelist
 export SLURM_RELEASE=slurm-24.05
-git submodule add https://gitlab.com/SchedMD/training/docker-scale-out --depth 1
+git clone https://gitlab.com/SchedMD/training/docker-scale-out --depth 1
 cd docker-scale-out/ || exit
 # current commit that has been used for the testbed
 git checkout 562e5bb92d19f0af6b3b6aee2665cf093d5b32d4
