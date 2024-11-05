@@ -1,15 +1,14 @@
 import subprocess
 from flask import Flask, request, Response
 import requests
+import sys
 
 
-token = subprocess.check_output("docker exec scale-out-rest-1 scontrol token", stderr=subprocess.STDOUT,
-                                shell=True, text=True)
-
+token = str(sys.argv[1])
 app = Flask(__name__)
 
 # Define the new destination base URL
-new_destination = 'http://10.11.1.6:6820'
+new_destination = 'http://'+str(sys.argv[2])
 
 
 @app.route('/', defaults={'path': ''}, methods=['GET', 'POST', 'PUT', 'DELETE'])
@@ -49,6 +48,6 @@ def proxy(path):
 
 if __name__ == '__main__':
     try:
-        app.run(port=8080)
+        app.run(port=8082)
     except KeyboardInterrupt:
         print("\nKeyboard interrupt received, shutting down the server.")

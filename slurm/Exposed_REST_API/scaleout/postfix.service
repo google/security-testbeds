@@ -1,3 +1,0 @@
-[Service]
-ExecCondition=+bash -c 'exec test $(hostname -s) = "login"'
-ExecStartPre=

