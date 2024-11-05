@@ -2,8 +2,8 @@ cd start_quick || exit
 docker compose up -d
 
 cd ../authProxy || exit
-apt install python3-pip
-apt install python3.11-venv
+apt install python3-pip -y
+apt install python3.11-venv -y
 python3.11 -m venv venv
 source ./venv/bin/activate
 pip install flask requests --break-system-packages
