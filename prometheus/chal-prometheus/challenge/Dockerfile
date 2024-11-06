@@ -43,7 +43,6 @@ COPY --from=chroot / /chroot
 
 ADD nsjail.cfg /home/user/nsjail.cfg
 
-
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends cron
 RUN apt-get install -y --reinstall rsyslog
@@ -63,5 +62,5 @@ VOLUME /tmp
 CMD service rsyslog start; \
     cron; \
     kctf_setup \
-    && kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /start.sh & \
-    tail -f /var/log/syslog
+    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /start.sh &) \
+    && tail -f /var/log/syslog
