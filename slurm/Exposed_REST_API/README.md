@@ -21,6 +21,7 @@ ref: https://slurm.schedmd.com/faq.html#cgroupv2
 
 ## configure docker
 ```
+mkdir /etc/docker/
 cat << EOFF >> /etc/docker/daemon.json
 {
   "exec-opts": [
