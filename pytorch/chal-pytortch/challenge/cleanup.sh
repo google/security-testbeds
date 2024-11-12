@@ -3,7 +3,7 @@
 logFolder="/chroot/home/model-server/logs"
 
 now=$(date +%s)
-cutoff=$((now - 10*60))
+cutoff=$((now - 3*60))
 
 for file in "$logFolder"/*.log
 do
