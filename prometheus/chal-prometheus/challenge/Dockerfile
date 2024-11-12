@@ -43,6 +43,33 @@ COPY --from=chroot / /chroot
 
 ADD nsjail.cfg /home/user/nsjail.cfg
 
+# Apache config
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends tzdata apache2 \
+    && ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN service apache2 start
+
+# For Proxy
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
+RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
+# For logging
+RUN ln -s /etc/apache2/mods-available/dump_io.load /etc/apache2/mods-enabled/
+RUN echo '# Enable mod_dumpio logging \n\
+DumpIOInput On \n\
+DumpIOOutput On \n\
+
+# Set the log level to `trace7` to capture dumpio output \n\
+LogLevel dumpio:trace7' >> etc/apache2/apache2.conf 
+
+COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+
+VOLUME /var/run/apache2
+
+
+# cronjob logging
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends cron
 RUN apt-get install -y --reinstall rsyslog
@@ -62,5 +89,6 @@ VOLUME /tmp
 CMD service rsyslog start; \
     cron; \
     kctf_setup \
-    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 1337 -- /start.sh &) \
-    && tail -f /var/log/syslog
+    && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 8080 -- /start.sh &) \
+    && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
+    && tail -f /var/log/syslog /var/log/apache2/error.log
