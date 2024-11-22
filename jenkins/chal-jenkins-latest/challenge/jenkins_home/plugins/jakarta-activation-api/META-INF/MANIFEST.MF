@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Jakarta Activation API
+Specification-Version: 2.1
+Implementation-Title: Jakarta Activation API
+Implementation-Version: 2.1.3-1
+Group-Id: io.jenkins.plugins
+Artifact-Id: jakarta-activation-api
+Short-Name: jakarta-activation-api
+Long-Name: Jakarta Activation API
+Url: https://github.com/jenkinsci/jakarta-activation-api-plugin
+Plugin-Version: 2.1.3-1
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: BSD-3-Clause
+Plugin-License-Url: https://opensource.org/licenses/BSD-3-Clause
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/jakarta-activ
+ ation-api-plugin.git
+Plugin-ScmTag: jakarta-activation-api-2.1.3-1
+Plugin-ScmUrl: https://github.com/jenkinsci/jakarta-activation-api-plugi
+ n
+Plugin-GitHash: e19a9cd359cfc12f52038f6e6c5b403e9f26a724
+Implementation-Build: e19a9cd359cfc12f52038f6e6c5b403e9f26a724
+
