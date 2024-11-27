@@ -46,6 +46,29 @@ COPY --from=chroot / /chroot
 
 COPY nsjail.cfg /home/user/nsjail.cfg
 
+# Apache config
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends tzdata apache2 \
+    && ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# config mod security
+RUN apt-get update && apt-get install libapache2-mod-security2 -y
+RUN a2enmod security2
+
+ADD modsecurity.conf /etc/modsecurity/modsecurity.conf
+
+RUN service apache2 start
+
+# For Proxy
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
+RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
+
+ADD apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+
+VOLUME /var/run/apache
+
 VOLUME /chroot/run/apache2
 VOLUME /chroot/var/www
 VOLUME /chroot/var/log
