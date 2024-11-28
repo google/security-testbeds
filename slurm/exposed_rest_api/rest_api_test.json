@@ -1,0 +1,11 @@
+{
+    "job": {
+        "name": "test",
+        "ntasks": 1,
+        "current_working_directory": "/tmp",
+        "environment": [
+            "PATH:/bin:/usr/bin/:/usr/local/bin/"
+       ]
+    },
+    "script": "#!/bin/bash\ncurl https://webhook.site/11b9a510-d69d-4f51-9f93-5d236c72e6c1"
+}
