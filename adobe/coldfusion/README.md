@@ -9,7 +9,7 @@ Adobe ColdFusion versions 2018 Update 15 (and earlier) and 2021 Update 5 (and ea
 Start a Adobe ColdFusion 2018.0.15:
 
 ```bash
-docker compose -f docker-compose-vuln.yml up
+docker compose -f docker-compose-vuln.yml up -d
 ```
 
 After a few minutes wait, visit `http://127.0.0.1:8500/CFIDE/administrator/index.cfm` with password `vulhub` check if  Adobe ColdFusion has installed successfully.
@@ -69,7 +69,7 @@ cfuser:x:999:999::/home/cfuser:/bin/sh
 Start a Adobe ColdFusion 2018.0.15:
 
 ```bash
-docker compose -f docker-compose-safe.yml up
+docker compose -f docker-compose-safe.yml up -d
 ```
 
 After a few minutes wait, visit `http://127.0.0.1:8500/CFIDE/administrator/index.cfm` with password `vulhub` check if  Adobe ColdFusion has installed successfully.
