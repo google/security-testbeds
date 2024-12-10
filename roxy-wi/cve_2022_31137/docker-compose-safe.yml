@@ -1,0 +1,7 @@
+name: roxy-wi-testbed
+services:
+  roxy-wi:
+    image: registry.roxy-wi.org/roxy-wi:7.2.6.0
+    command: bash -c '/usr/sbin/httpd -DFOREGROUND'
+    ports:
+      - "443:443"
