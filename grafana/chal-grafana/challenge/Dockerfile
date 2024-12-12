@@ -34,6 +34,32 @@ COPY --from=chroot / /chroot
 
 ADD nsjail.cfg /home/user/nsjail.cfg
 
+
+
+# Apache config
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends tzdata apache2 \
+    && ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# config mod security
+RUN apt-get update && apt-get install libapache2-mod-security2 -y
+RUN a2enmod security2
+
+ADD modsecurity.conf /etc/modsecurity/modsecurity.conf
+
+RUN service apache2 start
+
+# For Proxy
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
+RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
+
+
+COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+
+VOLUME /var/run/apache2
+
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends sqlite3 cron
 RUN apt-get install -y --reinstall rsyslog
@@ -56,5 +82,7 @@ CMD service rsyslog start; \
     sqlite3 /chroot/var/lib/grafana/grafana.db "UPDATE user SET password = '$(cat /flag/password.txt)' WHERE id = 1;"; \
     sqlite3 /chroot/var/lib/grafana/grafana.db "UPDATE dashboard SET slug = '$(cat /flag/flag-auth.txt)', title = '$(cat /flag/flag-auth.txt)', data = '{\"schemaVersion\":17,\"title\":\"$(cat /flag/flag-auth.txt)\",\"uid\":\"bdor3q2sgq2o0c\",\"version\":1}' WHERE id = 1;"; \
     kctf_setup \
-    && (kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/flag-root.txt) --disable_rlimits --config /home/user/nsjail.cfg --port 1337 -- /start.sh &) \
-    && tail -F /var/log/syslog 
+    && (kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/flag-root.txt) --disable_rlimits --config /home/user/nsjail.cfg --port 8080 -- /start.sh &) \
+    && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
+    && tail -f /var/log/syslog /var/log/apache2/modsec_audit.log
+
