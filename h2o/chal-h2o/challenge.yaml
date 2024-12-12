@@ -60,5 +60,5 @@ spec:
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:10ab993b6047275797a82ac09df280e0394328aac3494c772d942b826d7e5d28
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:93c6cf0d5f4423f47a9255d57865ecb3f0f6a1c62c19c26c21f5c37d1a8f1ee5
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:3c0515ddfea910134ad02e5f3cdf628df8def60616f1c58d452ae7dcfdb5e135
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:32038a1dfec90bc0194688dedfe33ca486d6db6bd4ec23f5acfab564e13a8134

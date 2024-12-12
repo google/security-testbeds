@@ -52,6 +52,43 @@ VOLUME /chroot/logs
 VOLUME /chroot/flag
 VOLUME /chroot/h2o
 
+# fixing java version
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    software-properties-common \
+    && add-apt-repository ppa:openjdk-r/ppa \
+    && apt-get update \
+    && apt-get install -y openjdk-21-jdk \
+    && apt-get clean
+
+# Set environment variables for Java
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Apache config
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends tzdata apache2 \
+    && ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# config mod security
+RUN apt-get update && apt-get install libapache2-mod-security2 -y
+RUN a2enmod security2
+
+ADD modsecurity.conf /etc/modsecurity/modsecurity.conf
+
+RUN service apache2 start
+
+# For Proxy
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
+RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
+
+COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+
+VOLUME /var/run/apache2
+
 ADD nsjail.cfg /
 
 RUN sed -i "s/version/$(cat /chroot/zipver)/g" /nsjail.cfg
@@ -78,6 +115,7 @@ CMD service rsyslog start; \
     sed -i "12 a$(cat /flag/uiflag.txt)" /chroot/h2o/h2o/www/flow/index.html; \
     jar cmf ./META-INF/MANIFEST.MF ../h2o.jar *; \
     kctf_setup && \
-    kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/rootflag.txt) --config /nsjail.cfg --port 1337 -- /startup.sh & \
-    tail -f /var/log/syslog 
+    (kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/rootflag.txt) --config /nsjail.cfg --port 8080 -- /startup.sh &) \
+    && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
+    && tail -f /var/log/syslog /var/log/apache2/modsec_audit.log
 
