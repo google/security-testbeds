@@ -36,12 +36,15 @@ RUN chmod -R +777 /logs
 
 FROM europe-west4-docker.pkg.dev/internet-ctf/custom-images/kctf-source
 
-VOLUME /chroot/home/ubuntu/data
-VOLUME /chroot/logs
+
 
 COPY --from=chroot / /chroot
 
+VOLUME /chroot/home/ubuntu/data
+VOLUME /chroot/logs
+
 ADD nsjail.cfg /home/user/nsjail.cfg
+
 
 # Apache config
 RUN apt-get update \
@@ -50,24 +53,21 @@ RUN apt-get update \
     && dpkg-reconfigure --frontend noninteractive tzdata \
     && rm -rf /var/lib/apt/lists/*
 
+# config mod security
+RUN apt-get update && apt-get install libapache2-mod-security2 -y
+RUN a2enmod security2
+
+ADD modsecurity.conf /etc/modsecurity/modsecurity.conf
+RUN rm /etc/modsecurity/modsecurity.conf-recommended
 RUN service apache2 start
 
 # For Proxy
 RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
 RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
-# For logging
-RUN ln -s /etc/apache2/mods-available/dump_io.load /etc/apache2/mods-enabled/
-RUN echo '# Enable mod_dumpio logging \n\
-DumpIOInput On \n\
-DumpIOOutput On \n\
 
-# Set the log level to `trace7` to capture dumpio output \n\
-LogLevel dumpio:trace7' >> etc/apache2/apache2.conf 
-
-COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+ADD apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
 
 VOLUME /var/run/apache2
-
 
 # cronjob logging
 RUN apt-get update \
@@ -91,4 +91,4 @@ CMD service rsyslog start; \
     kctf_setup \
     && (kctf_drop_privs nsjail --config /home/user/nsjail.cfg --port 8080 -- /start.sh &) \
     && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
-    && tail -f /var/log/syslog /var/log/apache2/error.log
+    && tail -f /var/log/syslog /var/log/apache2/modsec_audit.log
