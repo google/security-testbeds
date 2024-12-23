@@ -1,0 +1,33 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-influxdb-latest
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: influx-db-latest-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: false
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:7c0f66380e8aad723b26b6aeaefc6d3d1529435289400a208e6b1a3673d6a961
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:d43d2f306ebf980ea739ef905b6b47eee9065b1e54a765c8504e8088d290b0ee
