@@ -111,6 +111,6 @@ VOLUME /tmp
 CMD service rsyslog start; \
     cron; \
     kctf_setup \
-        && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) --config /home/user/nsjail.cfg --port 8082 -- /config.sh &) \
+        && (kctf_drop_privs nsjail -E AUTHFLAG=$(cat /flag/flag.txt) -E DB_PASSWD=$(cat /flag/db-pass.txt) --config /home/user/nsjail.cfg --port 8082 -- /config.sh &) \
         && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
         && tail -f /var/log/syslog /var/log/apache2/modsec_audit.log

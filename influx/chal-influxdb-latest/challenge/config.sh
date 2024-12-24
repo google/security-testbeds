@@ -7,8 +7,8 @@ influxd > /logs/$(date +%s).log 2>&1 &
 INFLUXDB_HOST="127.0.0.1"  
 INFLUXDB_PORT="8086"       
 USER="admin"
-PASSWORD="kjgiaou8924jfkanfau1i2ndaoi"   
 
+PASSWORD=$DB_PASSWD  
 DATABASE_NAME=$AUTHFLAG
 
 sleep 2
