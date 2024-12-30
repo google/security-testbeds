@@ -15,7 +15,7 @@
 set -Eeuo pipefail
 
 TIMEOUT=20
-PERIOD=30
+PERIOD=200
 
 export TERM=linux
 export TERMINFO=/etc/terminfo
