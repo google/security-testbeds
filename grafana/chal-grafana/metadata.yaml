@@ -1,12 +1,12 @@
 # Human readable task name
 
-name: Grafana 
+name: Grafana [Auth Bypass Flag] 
 
 # Long form description.
 
 description: |+
 
-  This is a secure version of Grafana.
+  This is a secure version of Grafana, a zero-day auth bypass exploit is need to access the auth flag in the dashboard.
 
 # The flag
 
