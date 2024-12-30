@@ -1,12 +1,13 @@
 # Human readable task name
 
-name: H2O 
+name: H2O Flow [Root Flag] 
 
 # Long form description.
 
 description: |+
 
-  This is a secure authenticated version of H2O.
+  This is a secure version of H2O flow instance, a zero-day auth bypass exploit is needed to access the dashboard.
+
 
 # The flag
 
