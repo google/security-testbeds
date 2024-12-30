@@ -1,12 +1,12 @@
 # Human readable task name
 
-name: Node Red Dashboard 
+name: Node-Red Exposed UI 
 
 # Long form description.
 
 description: |+
 
-    This is version 1.1.2 of Node Red Dashboard.
+    Exposed Node-Red dashboard allows a remote attacker to execute arbitrary code. The root flag is located in /flag/flag-root.txt.
  
 
 # The flag
