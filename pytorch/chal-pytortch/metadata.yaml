@@ -1,12 +1,12 @@
 # Human readable task name
 
-name: Pytorch Serve 
+name: Pytorch Serve [Auth Bypass Flag] 
 
 # Long form description.
 
 description: |+
 
-  This is the latest version of Pytorch Serve instance, configured with authentication. The management API is accessible at chal-pytortch.internet-ctf.kctf.cloud:1337/one/, the inference API is accessible at chal-pytortch.internet-ctf.kctf.cloud:1337/two/.
+  This is a secure version of Pytorch Serve instance, the management API is accessible at chal-pytortch.internet-ctf.kctf.cloud:1337/one/, the inference API is accessible at chal-pytortch.internet-ctf.kctf.cloud:1337/two/.
 
 # The flag
 
