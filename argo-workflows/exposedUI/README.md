@@ -3,7 +3,7 @@
 2. please don't forget to add `alias kubectl="minikube kubectl --"` to your shell environment.
 
 # Vulnerable Instance
-## install argo workflows
+## Install Argo Workflows
 ```bash
 kubectl create namespace argo
 kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/v3.5.5/install.yaml
