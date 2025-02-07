@@ -2,7 +2,7 @@
 1. k8s with minikube: https://minikube.sigs.k8s.io/docs/start/ (we can use original k8s but this is a easy solution)
 2. please don't forget to add `alias kubectl="minikube kubectl --"` to your shell environment.
 
-# vulnerable instance
+# Vulnerable Instance
 ## install argo workflows
 ```bash
 kubectl create namespace argo
