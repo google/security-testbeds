@@ -13,7 +13,7 @@ kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/dow
 kubectl patch deployment argo-server --namespace argo  --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/args", "value": ["server","--auth-mode=server"]}]'
 ```
 
-## allow Argo to interact with the resources in your Kubernetes cluster with admin-level privileges
+## Allow Argo to Interact with the Resources in Your Kubernetes Cluster with admin-level Privileges
 ```bash
 kubectl create rolebinding argo-default-admin --clusterrole=admin --serviceaccount=argo:default -n argo
 ```
