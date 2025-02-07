@@ -29,7 +29,7 @@ curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
   --data-raw '{"workflow":{"apiVersion":"argoproj.io/v1alpha1","kind":"Workflow","metadata":{"name":"","generateName":"scripts-"},"spec":{"destination":{"name":"","namespace":"","server":""},"source":{"path":"","repoURL":"","targetRevision":"HEAD"},"project":"","entrypoint":"aaaaaa","templates":[{"name":"aaaaaa","script":{"image":"curlimages/curl:7.78.0","command":["sh"],"source":"curl URL"}}]}}}' \
   --insecure
 ```
-# secure instance
+# Secure Instance
 after setting up a vulnerable version, change the authentication mode to client.
 ## change authentication
 ```bash
