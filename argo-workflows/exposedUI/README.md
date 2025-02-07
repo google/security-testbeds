@@ -31,7 +31,7 @@ curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
 ```
 # Secure Instance
 after setting up a vulnerable version, change the authentication mode to client.
-## change authentication
+## Change Authentication
 ```bash
 kubectl patch deployment argo-server --namespace argo  --type='json' -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/args", "value": ["server","--auth-mode=client"]}]'
 ```
