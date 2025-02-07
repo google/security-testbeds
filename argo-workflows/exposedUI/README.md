@@ -46,7 +46,7 @@ curl 'https://127.0.0.1:2746/api/v1/workflows/default' \
   --data-raw '{"workflow":{"apiVersion":"argoproj.io/v1alpha1","kind":"Workflow","metadata":{"name":"","generateName":"scripts-"},"spec":{"destination":{"name":"","namespace":"","server":""},"source":{"path":"","repoURL":"","targetRevision":"HEAD"},"project":"","entrypoint":"aaaaaa","templates":[{"name":"aaaaaa","script":{"image":"curlimages/curl:7.78.0","command":["sh"],"source":"curl URL}}]}}}' \
   --insecure
 ```
-it will response with `{"code":16,"message":"token not valid. see https://argo-workflows.readthedocs.io/en/release-3.5/faq/"}` which prove us that there is a authentication layer.
+It will respond with `{"code":16,"message":"token not valid. see https://argo-workflows.readthedocs.io/en/release-3.5/faq/"}`, proving that the authentication layer is active.
 
 
 Ref: mostly from https://spacelift.io/blog/argo-workflows and https://argo-workflows.readthedocs.io/en/stable/argo-server-auth-mode/
