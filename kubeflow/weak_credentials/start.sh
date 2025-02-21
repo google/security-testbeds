@@ -4,12 +4,24 @@ RED='\033[0;31m'
 Green='\033[0;32m'
 NC='\033[0m'
 
+IS_DEBIAN=$(grep -q "Debian" /etc/os-release && echo "true" || echo "false")
+IS_UBUNTU=$(grep -q "Ubuntu" /etc/os-release && echo "true" || echo "false")
+
+if [ "$IS_DEBIAN" ] ; then
+    echo -e "\n${Green}This is a Debian Distro${NC}\n"
+elif [ "$IS_UBUNTU" ] ; then
+    echo -e "\n${Green}This is a Ubuntu Distro${NC}\n"
+else
+    echo -e "\n${RED}This is not a Debian or Ubuntu Distro${NC}\n"
+    exit 1
+fi
+
 echo -e "\n${Green}Install python3, python3-pip, python3-venv, wget and git ...${NC}\n"
-sudo apt update
-command -v git || sudo apt install git
-command -v python3 || sudo apt install python3
-command -v pip || sudo apt install python3-pip
-python3 -m venv || sudo apt install python3-venv
+sudo apt-get update
+command -v git || sudo apt-get install -y git
+command -v python3 || sudo apt-get install -y python3
+command -v pip || sudo apt-get install -y python3-pip
+python3 -m venv || sudo apt-get install -y python3-venv
 
 echo -e "\n${Green}Clone manifests repo ...${NC}\n"
 {
@@ -29,19 +41,33 @@ echo -e "\n${Green}We are inside the manifests repo now ...${NC}\n"
 echo -e "\n${Green}Install Docker ...${NC}\n"
 command -v docker ||
 {
-  sudo apt-get install ca-certificates curl
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
-  echo  "Add the repository to Apt sources..."
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    if [ "$IS_DEBIAN" = "true" ]; then
+      sudo apt-get install -y ca-certificates curl
+      sudo install -m 0755 -d /etc/apt/keyrings
+      sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+      sudo chmod a+r /etc/apt/keyrings/docker.asc
+      echo  "Add the repository to Apt sources..."
+      echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      fi
+    if [ "$IS_UBUNTU" = "true" ]; then
+      sudo apt-get install -y ca-certificates curl
+      sudo install -m 0755 -d /etc/apt/keyrings
+      sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+      sudo chmod a+r /etc/apt/keyrings/docker.asc
+      echo  "Add the repository to Apt sources..."
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    fi
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   docker info 1>/dev/null || (echo -e "${RED}docker is not running${NC}" ; exit 1)
   sudo usermod -aG docker "$USER"
 } || { echo -e "\n${RED}Failed to install Docker"; exit 1; }
+
 
 echo -e "\n${Green}Install minikube ...${NC}\n"
 command -v minikube ||
