@@ -7,21 +7,19 @@ NC='\033[0m'
 IS_DEBIAN=$(grep -q "Debian" /etc/os-release && echo "true" || echo "false")
 IS_UBUNTU=$(grep -q "Ubuntu" /etc/os-release && echo "true" || echo "false")
 
-if [ "$IS_DEBIAN" ] ; then
+if [ "$IS_DEBIAN" = "true" ] ; then
     echo -e "\n${Green}This is a Debian Distro${NC}\n"
-elif [ "$IS_UBUNTU" ] ; then
+elif [ "$IS_UBUNTU" = "true" ] ; then
     echo -e "\n${Green}This is a Ubuntu Distro${NC}\n"
 else
     echo -e "\n${RED}This is not a Debian or Ubuntu Distro${NC}\n"
     exit 1
 fi
 
-echo -e "\n${Green}Install python3, python3-pip, python3-venv, wget and git ...${NC}\n"
+echo -e "\n${Green}Install curl and git ...${NC}\n"
 sudo apt-get update
 command -v git || sudo apt-get install -y git
-command -v python3 || sudo apt-get install -y python3
-command -v pip || sudo apt-get install -y python3-pip
-python3 -m venv || sudo apt-get install -y python3-venv
+command -v curl || sudo apt-get install -y curl
 
 echo -e "\n${Green}Clone manifests repo ...${NC}\n"
 {
@@ -91,7 +89,7 @@ command -v kubectl ||
 
 echo -e "\n${Green}Install Kustomize ...${NC}\n"
 command -v kustomize || {
-    curl --silent --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
+    curl --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
     tar -xzvf kustomize_v5.4.3_linux_amd64.tar.gz
     chmod a+x kustomize
     sudo mv kustomize /usr/local/bin
@@ -110,4 +108,4 @@ echo -e "\n${Green}Port forward the dex login ...${NC}\n"
         while ! curl localhost:8080; do echo waiting for port-forwarding; sleep 1; done; echo port-forwarding ready
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
-echo -e "\n${Green}Go to http://localhost:8080 and login with `user@example.com:12341234` as username:password...${NC}\n"
+echo -e "\n${Green}Go to http://localhost:8080 and login with \`user@example.com:12341234\` as username:password...${NC}\n"
