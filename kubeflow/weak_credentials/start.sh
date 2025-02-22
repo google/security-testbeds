@@ -104,8 +104,7 @@ echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
 (
     ingress_gateway_service=$(kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
-        nohup kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
-        while ! curl localhost:8080; do echo waiting for port-forwarding; sleep 10; done; echo port-forwarding ready
+    while ! kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80; do echo waiting for port-forwarding; sleep 10; done; echo port-forwarding ready
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
 echo -e "\n${Green}Go to http://localhost:8080 and login with \`user@example.com:12341234\` as username:password...${NC}\n"
