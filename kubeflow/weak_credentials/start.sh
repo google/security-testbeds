@@ -101,10 +101,40 @@ echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
     while ! kustomize build example | kubectl apply --server-side --force-conflicts -f -; do echo "Retrying to apply resources"; sleep 20; done
 } || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
+check_pods_running() {
+  namespaces=(
+    "cert-manager"
+    "istio-system"
+    "auth"
+    "knative-eventing"
+    "knative-serving"
+    "kubeflow"
+    "kubeflow-user-example-com"
+  )
+  for ns in "${namespaces[@]}"; do
+    pods=$(kubectl get pods -n "$ns" --no-headers)
+    if [ -z "$pods" ]; then
+      echo "No pods found in namespace: $ns"
+      return 1
+    fi
+
+    not_running=$(echo "$pods" | awk '{print $3}' | grep -v "Running")
+    if [ -n "$not_running" ]; then
+      echo "Not all pods are in Running state in namespace: $ns"
+      return 0
+    fi
+  done
+  echo "All pods are in Running state in all namespaces"
+  return 1
+}
+
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
 (
+    while check_pods_running; do
+      sleep 20
+    done
     ingress_gateway_service=$(kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
-    while ! kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80; do echo waiting for port-forwarding; sleep 10; done; echo port-forwarding ready
+    nohup kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
 echo -e "\n${Green}Go to http://localhost:8080 and login with \`user@example.com:12341234\` as username:password...${NC}\n"
