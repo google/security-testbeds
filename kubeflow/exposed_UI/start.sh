@@ -4,12 +4,28 @@ RED='\033[0;31m'
 Green='\033[0;32m'
 NC='\033[0m'
 
+IS_DEBIAN=$(grep -q "Debian" /etc/os-release && echo "true" || echo "false")
+IS_UBUNTU=$(grep -q "Ubuntu" /etc/os-release && echo "true" || echo "false")
+
+if [ "$IS_DEBIAN" = "true" ] ; then
+    echo -e "\n${Green}This is a Debian Distro${NC}\n"
+elif [ "$IS_UBUNTU" = "true" ] ; then
+    echo -e "\n${Green}This is a Ubuntu Distro${NC}\n"
+else
+    echo -e "\n${RED}This is not a Debian or Ubuntu Distro${NC}\n"
+    exit 1
+fi
+
+echo -e "\n${Green}Increase inotify limits to prevent CrashLoopBackOff ...${NC}\n"
+sudo sysctl fs.inotify.max_user_instances=1280
+sudo sysctl fs.inotify.max_user_watches=655360
+
 echo -e "\n${Green}Install python3, python3-pip, python3-venv, wget and git ...${NC}\n"
-sudo apt update
-command -v git || sudo apt install git
-command -v python3 || sudo apt install python3
-command -v pip || sudo apt install python3-pip
-python3 -m venv || sudo apt install python3-venv
+sudo apt-get update
+command -v git || sudo apt-get install git
+command -v python3 || sudo apt-get install python3
+command -v pip || sudo apt-get install python3-pip
+python3 -m venv || sudo apt-get install python3-venv
 
 echo -e "\n${Green}Clone manifests repo ...${NC}\n"
 {
@@ -19,7 +35,7 @@ echo -e "\n${Green}Clone manifests repo ...${NC}\n"
       git reset HEAD --hard
       cd ..
     else
-     git clone -b v1.9.1-branch https://github.com/kubeflow/manifests
+     git clone -b v1.9.1 https://github.com/kubeflow/manifests
     fi
 } || { echo -e "\n${RED}Failed to clone the manifests...${NC}\n"; exit 1; }
 
@@ -29,14 +45,27 @@ echo -e "\n${Green}We are inside the manifests repo now ...${NC}\n"
 echo -e "\n${Green}Install Docker ...${NC}\n"
 command -v docker ||
 {
-  sudo apt-get install ca-certificates curl
-  sudo install -m 0755 -d /etc/apt/keyrings
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  sudo chmod a+r /etc/apt/keyrings/docker.asc
-  echo  "Add the repository to Apt sources..."
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    if [ "$IS_DEBIAN" = "true" ]; then
+      sudo apt-get install -y ca-certificates curl
+      sudo install -m 0755 -d /etc/apt/keyrings
+      sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+      sudo chmod a+r /etc/apt/keyrings/docker.asc
+      echo  "Add the repository to Apt sources..."
+      echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      fi
+    if [ "$IS_UBUNTU" = "true" ]; then
+      sudo apt-get install -y ca-certificates curl
+      sudo install -m 0755 -d /etc/apt/keyrings
+      sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+      sudo chmod a+r /etc/apt/keyrings/docker.asc
+      echo  "Add the repository to Apt sources..."
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    fi
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   docker info 1>/dev/null || (echo -e "${RED}docker is not running${NC}" ; exit 1)
@@ -77,12 +106,41 @@ echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
     while ! kustomize build example | kubectl apply --server-side --force-conflicts -f -; do echo "Retrying to apply resources"; sleep 20; done
 } || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
+check_pods_running() {
+  namespaces=(
+    "cert-manager"
+    "istio-system"
+    "auth"
+    "knative-eventing"
+    "knative-serving"
+    "kubeflow"
+    "kubeflow-user-example-com"
+  )
+  for ns in "${namespaces[@]}"; do
+    pods=$(kubectl get pods -n "$ns" --no-headers)
+    if [ -z "$pods" ]; then
+      echo "No pods found in namespace: $ns"
+      return 1
+    fi
+
+    not_running=$(echo "$pods" | awk '{print $3}' | grep -v "Running")
+    if [ -n "$not_running" ]; then
+      echo "Not all pods are in Running state in namespace: $ns"
+      return 0
+    fi
+  done
+  echo "All pods are in Running state in all namespaces"
+  return 1
+}
+
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
 (
+    while check_pods_running; do
+      sleep 20
+    done
     ingress_gateway_service=$(kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
-    while ! kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80; do echo waiting for port-forwarding; sleep 10; done; echo port-forwarding ready
+    nohup kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
-
 
 echo -e "\n${Green}Install python3 requirements ...${NC}\n"
 (
