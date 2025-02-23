@@ -16,6 +16,10 @@ else
     exit 1
 fi
 
+echo -e "\n${Green}Increase inotify limits to prevent CrashLoopBackOff ...${NC}\n"
+sudo sysctl fs.inotify.max_user_instances=1280
+sudo sysctl fs.inotify.max_user_watches=655360
+
 echo -e "\n${Green}Install curl and git ...${NC}\n"
 sudo apt-get update
 command -v git || sudo apt-get install -y git
