@@ -1,15 +1,20 @@
-# Setup vulnerable and secure instances
-On an Ubuntu 24.04 virtual machine:
+# Setup Vulnerable and Secure Instances
+
+On an Ubuntu 24.04 virtual machine, run:
+
 ```bash
 bash start.sh
 ```
-go to localhost:8080 for using a secure instance which has login and authentication enabled
-go to localhost:8081 for using an exposed UI which authentication disabled
+
+Access the secure instance with login and authentication enabled at http://localhost:8080.
+
+Access the exposed UI, which has authentication disabled and is vulnerable to attacks, at http://localhost:8081. You can
+create and run a new pipeline here.
 
 ## clean up
-cautions: it will remove all k8s cluster on minikube.
+
+Caution: This will remove all Kubernetes clusters on Minikube.
+
 ```bash
 bash clean.sh
 ```
-
-
