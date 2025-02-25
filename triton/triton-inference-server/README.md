@@ -6,11 +6,12 @@ Detailed blog post: https://protectai.com/threat-research/triton-inference-serve
 Metasploit module: https://github.com/protectai/ai-exploits/tree/main/triton
 
 # safe version instance setup
+A safe version is loaded with no initial models so we can't overwrite any model and we can't exploit the server.
 ```bash
-docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/APath1/:/models nvcr.io/nvidia/tritonserver:23.11-py3 tritonserver --model-repository=/models --model-control explicit
+docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v APathWithNoModelInside/:/models nvcr.io/nvidia/tritonserver:23.10-py3 tritonserver --model-repository=/models --model-control explicit
 ```
 
 # vulnerable version instance setup
 ```bash
-docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/APath2/:/models nvcr.io/nvidia/tritonserver:23.10-py3 tritonserver --model-repository=/models --model-control explicit
+docker run --rm -p8000:8000 -p8001:8001 -p8002:8002 -v ASimpleModel/:/models nvcr.io/nvidia/tritonserver:23.10-py3 tritonserver --model-repository=/models --model-control explicit
 ```

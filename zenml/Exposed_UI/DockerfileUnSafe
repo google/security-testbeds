@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+LABEL authors="secureness"
+RUN apt update  \
+    && apt install python3.11 python3-pip python3.11-venv -y
+RUN mkdir zenml
+WORKDIR zenml
+
+RUN python3.11 -m venv .venv
+RUN bash -c "source .venv/bin/activate && pip install zenml[server]"
+
+ENTRYPOINT ["bash","-c","source .venv/bin/activate &&  zenml up --ip-address 0.0.0.0 --port 8080 && sleep 100000"]

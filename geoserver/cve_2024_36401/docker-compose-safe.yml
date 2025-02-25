@@ -1,0 +1,5 @@
+services:
+  geoserver-safe:
+    image: docker.osgeo.org/geoserver:2.25.3
+    ports:
+      - "8080:8080"

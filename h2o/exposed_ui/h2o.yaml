@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: h2o-ai
+  labels:
+    app: h2o-ai
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 54321
+  selector:
+    app: h2o-ai
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: h2o-ai
+  labels:
+    app: h2o-ai
+spec:
+  selector:
+    matchLabels:
+      app: h2o-ai
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: h2o-ai
+    spec:
+      containers:
+      - name: h2o-ai
+        image: h2oai/h2o-open-source-k8s:3.44.0.3@sha256:cacf09e3811f3170d70743987a3a32ccf00c0872b5e5443befd626f2ddfa1fde
+        ports:
+        - containerPort: 54321

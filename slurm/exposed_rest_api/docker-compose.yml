@@ -1,0 +1,34 @@
+name: slurm-testbed
+services:
+  slurm:
+    build: ./slurm
+    ports:
+      - 6820:6820
+    networks:
+      - slurm-testbed-network
+
+  api-proxy:
+    image: caddy:2.9-alpine
+    container_name: api-proxy
+    command:
+      - "caddy"
+      - "reverse-proxy"
+      - "--from"
+      - ":8080"
+      - "--to"
+      - "http://slurm:6820"
+      - "--header-up"
+      - "X-SLURM-USER-NAME: slurm"
+      - "--header-up"
+      - "X-SLURM-USER-TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjM4Nzk4MDQ5MjQsImlhdCI6MTczMjMyMTI3OCwic3VuIjoicm9vdCJ9.lV0sZg_KGxSck90yxVJ52vWzeL_ldtqse_Fn10vWz_0"
+      - "--access-log"
+    ports:
+      - 8080:8080
+    depends_on:
+      - "slurm"
+    networks:
+      - slurm-testbed-network
+
+networks:
+  slurm-testbed-network:
+    driver: bridge
