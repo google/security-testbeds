@@ -26,7 +26,7 @@ The Setup should work on apt-get based Linux distros.
 
    Execute the `pyZMQ_exploit.py` script to send a command to the server.  
    ```sh
-   python3 pyZMQ_exploit.py
+   ./RunZmqExploit.sh
    ```
    When prompted, enter the command you want to execute on the server. 
 
