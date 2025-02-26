@@ -4,9 +4,11 @@
 
 # Vulnerable Instance
 ## Install Argo Workflows
+The version that we tested is v3.5.5. You can find the other versions [here](https://github.com/argoproj/argo-workflows/releases) and change the VERSION variable accordingly.
 ```bash
 kubectl create namespace argo
-kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/v3.5.5/install.yaml
+$VERSION=v3.5.5
+kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/$VERSION/install.yaml
 ```
 ## Remove Authentication
 ```bash
