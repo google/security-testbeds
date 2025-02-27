@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Pipeline: GitHub Groovy Libraries
+Specification-Version: 0.0
+Implementation-Title: Pipeline: GitHub Groovy Libraries
+Implementation-Version: 42.v0739460cda_c4
+Group-Id: org.jenkins-ci.plugins
+Short-Name: pipeline-github-lib
+Long-Name: Pipeline: GitHub Groovy Libraries
+Url: https://github.com/jenkinsci/pipeline-github-lib-plugin
+Plugin-Version: 42.v0739460cda_c4
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Dependencies: pipeline-groovy-lib:629.vb_5627b_ee2104,git:5.0.0
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/pipeline-github-lib-plugin
+

@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<l:dependencies xmlns:l='licenses' groupId='org.jenkins-ci.plugins.workflow' artifactId='workflow-aggregator' version='596.v8c21c963d92d'><l:dependency name='Pipeline' groupId='org.jenkins-ci.plugins.workflow' artifactId='workflow-aggregator' version='596.v8c21c963d92d' url='https://github.com/jenkinsci/workflow-aggregator-plugin'><l:description>The Jenkins Plugins Parent POM Project</l:description><l:license name='MIT License' url='https://opensource.org/licenses/MIT'/></l:dependency></l:dependencies>
