@@ -1,5 +1,8 @@
 # Setup Vulnerable and Secure Instances
 
+Please make sure you have deleted the existing minikube cluster: `minikube delete --all` this is to avoid any conflicts
+with the new cluster.
+
 On an Ubuntu 24.04 virtual machine, run:
 
 ```bash
