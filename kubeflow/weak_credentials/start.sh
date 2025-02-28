@@ -72,37 +72,34 @@ command -v docker ||
 
 
 echo -e "\n${Green}Install minikube ...${NC}\n"
-command -v minikube ||
+ls minikube ||
 {
     curl -LO https://storage.googleapis.com/minikube/releases/v1.34.0/minikube-linux-amd64
     mv minikube-linux-amd64 minikube
     chmod a+x minikube
-    sudo mv minikube /usr/local/bin
 }
-minikube status | grep "kubelet: Running" || minikube start \
+./minikube status | grep "kubelet: Running" || ./minikube start \
     || { echo -e "\n${RED}Failed to install Minikube${NC}"; exit 1; }
 
 echo -e "\n${Green}Install kubectl...${NC}\n"
-command -v kubectl ||
+ls kubectl ||
 {
     curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/amd64/kubectl
     chmod a+x kubectl
-    sudo mv kubectl /usr/local/bin
 } || { echo -e "\n${RED}Failed to install kubectl${NC}"; exit 1; }
 
 
 echo -e "\n${Green}Install Kustomize ...${NC}\n"
-command -v kustomize || {
+ls kustomize || {
     curl --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
     tar -xzvf kustomize_v5.4.3_linux_amd64.tar.gz
     chmod a+x kustomize
-    sudo mv kustomize /usr/local/bin
 } || { echo -e "\n${RED}Failed to install Kustomize${NC}"; exit 1; }
 
 
 echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
 {
-    while ! kustomize build example | kubectl apply --server-side --force-conflicts -f -; do echo "Retrying to apply resources"; sleep 20; done
+    ./kustomize build example | ./kubectl apply --server-side --force-conflicts -f -
 } || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
 check_pods_running() {
@@ -110,13 +107,11 @@ check_pods_running() {
     "cert-manager"
     "istio-system"
     "auth"
-    "knative-eventing"
     "knative-serving"
     "kubeflow"
-    "kubeflow-user-example-com"
   )
   for ns in "${namespaces[@]}"; do
-    pods=$(kubectl get pods -n "$ns" --no-headers)
+    pods=$(./kubectl get pods -n "$ns" --no-headers)
     if [ -z "$pods" ]; then
       echo "No pods found in namespace: $ns"
       return 1
@@ -132,13 +127,17 @@ check_pods_running() {
   return 1
 }
 
-echo -e "\n${Green}Port forward the dex login ...${NC}\n"
+echo -e "\n${Green}Wait until all pods get ready ...${NC}\n"
 (
     while check_pods_running; do
       sleep 20
     done
-    ingress_gateway_service=$(kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
-    nohup kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
+)
+
+echo -e "\n${Green}Port forward the dex login ...${NC}\n"
+(
+    ingress_gateway_service=$(./kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
+    nohup ./kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
 echo -e "\n${Green}Go to http://localhost:8080 and login with \`user@example.com:12341234\` as username:password...${NC}\n"
