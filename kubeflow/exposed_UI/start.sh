@@ -100,6 +100,7 @@ ls ./kustomize || {
 echo -e "\n${Green}Apply manifests for pipelines... ${NC}\n"
 {
     ./kubectl apply --server-side --force-conflicts -f exampleManifest.yaml
+} || { #do nothing
 }
 
 check_pods_running() {
