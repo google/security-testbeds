@@ -53,7 +53,7 @@ command -v docker ||
     fi
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-  docker info 1>/dev/null || { echo -e "${RED}docker is not running, Mostly we need a reboot${NC}" ; exit 1}
+  docker info 1>/dev/null || { echo -e "${RED}docker is not running, Mostly we need a reboot${NC}" ; exit 1; }
   sudo usermod -aG docker "$USER"
 } || { echo -e "\n${RED}Failed to install Docker"; exit 1; }
 
