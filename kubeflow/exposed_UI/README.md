@@ -6,6 +6,14 @@
     1. remember the IP address of machine
     2. install openssh-server without any configuration
     3. don't install any additional softwares like docker microk8s and ... we will install it with `start.sh` script
+    4. (optional) enable ssh to be able to do copy/pastes
+        ```bash
+        sudo bash -c 'cat <<EOT > /etc/ssh/sshd_config
+        PasswordAuthentication yes
+        PermitRootLogin yes
+        EOT'
+        sudo systemctl restart ssh
+        ```
 4. make sure you give the Ubuntu server at least 60GB storage and 12GB RAM.
 5. run the following
     ```bash
