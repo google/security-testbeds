@@ -86,7 +86,7 @@ ls ./kustomize || {
 echo -e "\n${Green}Apply manifests for pipelines... ${NC}\n"
 {
     ./kubectl apply --server-side --force-conflicts -f exampleManifest.yaml
-} || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
+}
 
 check_pods_running() {
   namespaces=(
