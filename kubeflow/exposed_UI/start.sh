@@ -64,6 +64,19 @@ ls ./minikube ||
     mv minikube-linux-amd64 minikube
     chmod a+x minikube
 }
+
+read -p "We need to clean minikube clusters before each run, please enter y if you agree. (y/n): " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "\n${Green}Deleting all Minikube clusters...${NC}\n"
+    ./minikube delete --all
+else
+    echo -e "\n${Green}Operation cancelled.${NC}\n"; exit 1
+fi
+
+
+./minikube delete --all
 ./minikube status | grep "kubelet: Running" || ./minikube start \
     || { echo -e "\n${RED}Failed to install Minikube${NC}"; exit 1; }
 
