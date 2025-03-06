@@ -1,0 +1,9 @@
+caddy
+caddy_2.8.4_linux_amd64.tar.gz
+exampleManifest.yaml
+kubectl
+kustomize
+kustomize_v5.4.3_linux_amd64.tar.gz
+minikube
+nohup.out
+.venv

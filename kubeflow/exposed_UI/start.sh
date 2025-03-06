@@ -27,21 +27,6 @@ command -v python3 || sudo apt-get install python3
 command -v pip || sudo apt-get install python3-pip
 python3 -m venv || sudo apt-get install python3-venv
 
-echo -e "\n${Green}Clone manifests repo ...${NC}\n"
-{
-    if test -d manifests; then
-      cd manifests
-      git add .
-      git reset HEAD --hard
-      cd ..
-    else
-     git clone -b v1.9.1 https://github.com/kubeflow/manifests
-    fi
-} || { echo -e "\n${RED}Failed to clone the manifests...${NC}\n"; exit 1; }
-
-cd manifests || exit 1;
-echo -e "\n${Green}We are inside the manifests repo now ...${NC}\n"
-
 echo -e "\n${Green}Install Docker ...${NC}\n"
 command -v docker ||
 {
@@ -98,9 +83,9 @@ ls ./kustomize || {
 } || { echo -e "\n${RED}Failed to install Kustomize${NC}"; exit 1; }
 
 
-echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
+echo -e "\n${Green}Apply manifests for pipelines... ${NC}\n"
 {
-    ./kustomize build example | ./kubectl apply --server-side --force-conflicts -f -
+    ./kubectl apply --server-side --force-conflicts -f exampleManifest.yaml
 } || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
 check_pods_running() {
@@ -151,8 +136,7 @@ cookies=""
 
 echo -e "\n${Green}Logging in and save an authenticated cookie ...${NC}\n"
 {
-    echo -e "\nprint(session_cookies)" >> tests/gh-actions/test_dex_login.py
-    cookies=$(./.venv/bin/python3 tests/gh-actions/test_dex_login.py)
+    cookies=$(./.venv/bin/python3 test_dex_login.py)
 } || { echo -e "\n${RED}Failed to get a valid session cookie ...${NC}\n"; exit 1; }
 
 

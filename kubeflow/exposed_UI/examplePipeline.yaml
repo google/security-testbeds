@@ -8,19 +8,19 @@ deploymentSpec:
         command:
           - sh
           - -c
-          - 'PAYLOAD_HERE'
+          - 'echo hey'
         image: alpine/curl:8.12.1
 pipelineInfo:
   name: v2-container-component-no-input
 root:
-  dag:
-    tasks:
-      hello-world-container:
-        cachingOptions:
-          enableCache: true
-        componentRef:
-          name: comp-hello-world-container
-        taskInfo:
-          name: hello-world-container
+  dag:`
+  tasks:
+    hello-world-container:
+      cachingOptions:
+        enableCache: true
+      componentRef:
+        name: comp-hello-world-container
+      taskInfo:
+        name: hello-world-container
 schemaVersion: 2.1.0
 sdkVersion: kfp-2.0.0-beta.0
