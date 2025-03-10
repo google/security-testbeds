@@ -7,7 +7,7 @@ RED=$(tput setaf 1)
 echo "An Automated Bash script for setting up a secure airbyte instance that contains random login credentials"
 
 echo "Updating package index..."
-sudo apt update
+sudo apt-get update
 
 echo  "Add Docker's official GPG key..."
 sudo apt-get update
