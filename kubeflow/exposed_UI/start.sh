@@ -81,6 +81,11 @@ fi
 ./minikube status | grep "kubelet: Running" || ./minikube start \
     || { echo -e "\n${RED}Failed to install Minikube${NC}"; exit 1; }
 
+
+echo -e "\n${Green}We can use \`docker login\` command inside minikube to have faster Docker pulls, we are going to run the \`./minikube ssh -- \"docker login\"\` command, you can ignore this part by exiting the ssh connection with ctrl+c ...${NC}\n"
+./minikube ssh -- "docker login"
+
+
 echo -e "\n${Green}Install kubectl...${NC}\n"
 ls ./kubectl ||
 {

@@ -1,6 +1,6 @@
 # Setup Vulnerable and Secure Instances
 
-1. Download Ubuntu 24.04.2 LTS from here: https://ubuntu.com/download/server#manual-install
+1. Download Ubuntu Server 24.04.2 LTS from here: https://ubuntu.com/download/server#manual-install
 2. install it using virtualbox or KVM or ..
 3. during the installation:
     1. remember the IP address of machine
@@ -20,7 +20,9 @@
     bash start.sh
     ```
 
-6. Access the secure instance with login and authentication enabled at http://localhost:8080. Access the exposed UI, which has authentication disabled and is vulnerable to attacks, at http://localhost:8081. You can create and run a new pipeline here.
+6. Access the secure instance with login and authentication enabled at http://localhost:8080. Access the exposed UI,
+   which has authentication disabled and is vulnerable to attacks, at http://localhost:8081. You can create and run a
+   new pipeline here.
 
 ## clean up
 
