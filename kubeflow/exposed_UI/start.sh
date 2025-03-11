@@ -93,6 +93,7 @@ echo -e "\n${Green}Install Kustomize ...${NC}\n"
 ls ./kustomize || {
     curl --silent --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
     tar -xzvf kustomize_v5.4.3_linux_amd64.tar.gz
+    rm kustomize_v5.4.3_linux_amd64.tar.gz
     chmod a+x kustomize
 } || { echo -e "\n${RED}Failed to install Kustomize${NC}"; exit 1; }
 
@@ -100,8 +101,7 @@ ls ./kustomize || {
 echo -e "\n${Green}Apply manifests for pipelines... ${NC}\n"
 {
     ./kubectl apply --server-side --force-conflicts -f exampleManifest.yaml
-} || { #do nothing
-}
+} || echo
 
 check_pods_running() {
   namespaces=(
@@ -160,6 +160,7 @@ ls ./caddy ||
 {
     wget https://github.com/caddyserver/caddy/releases/download/v2.8.4/caddy_2.8.4_linux_amd64.tar.gz
     tar -zxvf caddy_2.8.4_linux_amd64.tar.gz  caddy
+    rm caddy_2.8.4_linux_amd64.tar.gz
     chmod +x caddy
 }
 
