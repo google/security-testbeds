@@ -60,5 +60,12 @@ spec:
   healthcheck:
     # TIP: disable the healthcheck during development
     enabled: true
-    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:4fe3383ff74faa2ef4424d630dfdc40161437adbc828542e6f2095fe630d8a6a
-  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:1f6ab411ad87e81cdc753c18542b003494aabf3053b5d0fce9080273a2cf66ad
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:ac77dac7646673b64155b6dc53a42dc7a8eede97023c68a8273cee2ae3673237
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:a8be5a10dc81edb24f26d2dafa52c1e3118a97afc42d013cba8309dee38ccfac
+  #podTemplate:
+  #  template:
+  #    spec:
+  #      containers:
+  #        - name: challenge
+  #          securityContext:
+  #            privileged: true

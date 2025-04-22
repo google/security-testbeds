@@ -3,7 +3,7 @@
 logFolder="/chroot/logs"
 
 now=$(date +%s)
-cutoff=$((now - 10*60))
+cutoff=$((now - 2*60))
 
 for file in "$logFolder"/*.log
 do
@@ -17,3 +17,5 @@ do
     sleep 1
     cat /dev/null > /var/log/syslog
 done
+
+pkill tensorflow_mode
