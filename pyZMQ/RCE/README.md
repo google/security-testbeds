@@ -1,32 +1,16 @@
 # PyZMQ Server Unsafe Pickle Deserialization
+Please note that _there is currently no safe version of the software_. The current version at this time is 26.4.0.
 
-## Project Structure
+## Setup Vulnerable version
 
-- `setupEnv.sh`: A shell script to set up the Python virtual environment and install the required dependencies.
-- `RunZmqServer.sh`: A shell script to activate the virtual environment and run the ZeroMQ server.
-- `pyZMQ_server.py`: The ZeroMQ server implementation that listens on port 5555 and deserializes received Python objects.
-- `pyZMQ_exploit.py`: The ZeroMQ client implementation that sends a user-provided command to the server for execution.
-
-## Setup
-The Setup should work on apt-get based Linux distros.
-
-1. **Install Dependencies**:
-
-   Execute the `setupEnv.sh` script to set up the virtual environment and install the required packages.
+1. **Run the Server**:
    ```sh
-   ./setupEnv.sh
+   docker compose run --rm pyzmq_vulnerable_rpc_server 
    ```
-2. **Run the Server**:
-
-   Execute the `RunZmqServer.sh` script to start the ZeroMQ server.
-   ```sh
-   ./RunZmqServer.sh
-   ```
-3. **Run the Client**:
+2. **Run the Client**:
 
    Execute the `pyZMQ_exploit.py` script to send a command to the server.  
    ```sh
-   ./RunZmqExploit.sh
+   docker compose run --rm exploit command_to_execute
    ```
-   When prompted, enter the command you want to execute on the server. 
-
+   now you can watch the output of the command in the server container output(previous step).
