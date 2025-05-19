@@ -22,6 +22,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
+
 echo "Installing Docker..."
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 docker info || (echo "${RED}docker is not running" ; exit 1)
@@ -42,11 +43,13 @@ echo 'alias kubectl="minikube kubectl --"' >> ~/.bashrc
 source ~/.bashrc
 
 echo "Downloading abctl..."
-curl -LO https://github.com/airbytehq/abctl/releases/download/v0.16.0/abctl-v0.16.0-linux-amd64.tar.gz || (echo "${RED}can't download abctl" ; exit 1)
-tar -xvzf abctl-v0.16.0-linux-amd64.tar.gz
-sudo mv abctl-v0.16.0-linux-amd64/abctl /usr/local/bin/
-rm -rf abctl-v0.16.0-linux-amd64 abctl-v0.16.0-linux-amd64.tar.gz
-sudo chmod +x /usr/local/bin/abctl
+ls abctl || {
+  curl -LO https://github.com/airbytehq/abctl/releases/download/v0.16.0/abctl-v0.16.0-linux-amd64.tar.gz || (echo "${RED}can't download abctl" ; exit 1)
+  tar -xvzf abctl-v0.16.0-linux-amd64.tar.gz
+  mv abctl-v0.16.0-linux-amd64/abctl .
+  rm abctl-v0.16.0-linux-amd64.tar.gz
+  rm -r abctl-v0.16.0-linux-amd64
+}
 
 echo "Uninstalling any previous Airbyte installation..."
 abctl local uninstall
