@@ -52,14 +52,14 @@ ls abctl || {
 }
 
 echo "Uninstalling any previous Airbyte installation..."
-abctl local uninstall
+./abctl local uninstall
 
 echo "Installing Airbyte..."
-abctl local install
+./abctl local install
 
 echo "Setting up credentials for an insecure instance..."
-abctl local credentials --email user@company.example
-abctl local credentials --password new_password
+./abctl local credentials --email user@company.example
+./abctl local credentials --password new_password
 
 echo "Installation completed! Access Airbyte at http://localhost:8000"
 
