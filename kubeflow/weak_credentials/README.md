@@ -3,7 +3,10 @@
 Please make sure you have deleted the existing minikube cluster: `minikube delete --all` this is to avoid any conflicts
 with the new cluster.
 
-On an Ubuntu 24.04 virtual machine:
+# Prerequisites
+
+1. Ubuntu 24.04 machine with 8GB RAM and 16 CPUs.
+2. A `docker.com` account.
 
 ```bash
 bash start.sh
@@ -11,8 +14,8 @@ bash start.sh
 
 # Set default password
 
-by default the username and password is `user@example.com:12341234`.
-if we changed the default password, we can set the default password again with help of the following script.
+by default, the username and password is `user@example.com:12341234`.
+if we change the default password, we can set the default password again with the help of the following script.
 
 ```bash
 bash set_default_user_pass.sh
