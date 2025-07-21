@@ -132,6 +132,8 @@ echo -e "\n${Green}Port forward the dex login ...${NC}\n"
     nohup ./kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
+
+cd ..
 echo -e "\n${Green}Install python3 requirements ...${NC}\n"
 (
     python3 -m venv .venv
