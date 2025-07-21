@@ -23,10 +23,10 @@ sudo sysctl fs.inotify.max_user_watches=1255360
 
 echo -e "\n${Green}Install python3, python3-pip, python3-venv, wget and git ...${NC}\n"
 sudo apt-get update
-command -v git || sudo apt-get install git
-command -v python3 || sudo apt-get install python3
-command -v pip || sudo apt-get install python3-pip
-python3 -m venv || sudo apt-get install python3-venv
+command -v git || sudo apt-get -y install git
+command -v python3 || sudo apt-get -y install python3
+command -v pip || sudo apt-get -y install python3-pip
+python3 -m venv || sudo apt-get -y install python3-venv
 
 echo -e "\n${Green}Clone manifests repo ...${NC}\n"
 {
