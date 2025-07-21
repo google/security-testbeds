@@ -17,15 +17,29 @@ else
 fi
 
 echo -e "\n${Green}Increase inotify limits to prevent CrashLoopBackOff ...${NC}\n"
-sudo sysctl fs.inotify.max_user_instances=1280
-sudo sysctl fs.inotify.max_user_watches=655360
+sudo sysctl fs.inotify.max_user_instances=2280
+sudo sysctl fs.inotify.max_user_watches=1255360
 
-echo -e "\n${Green}Install python3, python3-pip, python3-venv, wget and git ...${NC}\n"
+
+echo -e "\n${Green}Install curl and git ...${NC}\n"
 sudo apt-get update
-command -v git || sudo apt-get install git
-command -v python3 || sudo apt-get install python3
-command -v pip || sudo apt-get install python3-pip
-python3 -m venv || sudo apt-get install python3-venv
+command -v git || sudo apt-get install -y git
+command -v curl || sudo apt-get install -y curl
+
+echo -e "\n${Green}Clone manifests repo ...${NC}\n"
+{
+    if test -d manifests; then
+      cd manifests
+      git add .
+      git reset HEAD --hard
+      cd ..
+    else
+     git clone -b v1.9.1-branch https://github.com/kubeflow/manifests
+    fi
+} || { echo -e "\n${RED}Failed to clone the manifests...${NC}\n"; exit 1; }
+
+cd manifests || exit 1;
+echo -e "\n${Green}We are inside the manifests repo now ...${NC}\n"
 
 echo -e "\n${Green}Install Docker ...${NC}\n"
 command -v docker ||
@@ -52,93 +66,63 @@ command -v docker ||
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     fi
   sudo apt-get update
-  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  docker info 1>/dev/null || (echo -e "${RED}docker is not running${NC}" ; exit 1)
   sudo usermod -aG docker "$USER"
 } || { echo -e "\n${RED}Failed to install Docker"; exit 1; }
 
-docker info 1>/dev/null || { echo -e "${RED}docker is not running, Mostly we need a reboot${NC}" ; exit 1; }
-
-echo -e "\n${Green}Install minikube ...${NC}\n"
-ls ./minikube ||
+echo pwd:  $(pwd)
+echo -e "\n${Green}Install kind ...${NC}\n"
+ls kind ||
 {
-    curl -LO https://storage.googleapis.com/minikube/releases/v1.34.0/minikube-linux-amd64
-    mv minikube-linux-amd64 minikube
-    chmod a+x minikube
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.29.0/kind-linux-amd64
+    chmod +x kind
 }
+cat <<EOF | ./kind create cluster --name=kubeflow --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  image: kindest/node:v1.32.0@sha256:c48c62eac5da28cdadcf560d1d8616cfa6783b58f0d94cf63ad1bf49600cb027
+  kubeadmConfigPatches:
+  - |
+    kind: ClusterConfiguration
+    apiServer:
+      extraArgs:
+        "service-account-issuer": "https://kubernetes.default.svc"
+        "service-account-signing-key-file": "/etc/kubernetes/pki/sa.key"
+EOF
+./kind get kubeconfig --name kubeflow > /tmp/kubeflow-config
+export KUBECONFIG=/tmp/kubeflow-config
 
-read -p "We need to clean minikube clusters before each run, please enter y if you agree. (y/n): " -n 1 -r
-echo
-
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo -e "\n${Green}Deleting all Minikube clusters...${NC}\n"
-    ./minikube delete --all
-else
-    echo -e "\n${Green}Operation cancelled.${NC}\n"; exit 1
-fi
-
-
-./minikube delete --all
-./minikube status | grep "kubelet: Running" || ./minikube start \
-    || { echo -e "\n${RED}Failed to install Minikube${NC}"; exit 1; }
-
-
-echo -e "\n${Green}We can use \`docker login\` command inside minikube to have faster Docker pulls, we are going to run the \`./minikube ssh -- \"docker login\"\` command, you can ignore this part by exiting the ssh connection with ctrl+c ...${NC}\n"
-./minikube ssh -- "docker login"
-
+echo -e "\n${Green}We need to login into a docker account ...${NC}\n"
+docker login
 
 echo -e "\n${Green}Install kubectl...${NC}\n"
-ls ./kubectl ||
+ls kubectl ||
 {
     curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/amd64/kubectl
     chmod a+x kubectl
 } || { echo -e "\n${RED}Failed to install kubectl${NC}"; exit 1; }
 
+./kubectl create secret generic regcred \
+    --from-file=.dockerconfigjson=$HOME/.docker/config.json \
+    --type=kubernetes.io/dockerconfigjson
+
 
 echo -e "\n${Green}Install Kustomize ...${NC}\n"
-ls ./kustomize || {
-    curl --silent --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
+ls kustomize || {
+    curl --location --remote-name "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz"
     tar -xzvf kustomize_v5.4.3_linux_amd64.tar.gz
-    rm kustomize_v5.4.3_linux_amd64.tar.gz
     chmod a+x kustomize
+    rm kustomize_v5.4.3_linux_amd64.tar.gz
 } || { echo -e "\n${RED}Failed to install Kustomize${NC}"; exit 1; }
 
 
-echo -e "\n${Green}Apply manifests for pipelines... ${NC}\n"
+echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
 {
-    ./kubectl apply --server-side --force-conflicts -f exampleManifest.yaml
-} || echo
-
-check_pods_running() {
-  namespaces=(
-    "cert-manager"
-    "istio-system"
-    "auth"
-    "knative-serving"
-    "kubeflow"
-  )
-  for ns in "${namespaces[@]}"; do
-    pods=$(./kubectl get pods -n "$ns" --no-headers)
-    if [ -z "$pods" ]; then
-      echo "No pods found in namespace: $ns"
-      return 1
-    fi
-
-    not_running=$(echo "$pods" | awk '{print $3}' | grep -v "Running")
-    if [ -n "$not_running" ]; then
-      echo "Not all pods are in Running state in namespace: $ns"
-      return 0
-    fi
-  done
-  echo "All pods are in Running state in all namespaces"
-  return 1
-}
-
-echo -e "\n${Green}Wait until all pods get ready ...${NC}\n"
-(
-    while check_pods_running; do
-      sleep 20
-    done
-)
+    while ! ./kustomize build example | ./kubectl apply --server-side --force-conflicts -f -; do echo "Retrying to apply resources"; sleep 20; done
+} || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
 (
