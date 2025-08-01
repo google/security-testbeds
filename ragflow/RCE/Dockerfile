@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install -y python3 python3-pip
+RUN DEBIAN_FRONTEND=noninteractive apt install -y python3 python3-pip curl
 WORKDIR /app
 
 COPY requirements.txt .
