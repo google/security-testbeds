@@ -1,12 +1,14 @@
-version: '2'
-
 services:
   tomcat:
     image: docker.io/bitnami/tomcat:10.1
     ports:
       - '8080:8080'
+      - '8009:8009'
     volumes:
       - 'tomcat_data:/bitnami/tomcat'
+      - './server.xml:/opt/bitnami/tomcat/conf/server.xml'
+      - './conf/tomcat-users.xml:/opt/bitnami/tomcat/conf/tomcat-users.xml'
+
     environment:
       - TOMCAT_USERNAME=root
       - TOMCAT_PASSWORD=pass

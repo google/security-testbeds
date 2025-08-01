@@ -1,0 +1,23 @@
+services:
+  pyzmq_vulnerable_rpc_server:
+    image: pyzmq_vulnerable_rpc_server:v1
+    hostname: pyzmq_vulnerable_rpc_server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"
+    networks:
+      - internal
+    entrypoint: ["/bin/sh", "-c", "python3 pyZMQ_server.py & echo 'Running the server on port 5555...' && wait"]
+  exploit:
+    image: pyzmq_vulnerable_rpc_server:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - internal
+    entrypoint: ["python3","pyZMQ_exploit.py","pyzmq_vulnerable_rpc_server"]
+
+networks:
+  internal:
