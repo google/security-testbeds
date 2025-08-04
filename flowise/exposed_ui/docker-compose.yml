@@ -1,0 +1,18 @@
+services:
+    flowise:
+        image: flowiseai/flowise
+        restart: always
+        environment:
+            - PORT=${PORT}
+            - FLOWISE_USERNAME=${FLOWISE_USERNAME}
+            - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}
+            - DATABASE_PATH=${DATABASE_PATH}
+            - APIKEY_PATH=${APIKEY_PATH}
+            - SECRETKEY_PATH=${SECRETKEY_PATH}
+            - LOG_PATH=${LOG_PATH}
+            - BLOB_STORAGE_PATH=${BLOB_STORAGE_PATH}
+        ports:
+            - '${PORT}:${PORT}'
+        volumes:
+            - /tmp/.flowise:/root/.flowise
+        entrypoint: "flowise start"
