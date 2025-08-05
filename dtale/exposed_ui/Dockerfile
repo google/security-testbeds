@@ -1,11 +1,8 @@
 FROM python:3.7
-LABEL cve="CVE-2024-9016-secure" \
-      status="secure" \
-      description="Secured version D-Tale instance for CVE-2024-9016"
 
 WORKDIR /app
 
-RUN pip install dtale==3.13.1
+RUN pip install dtale==3.18.2
 RUN pip install dash_daq==0.5.0
 
 COPY config.ini /config.ini
