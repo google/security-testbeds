@@ -1,8 +1,5 @@
 echo "We are inside the manifests repo now ..."
 
-echo "Deletes the local Kubernetes cluster"
-minikube delete
-
-echo "Remove kubectl, minikube and kustomize ..."
-sudo rm kubectl minikube kustomize caddy
+echo "Deletes the local kubeflow cluster"
+./kind delete cluster --name kubeflow || { echo -e "\nFailed to delete the cluster..."; exit 1; }
 

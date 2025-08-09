@@ -15,3 +15,8 @@ Access the secure instance with login and authentication enabled at http://local
 which has authentication disabled and is vulnerable to attacks, at http://localhost:8081. You can create and run a
 new pipeline here.
 
+# cleanup
+
+```bash
+bash cleanup.sh
+```
