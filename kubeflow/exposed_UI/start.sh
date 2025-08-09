@@ -36,12 +36,17 @@ echo -e "\n${Green}Clone manifests repo ...${NC}\n"
       git reset HEAD --hard
       cd ..
     else
-     git clone -b v1.9.1-branch https://github.com/kubeflow/manifests
+     git clone https://github.com/kubeflow/manifests
     fi
 } || { echo -e "\n${RED}Failed to clone the manifests...${NC}\n"; exit 1; }
-
 cd manifests || exit 1;
+git checkout d740b6296a8765a994a42575852965d9f5b5206e
+
 echo -e "\n${Green}We are inside the manifests repo now ...${NC}\n"
+
+echo -e "\n${Green}Replacing the example/kustomization.yaml ...${NC}\n"
+cp ../kustomization.yaml example/kustomization.yaml || { echo -e "\n${RED}Failed to copy the kustomization.yaml...${NC}\n"; exit 1; }
+
 
 echo -e "\n${Green}Install Docker ...${NC}\n"
 command -v docker ||
@@ -120,6 +125,12 @@ if ! ./kubectl get secret regcred >/dev/null 2>&1; then
         --type=kubernetes.io/dockerconfigjson
 fi
 
+echo -e "\n${Green}Install Kapp...${NC}\n"
+ls kubectl ||
+{
+    curl -L https://carvel.dev/install.sh | K14SIO_INSTALL_BIN_DIR=./ bash
+} || { echo -e "\n${RED}Failed to install Kapp${NC}"; exit 1; }
+
 
 echo -e "\n${Green}Install Kustomize ...${NC}\n"
 ls kustomize || {
@@ -132,7 +143,7 @@ ls kustomize || {
 
 echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
 {
-    while ! ./kustomize build example | ./kubectl apply --server-side --force-conflicts -f -; do echo "Retrying to apply resources"; sleep 20; done
+    ./kustomize build example | ./kapp deploy -a kubeflow -f - --yes --diff-changes
 } || { echo -e "\n${RED}Failed to setup k8s pods ...${NC}\n"; exit 1; }
 
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
