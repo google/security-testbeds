@@ -126,7 +126,7 @@ if ! ./kubectl get secret regcred >/dev/null 2>&1; then
 fi
 
 echo -e "\n${Green}Install Kapp...${NC}\n"
-ls kubectl ||
+ls kapp ||
 {
     curl -L https://carvel.dev/install.sh | K14SIO_INSTALL_BIN_DIR=./ bash
 } || { echo -e "\n${RED}Failed to install Kapp${NC}"; exit 1; }
