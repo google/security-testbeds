@@ -80,7 +80,13 @@ ls kind ||
     [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.29.0/kind-linux-amd64
     chmod +x kind
 }
-cat <<EOF | ./kind create cluster --name=kubeflow --config=-
+
+echo -e "\n${Green}Checking if a cluster named 'kubeflow' already exists...${NC}\n"
+if ./kind get clusters | grep -q "^kubeflow$"; then
+    echo -e "\n${Green}Cluster 'kubeflow' already exists. Skipping cluster creation steps.${NC}\n"
+else
+    echo -e "\n${Green}Cluster 'kubeflow' not found. Proceeding with cluster creation...${NC}\n"
+    cat <<EOF | ./kind create cluster --name=kubeflow --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -94,8 +100,9 @@ nodes:
         "service-account-issuer": "https://kubernetes.default.svc"
         "service-account-signing-key-file": "/etc/kubernetes/pki/sa.key"
 EOF
-./kind get kubeconfig --name kubeflow > /tmp/kubeflow-config
-export KUBECONFIG=/tmp/kubeflow-config
+    ./kind get kubeconfig --name kubeflow > /tmp/kubeflow-config
+    export KUBECONFIG=/tmp/kubeflow-config
+fi
 
 echo -e "\n${Green}We need to login into a docker account ...${NC}\n"
 docker login
