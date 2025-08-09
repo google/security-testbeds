@@ -114,9 +114,11 @@ ls kubectl ||
     chmod a+x kubectl
 } || { echo -e "\n${RED}Failed to install kubectl${NC}"; exit 1; }
 
-./kubectl create secret generic regcred \
-    --from-file=.dockerconfigjson=$HOME/.docker/config.json \
-    --type=kubernetes.io/dockerconfigjson
+if ! ./kubectl get secret regcred >/dev/null 2>&1; then
+    ./kubectl create secret generic regcred \
+        --from-file=.dockerconfigjson=$HOME/.docker/config.json \
+        --type=kubernetes.io/dockerconfigjson
+fi
 
 
 echo -e "\n${Green}Install Kustomize ...${NC}\n"
@@ -136,7 +138,7 @@ echo -e "\n${Green}Build and Apply manifests for pipelines... ${NC}\n"
 echo -e "\n${Green}Port forward the dex login ...${NC}\n"
 (
     ingress_gateway_service=$(./kubectl get svc --namespace istio-system --selector="app=istio-ingressgateway" --output jsonpath='{.items[0].metadata.name}')
-    nohup ./kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
+      nohup ./kubectl port-forward --namespace istio-system svc/"${ingress_gateway_service}" 8080:80 &
 ) || { echo -e "\n${RED}Failed to port forward the kubeflow ...${NC}\n"; exit 1; }
 
 
