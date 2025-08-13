@@ -1,8 +1,8 @@
 # Setup Apache Livy with Docker Compose
 
 ```bash
-
-docker compose up --build
+docker compose build spark-master
+docker compose up
 ```
 # Access the Livy UI and execute PySpark code
 ```bash
