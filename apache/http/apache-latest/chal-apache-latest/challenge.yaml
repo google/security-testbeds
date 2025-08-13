@@ -1,0 +1,63 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-apache-latest
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: /chroot/flag
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: apache-latest-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+  healthcheck:
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:e8aee42133434275f095633bc48dab7f8e1c2551dc6714789d69e9ba2df13794
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:6963d34b44a0d482e1a4e3c170ea6da1a20e4436b171395b69fd7d99dd7d3acb
