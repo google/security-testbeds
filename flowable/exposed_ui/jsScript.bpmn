@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="Examples">
+
+  <process id="jsScriptProcess" name="JavaScript Script Process">
+    <startEvent id="start" />
+    <sequenceFlow sourceRef="start" targetRef="scriptTask" />
+    <scriptTask id="scriptTask" name="Execute Command via JavaScript" 
+                scriptFormat="javascript" 
+                flowable:autoStoreVariables="true">
+      <script>
+        var ProcessBuilder = Java.type('java.lang.ProcessBuilder');
+        var Arrays = Java.type('java.util.Arrays');
+        var Scanner = Java.type('java.util.Scanner');
+        
+        var processBuilder = new ProcessBuilder(Arrays.asList('uname', '-a'));
+        var process = processBuilder.start();
+        
+        var scanner = new Scanner(process.getInputStream()).useDelimiter("\\A");
+        var result = scanner.hasNext() ? scanner.next() : "";
+        
+        execution.setVariable('commandOutput', result);
+      </script>
+    </scriptTask>
+    <sequenceFlow sourceRef="scriptTask" targetRef="end" />
+    <endEvent id="end" />
+  </process>
+
+</definitions>
