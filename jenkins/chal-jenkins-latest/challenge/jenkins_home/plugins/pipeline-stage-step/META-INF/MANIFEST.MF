@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Pipeline: Stage Step
+Specification-Version: 0.0
+Implementation-Title: Pipeline: Stage Step
+Implementation-Version: 312.v8cd10304c27a_
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: pipeline-stage-step
+Short-Name: pipeline-stage-step
+Long-Name: Pipeline: Stage Step
+Url: https://github.com/jenkinsci/pipeline-stage-step-plugin
+Plugin-Version: 312.v8cd10304c27a_
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Dependencies: workflow-api:1213.v646def1087f9,workflow-step-api:6
+ 39.v6eca_cd8c04a_a_
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/pipeline-stag
+ e-step-plugin.git
+Plugin-ScmTag: 8cd10304c27a36009f99ecd942797e2762882b1a
+Plugin-ScmUrl: https://github.com/jenkinsci/pipeline-stage-step-plugin
+Plugin-GitHash: 8cd10304c27a36009f99ecd942797e2762882b1a
+Implementation-Build: 8cd10304c27a36009f99ecd942797e2762882b1a
+
