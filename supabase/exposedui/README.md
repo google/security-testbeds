@@ -1,4 +1,4 @@
-# Start Vulnerable instance
+# Start a Vulnerable instance
 ```bash
 bash start.sh
 ```
