@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: curl-job
+  labels:
+    app: curl-example
+spec:
+  template:
+    metadata:
+      labels:
+        app: curl-example
+    spec:
+      containers:
+        - name: curl-container
+          image: curlimages/curl:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              curl -s your-webhook || exit 0
+      restartPolicy: OnFailure
+  backoffLimit: 3
+  completions: 1
