@@ -1,15 +1,8 @@
 # setup an unauthenticated nomad ui
 you can install nomad cli according to the official document: https://developer.hashicorp.com/nomad/install
-OR base on ubuntu 24.04, docker should be installed.
+OR base on ubuntu 24.04 with docker run the following command to run nomad:
 ```bash
-wget https://releases.hashicorp.com/nomad/1.10.4/nomad_1.10.4_linux_amd64.zip
-unzip nomad_1.10.4_linux_amd64.zip && rm nomad_1.10.4_linux_amd64.zip
-sudo ./nomad agent -dev \
--bind 0.0.0.0 \
--network-interface='{{ GetDefaultInterfaces | attr "name" }}'
-
-# open another terminal
-sudo ./nomad ui --show-url
+docker run --rm -it  --privileged  -v /sys/fs/cgroup:/sys/fs/cgroup:rw  -p 4646:4646  hashicorp/nomad:1.10  agent -dev -bind 0.0.0.0  -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
 ```
 
 # confirming the exposed ui
