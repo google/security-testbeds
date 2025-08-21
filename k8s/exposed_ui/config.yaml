@@ -16,7 +16,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              curl -s https://webhook.site/0725a73b-854d-431f-92ae-de61dcfc2d57 || exit 0
+              curl -s your-webhook || exit 0
       restartPolicy: OnFailure
   backoffLimit: 3
   completions: 1
