@@ -1,0 +1,33 @@
+# Unauthenticated File Upload Tikiwiki (CVE-2025-34111) Testbed
+
+## Setup
+
+Build and run vulnerable container using docker compose, it will open port 8080 that run tikiwiki.
+
+1. Run and build tikiwiki docker container
+
+```bash
+docker compose up 
+```
+
+2. Follow the setup wizard for tikiwiki installation
+    - Click continue until Database Connection
+    - Fill the input:
+        -   Host name: db
+        -   Database name: tikiwiki
+        -   Database username: tiki
+        -   Database password: wiki
+        -   Database engine: InnoDB
+    - Continue until "Enter tiki and lock installer"
+    - Set admin password, then logout
+
+
+## How to Trigger the Vulnerability?
+
+To trigger this vulnerability manually, just simply by running the `exploit.py`
+
+```bash
+python3 exploit.py
+```
+
+The response should be contains php webshell (e. g. http://localhost:8080/vendor_extra/elfinder/files/CFRmkPLSTH.php?cmd=whoami)
