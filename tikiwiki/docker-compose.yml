@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  tiki:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      TIKI_DB_NAME: tikiwiki
+      TIKI_DB_USER: tiki
+      TIKI_DB_PASS: wiki
+
+  db:
+    image: mysql:5.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: tikiwiki
+      MYSQL_USER: tiki
+      MYSQL_PASSWORD: wiki
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
