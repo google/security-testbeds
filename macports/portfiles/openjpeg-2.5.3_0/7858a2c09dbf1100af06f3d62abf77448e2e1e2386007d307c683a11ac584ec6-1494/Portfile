@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           cmake 1.1
+PortGroup           github 1.0
+
+github.setup        uclouvain openjpeg 2.5.3 v
+github.tarball_from archive
+revision            0
+
+checksums           rmd160  f17f51a39618f4b1b05c2e88335ed5ccc24ad831 \
+                    sha256  368fe0468228e767433c9ebdea82ad9d801a3ad1e4234421f352c8b06e7aa707 \
+                    size    2155188
+
+categories          graphics
+license             BSD
+
+maintainers         {mcalhoun @MarcusCalhoun-Lopez} openmaintainer
+
+description         Library for manipulating JPEG-2000 images
+
+long_description    The OpenJPEG library is an open-source JPEG 2000 codec. \
+                    It has been developed in order to promote the use of JPEG \
+                    2000, the new still-image compression standard from the \
+                    Joint Photographic Experts Group (JPEG).
+
+homepage            https://www.openjpeg.org/
+
+depends_build-append \
+                    port:pkgconfig
+
+depends_lib         port:libpng \
+                    port:tiff \
+                    port:lcms2 \
+                    port:zlib \
+                    port:jbigkit
+
+configure.cppflags-replace -I${prefix}/include -isystem${prefix}/include
+
+if {${universal_possible} && [variant_isset universal]} {
+    if {${build_arch} in [list ppc ppc64]} {
+        PortGroup  muniversal 1.0
+
+    }
+}
