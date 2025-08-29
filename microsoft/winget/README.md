@@ -51,18 +51,37 @@ This will:
 - Mount the current directory as `/app` inside the container
 - Allow you to place the `scalibr` binary in `/app` and run tests
 
-### Running OSV-Scalibr
+### Running OSV-Scalibr on Windows
+
+Since the WinGet extractor requires Windows OS, extract the test data from the container to run on a Windows system:
+
+1. Run the Docker container to extract test data:
+```bash
+docker run --rm -v $(pwd)/extracted_testdata:/output winget-test cp -r /Users /ProgramData /output/
+```
+
+2. Copy the extracted test data to your Windows machine
+3. On Windows, run scalibr with the `--root` flag pointing to the extracted directory:
+
+```bash
+# Extract from all WinGet databases using extracted test data
+scalibr.exe --extractors=os/winget --result=winget_output.json --root=C:\path\to\extracted_testdata
+
+# Or target specific paths within the extracted data
+scalibr.exe --extractors=os/winget --result=winget_output.json --root=C:\path\to\extracted_testdata --paths=Users/test/AppData/Local,ProgramData/Microsoft
+```
+
+### Development/CI Testing (Linux)
+
+For development purposes, you can still use the Docker container to verify database contents, but note that the WinGet extractor will not run:
 
 1. Build or copy the `scalibr` binary to the current directory
 2. Run the container as shown above
 3. Inside the container, run scalibr with the WinGet extractor:
 
 ```bash
-# Extract from all WinGet databases
+# This will show the expected "needs to run on a different OS" message
 ./scalibr --extractors=os/winget --result=winget_output.json
-
-# Or target specific paths
-./scalibr --extractors=os/winget --result=winget_output.json --paths=/Users/test/AppData/Local,/ProgramData/Microsoft
 ```
 
 ### Verify Database Contents
