@@ -10,5 +10,3 @@ RUN curl -L https://sourceforge.net/projects/tikiwiki/files/Tiki_15.x_Situla/15.
     && mv tiki-15.1/* . \
     && rm -r tiki.zip tiki-15.1
 
-# 4. Ensure Apache user owns the files
-RUN chown -R www-data:www-data /var/www/html
