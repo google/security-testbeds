@@ -1,17 +1,5 @@
 FROM tikiwiki/php:5-apache
 
-# 1. Fix Debian Stretch repo references and disable expiry checks
-RUN sed -i \
-      -e 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' \
-      -e 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' \
-      -e '/stretch-updates/d' \
-      /etc/apt/sources.list \
-    && echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid
-
-# 2. Update apt and install wget + unzip (allow unauthenticated due to deprecated archive)
-RUN apt-get update \
-    && apt-get install -y --allow-unauthenticated wget unzip \
-    && apt-get clean
 
 # 3. Download and unpack TikiWiki 15.1 from the official Situla branch
 WORKDIR /var/www/html
