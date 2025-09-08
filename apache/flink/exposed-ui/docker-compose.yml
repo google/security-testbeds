@@ -1,0 +1,23 @@
+services:
+  flink-dev:
+    container_name: flink
+    image: hibuz/flink-dev
+    build: .
+    ports:
+      - 9870:9870
+      - 8088:8088
+      - 19888:19888
+      - 16010:16010
+      - 4040:4040
+      - 8080:8080
+      - 8081:8081
+      - 18080:18080
+      - 9083:9083
+      - 10002:10002
+      - 8083:8083
+    command: hive
+    volumes:
+      - flink-vol:/tmp
+
+volumes:
+  flink-vol: {}
