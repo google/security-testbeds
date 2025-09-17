@@ -1,0 +1,16 @@
+{
+  "hosts": [
+    "unix:///var/run/docker.sock"
+  ],
+  "tls": true,
+  "tlscert": "/etc/docker/certs/server-cert.pem",
+  "tlskey": "/etc/docker/certs/server-key.pem",
+  "tlsverify": true,
+  "tlscacert": "/etc/docker/certs/ca.pem",
+  "storage-driver": "overlay2",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
