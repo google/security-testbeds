@@ -1,0 +1,78 @@
+services:
+  spark-master:
+    container_name: spark-master
+    hostname: spark-master
+    build:
+      context: ./
+      dockerfile: ./spark/Dockerfile
+    image: mounirbs-local/spark-python3-java11:3.5.4
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+      - "6066:6066"
+    labels:
+      kompose.service.expose: true
+      kompose.service.type: headless
+    environment:
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_DAEMON_MEMORY=2g
+      - SPARK_MASTER_OPTS="-Dspark.master.rest.enabled=true"
+      - PYSPARK_PYTHON=python3
+    entrypoint: 
+      - "bash"
+      - "-c"
+      - "/opt/spark/sbin/start-master.sh && tail -f /dev/null"
+    volumes:
+      - ./python:/python
+
+  spark-worker:
+    # reuse the image built for the spark-master
+    image: mounirbs-local/spark-python3-java11:3.5.4
+    ports:
+      - "8081:8081"
+    labels:
+      kompose.service.expose: true
+      kompose.service.type: headless  
+    container_name: spark-worker
+    hostname: spark-worker
+    environment:
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=2g
+      - PYSPARK_PYTHON=python3
+    depends_on:
+      - spark-master
+    entrypoint:
+      - "bash" 
+      - "-c"
+      - "/opt/spark/sbin/start-worker.sh spark://spark-master:7077 && tail -f /dev/null"
+    volumes:
+      - ./python:/python
+
+  apache-livy:
+    container_name: apache-livy
+    hostname: apache-livy
+    environment:
+      - PYSPARK_PYTHON=python3
+    build: ./apache-livy/
+    image: mounirbs-local/livy-spark3.5.4-python3-java11:0.8
+    command: ["sh", "-c", "/opt/livy/bin/livy-server"]
+    user: root
+    volumes:
+      - ./apache-livy/conf/:/opt/livy/conf/       
+      - ./apache-livy/spark/conf/:/opt/spark/conf/
+    ports:
+      - '8998:8998'
+    labels:
+      kompose.service.expose: true
+      kompose.service.type: headless
+    depends_on:
+      - spark-master
+      - spark-worker
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2g
