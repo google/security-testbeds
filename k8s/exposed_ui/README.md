@@ -1,5 +1,6 @@
-# Vulnerable Kubernetes Dashboard
-we need docker to run the vulnerable kubernetes dashboard
+# Exposed Kubernetes Dashboard
+This will spin up an instance of Kubernetes Dashboard v2.7.0+0.g42deb6b32 with Authentication disabled.
+The setup targets Linux amd64 and needs docker to run the exposed kubernetes dashboard.
 ```bash
 curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64
 chmod +x minikube
