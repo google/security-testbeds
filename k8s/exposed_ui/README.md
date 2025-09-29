@@ -21,7 +21,7 @@ bash cleanup.sh
 Or you can upload the `config.yaml` file to the kubernetes dashboard at http://127.0.0.1:8100/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default and run the exploit from there.
 
 # Secure K8s Dashboard with Login enabled
-
+The setup targets Linux amd64 and needs docker to run the exposed kubernetes dashboard.
 ```bash
 curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.36.0/minikube-linux-amd64
 chmod +x minikube
