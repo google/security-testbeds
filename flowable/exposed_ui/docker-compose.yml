@@ -4,6 +4,8 @@ services:
   flowable:
     image: flowable/flowable-rest
     container_name: flowable-rest
+    ports:
+      - "8080:8080"
     networks:
       - flowable-network
 
