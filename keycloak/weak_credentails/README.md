@@ -18,4 +18,4 @@ docker compose down
 
 Credentials can be set customizing the `KC_BOOTSTRAP_ADMIN_USERNAME` and `KC_BOOTSTRAP_ADMIN_PASSWORD`.
 
-The service will be served on <https://localhost:8080>
+The service will be served on <http://localhost:8080>
