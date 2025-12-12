@@ -8,7 +8,8 @@ Install minikube: <https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 
-minikube start --cpus=4 --memory=8192 --driver=docker```
+minikube start --cpus=4 --memory=8192 --driver=docker
+```
 
 Install helm: <https://helm.sh/docs/intro/install/>
 
