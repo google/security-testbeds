@@ -1,0 +1,64 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-jetty
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/chroot/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: jetty-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:d610fcf30d926dba7751f7f28d6a86eece9793d880f1a7166922364b787ba0ff
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:7fbd53a514dcfeb6920aa74bc9316cabd68df1f9f80c12d09c22c8e73a8ded83
