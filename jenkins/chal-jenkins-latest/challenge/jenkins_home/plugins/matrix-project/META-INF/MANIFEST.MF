@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Matrix Project Plugin
+Specification-Version: 0.0
+Implementation-Title: Matrix Project Plugin
+Implementation-Version: 822.824.v14451b_c0fd42
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: matrix-project
+Short-Name: matrix-project
+Long-Name: Matrix Project Plugin
+Url: https://github.com/jenkinsci/matrix-project-plugin
+Plugin-Version: 822.824.v14451b_c0fd42
+Hudson-Version: 2.401.3
+Jenkins-Version: 2.401.3
+Plugin-Dependencies: junit:1240.vf9529b_881428,script-security:1294.v993
+ 33c047434
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/matrix-projec
+ t-plugin.git
+Plugin-ScmTag: 14451bc0fd4240fed322178655bb3361cc6d4296
+Plugin-ScmUrl: https://github.com/jenkinsci/matrix-project-plugin
+Plugin-GitHash: 14451bc0fd4240fed322178655bb3361cc6d4296
+Implementation-Build: 14451bc0fd4240fed322178655bb3361cc6d4296
+
