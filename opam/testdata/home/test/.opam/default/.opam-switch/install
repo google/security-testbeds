@@ -1,0 +1,7 @@
+# opam switch install list
+dune.3.7.2
+ocamlfind.1.9.6
+
+core_kernel.0.15.1 # comment after entry
+cohttp-lwt.6.0.0
+ppx_deriving.5.2.1
