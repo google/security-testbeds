@@ -1,0 +1,3 @@
+# cron.d/misconfig
+# This job runs as root and uses a relative path, making it vulnerable to PATH manipulation.
+*/3 * * * * root relative_script.sh
