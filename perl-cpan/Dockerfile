@@ -11,7 +11,7 @@ RUN echo "yes" > CPAN
 RUN cpan App::cpanminus
 
 # Install some CPAN modules along with their dependencies
-RUN cpanm JSON LWP::UserAgent Try::Tiny
+RUN cpanm JSON LWP::UserAgent Try::Tiny Class::Data::Inheritable@0.08
 
 # App for putting scalibr binary inside the container
 RUN mkdir -p /app
