@@ -70,9 +70,18 @@ services:
     depends_on:
       - spark-master
       - spark-worker
-    
     deploy:
       resources:
         limits:
           cpus: '1'
           memory: 2g
+
+  livy-auth-proxy:
+    image: caddy:2.9-alpine
+    container_name: livy-auth-proxy
+    ports:
+      - "8999:8999"
+    volumes:
+      - ./caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - apache-livy

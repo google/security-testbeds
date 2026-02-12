@@ -20,3 +20,9 @@ curl http://127.0.0.1:8998/sessions/$id/statements/$statements_id
 # output.data is the stdout
 # {"id":0,"code":"import os\nprint(os.getcwd())","state":"available","output":{"status":"ok","execution_count":0,"data":{"text/plain":"/opt"}},"progress":1.0,"started":1754515902001,"completed":1754515902003}
 ```
+
+# Secured Livy instance
+By running the following command, against a secured Livy instance, we receive `401 Unauthorized` response from the server:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"kind":"pyspark"}' http://localhost:8999/sessions -v
+```
