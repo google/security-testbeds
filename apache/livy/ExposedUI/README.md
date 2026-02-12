@@ -15,7 +15,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"code":"import os\nprint(o
 #  wait 30sec
 # {"id":0,"code":"import os\nprint(os.getcwd())","state":"waiting","output":null,"progress":0.0,"started":0,"completed":0}
 
-# replace id from last reseponse with #statements_id
+# replace id from last response with #statements_id
 curl http://127.0.0.1:8998/sessions/$id/statements/$statements_id
 # output.data is the stdout
 # {"id":0,"code":"import os\nprint(os.getcwd())","state":"available","output":{"status":"ok","execution_count":0,"data":{"text/plain":"/opt"}},"progress":1.0,"started":1754515902001,"completed":1754515902003}
