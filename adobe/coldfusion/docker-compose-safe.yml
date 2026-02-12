@@ -1,0 +1,10 @@
+name: coldfusion-safe
+services:
+  coldfusion:
+    image: adobecoldfusion/coldfusion:latest-2018
+    ports:
+      - "8500:8500"
+      - "5005:5005"
+    environment:
+      - password=vulhub
+      - acceptEULA=YES

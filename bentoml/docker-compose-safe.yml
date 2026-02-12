@@ -1,8 +1,0 @@
-services:
-  bentoml-safe:
-    build:
-      context: .
-      args:
-        BENTOML_VERSION: 1.2.5
-    ports:
-      - "3000:3000"

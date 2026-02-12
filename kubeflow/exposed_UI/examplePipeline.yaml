@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: v2-container-component-no-input-
+  annotations:
+    pipelines.kubeflow.org/kfp_sdk_version: 2.0.0-beta.0
+    pipelines.kubeflow.org/pipeline_compilation_time: '2025-08-09T16:05:29Z'
+    pipelines.kubeflow.org/pipeline_spec: '{"name":"v2-container-component-no-input","schemaVersion":"2.1.0"}'
+spec:
+  entrypoint: v2-container-component-no-input
+  templates:
+    - name: v2-container-component-no-input
+      dag:
+        tasks:
+          - name: hello-world-container
+            template: hello-world-container
+    - name: hello-world-container
+      container:
+        image: alpine/curl:8.12.1
+        command:
+          - sh
+          - -c
+          - 'echo hey'
