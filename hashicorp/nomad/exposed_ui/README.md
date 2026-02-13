@@ -1,8 +1,12 @@
-# setup an unauthenticated nomad ui
+# setup an unauthenticated nomad ui (vulnerable)
 you can install nomad cli according to the official document: https://developer.hashicorp.com/nomad/install
 OR base on ubuntu 24.04 with docker run the following command to run nomad:
 ```bash
-docker run --rm -it  --privileged  -v /sys/fs/cgroup:/sys/fs/cgroup:rw  -p 4646:4646  hashicorp/nomad:1.10  agent -dev -bind 0.0.0.0  -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
+docker run --rm -it \
+  -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+  -p 4646:4646 \
+  hashicorp/nomad:1.10 \
+  agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
 ```
 
 # confirming the exposed ui
@@ -12,4 +16,35 @@ curl 'http://localhost:4646/v1/jobs' -X POST  -H 'content-type: application/json
 
 # clean up
 curl 'http://localhost:4646/v1/job/tsunami-job?purge=true' -X DELETE -H 'content-type: application/json; charset=utf-8'
+```
+
+# setup an authenticated nomad ui (safe)
+This version enables Nomad's ACL system, which requires a valid token for all API and UI access.
+```bash
+docker run --rm -it \
+  --name nomad-safe \
+  -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+  -p 4646:4646 \
+  hashicorp/nomad:1.10 \
+  agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}' \
+  -acl-enabled
+```
+
+After the agent starts, bootstrap the ACL system to get a management token:
+```bash
+docker exec nomad-safe nomad acl bootstrap
+```
+This will output a `Secret ID` (the management token). All subsequent API/UI requests require this token.
+
+# confirming the safe setup
+Without a valid token, API requests are rejected with a 403:
+```bash
+curl 'http://localhost:4646/v1/jobs'
+# Permission denied
+```
+With the management token, requests succeed:
+```bash
+# Replace <TOKEN> with the Secret ID from the bootstrap step
+curl -H "X-Nomad-Token: <TOKEN>" 'http://localhost:4646/v1/jobs'
+# Expected output(when there is no job): []
 ```
