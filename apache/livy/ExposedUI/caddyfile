@@ -1,6 +1,0 @@
-:8999 {
-    basicauth * {
-        admin $2a$14$jHFWxuhiqIAvbDQ/JJl/huo80ecDIvULPt2TvWII1oYbY2HpTqxMu
-    }
-    reverse_proxy apache-livy:8998
-}
