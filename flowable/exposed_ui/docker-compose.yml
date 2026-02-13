@@ -1,25 +1,21 @@
 version: '3'
 
 services:
-  flowable:
+  flowable-secure:
     image: flowable/flowable-rest
-    container_name: flowable-rest
+    container_name: flowable-rest-secure
     ports:
       - "8080:8080"
     networks:
       - flowable-network
 
-  caddy:
-    image: caddy:2.8.4
-    container_name: caddy-proxy
+  flowable-vulnerable:
+    build: .
+    container_name: flowable-rest-vulnerable
     ports:
-      - "8081:8081"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - "8081:8080"
     networks:
       - flowable-network
-    depends_on:
-      - flowable
 
 networks:
   flowable-network:

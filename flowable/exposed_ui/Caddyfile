@@ -1,5 +1,0 @@
-:8081 {
-    reverse_proxy flowable:8080 {
-        header_up Authorization "Basic cmVzdC1hZG1pbjp0ZXN0"
-    }
-}
