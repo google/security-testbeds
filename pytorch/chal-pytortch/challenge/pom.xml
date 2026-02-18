@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.pytorch</groupId>
+  <artifactId>torchserve-endpoint-plugin</artifactId>
+  <version>0.0.1</version>
+  <name>torchserve-endpoint-plugin</name>
+  <description>SDK for PyTorch model server endpoint plugins</description>
+  <url>https://github.com/pytorch/serve</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>PyTorch Model Server</id>
+      <url>https://github.com/pytorch/serve</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/pytorch/serve.git</connection>
+    <developerConnection>scm:git:ssh://github.com:pytorch/serve.git</developerConnection>
+    <url>https://github.com/pytorch/serve</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.9.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.pytorch</groupId>
+      <artifactId>torchserve-plugins-sdk</artifactId>
+      <version>0.0.5</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.53.Final</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
