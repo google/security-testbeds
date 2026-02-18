@@ -1,0 +1,38 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: challenge-jupyter
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - port: 1337
+        protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        #        securityContext:
+        #          sysctls:
+        #            - name: "net.ipv4.ip_unprivileged_port_start"
+        #              value: "0"
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: jupyter-exposed-ui-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:a5f67eccc820267aad79ebc74d82ba0dfd8e72f66de09610eb9d27c5f1ccf016
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:e29ae7c11bcab8f42aa68967ddfc4b7bc24d85bd7fe6968e601fb85df350d56a
