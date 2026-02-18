@@ -1,0 +1,33 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-drupal-latest
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: drupal-latest-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:ba5c93905be7eda296a800e91482f9644217ef8e2897588ae6a77c2602f6f93b
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:ec9476fcac0352fbe53fd987767f85eeb0456f2a57b4eeb4743806a30aee2a9a
