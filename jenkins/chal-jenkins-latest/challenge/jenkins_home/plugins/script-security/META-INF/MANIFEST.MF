@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Script Security Plugin
+Specification-Version: 0.0
+Implementation-Title: Script Security Plugin
+Implementation-Version: 1335.vf07d9ce377a_e
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: script-security
+Short-Name: script-security
+Long-Name: Script Security Plugin
+Url: https://github.com/jenkinsci/script-security-plugin
+Plugin-Version: 1335.vf07d9ce377a_e
+Hudson-Version: 2.387.3
+Jenkins-Version: 2.387.3
+Plugin-Dependencies: caffeine-api:3.1.8-133.v17b_1ff2e0599
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/script-securi
+ ty-plugin.git
+Plugin-ScmTag: f07d9ce377aefdad4794a520effe20638983124b
+Plugin-ScmUrl: https://github.com/jenkinsci/script-security-plugin
+Plugin-GitHash: f07d9ce377aefdad4794a520effe20638983124b
+Implementation-Build: f07d9ce377aefdad4794a520effe20638983124b
+

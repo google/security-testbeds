@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Java JSON Web Token (JJWT) Plugin
+Specification-Version: 0.11
+Implementation-Title: Java JSON Web Token (JJWT) Plugin
+Implementation-Version: 0.11.5-112.ve82dfb_224b_a_d
+Group-Id: io.jenkins.plugins
+Artifact-Id: jjwt-api
+Short-Name: jjwt-api
+Long-Name: Java JSON Web Token (JJWT) Plugin
+Url: https://github.com/jenkinsci/jjwt-api-plugin
+Plugin-Version: 0.11.5-112.ve82dfb_224b_a_d
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Dependencies: jackson2-api:2.15.1-344.v6eb_55303dc3e
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/jjwt-api-plug
+ in.git
+Plugin-ScmTag: e82dfb224bad69cab2cb909bc3eee60f8431fe69
+Plugin-ScmUrl: https://github.com/jenkinsci/jjwt-api-plugin
+Plugin-GitHash: e82dfb224bad69cab2cb909bc3eee60f8431fe69
+Implementation-Build: e82dfb224bad69cab2cb909bc3eee60f8431fe69
+

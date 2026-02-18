@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Timestamper
+Specification-Version: 1.26
+Implementation-Title: Timestamper
+Implementation-Version: 1.26
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: timestamper
+Short-Name: timestamper
+Long-Name: Timestamper
+Url: https://github.com/jenkinsci/timestamper-plugin
+Plugin-Version: 1.26
+Hudson-Version: 2.375.4
+Jenkins-Version: 2.375.4
+Plugin-Dependencies: commons-lang3-api:3.12.0-36.vd97de6465d5b_,workflow
+ -api:1215.v2b_ee3e1b_dd39,workflow-step-api:639.v6eca_cd8c04a_a_,antisa
+ my-markup-formatter:159.v25b_c67cd35fb_
+Plugin-Developers: Basil Crow:basil:,Steven Brown:stevengbrown:StevenGBr
+ own@gmail.com,Jesse Glick:jglick:
+Plugin-License-Name: The MIT License (MIT)
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/timestamper-p
+ lugin.git
+Plugin-ScmTag: timestamper-1.26
+Plugin-ScmUrl: https://github.com/jenkinsci/timestamper-plugin
+Plugin-GitHash: 59a52c3239414a398aabb240d4b204e104324e36
+Implementation-Build: 59a52c3239414a398aabb240d4b204e104324e36
+

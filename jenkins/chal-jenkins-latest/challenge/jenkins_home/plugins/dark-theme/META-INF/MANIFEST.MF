@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Dark Theme
+Specification-Version: 0.0
+Implementation-Title: Dark Theme
+Implementation-Version: 439.vdef09f81f85e
+Group-Id: io.jenkins.plugins
+Artifact-Id: dark-theme
+Short-Name: dark-theme
+Long-Name: Dark Theme
+Url: https://github.com/jenkinsci/dark-theme-plugin
+Plugin-Version: 439.vdef09f81f85e
+Hudson-Version: 2.426.3
+Jenkins-Version: 2.426.3
+Plugin-Dependencies: theme-manager:215.vc1ff18d67920
+Plugin-Developers: Tim Jacomb:timja:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/dark-theme-pl
+ ugin.git
+Plugin-ScmTag: def09f81f85efd5a668a964f5a524bf213cfb4c0
+Plugin-ScmUrl: https://github.com/jenkinsci/dark-theme-plugin
+Plugin-GitHash: def09f81f85efd5a668a964f5a524bf213cfb4c0
+Implementation-Build: def09f81f85efd5a668a964f5a524bf213cfb4c0
+
