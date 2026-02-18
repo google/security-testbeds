@@ -1,0 +1,121 @@
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+FROM ubuntu:22.04 as chroot
+
+RUN /usr/sbin/useradd --no-create-home -u 1000 user
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get -y install \
+    unzip \
+    wget \
+    curl \
+    socat \
+    default-jre-headless && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN echo $(curl -s https://h2o-release.s3.amazonaws.com/h2o/latest_stable.html | grep -o 'rel-.*index.html' | sed 's/rel-//' | sed 's/index.html//') > /version
+RUN cat /version | sed '0,/\//{s/\//\./}' | sed 's/\///g' > /zipver
+RUN wget https://h2o-release.s3.amazonaws.com/h2o/rel-$(cat /version)h2o-$(cat /zipver).zip
+RUN unzip h2o-$(cat /zipver).zip
+RUN mkdir /h2o-$(cat /zipver)/h2o /flag
+
+RUN chown user /h2o-$(cat /zipver)
+
+ADD startup.sh /
+RUN chmod +777 /startup.sh
+
+RUN mkdir -p /logs
+RUN touch /logs/log
+RUN chmod -R +777 /logs
+RUN chmod a=w /logs/log
+
+FROM europe-west4-docker.pkg.dev/internet-ctf/custom-images/kctf-source
+COPY --from=chroot / /chroot
+
+# setup to reflect flag in ui
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install default-jdk
+RUN mv /chroot/h2o-$(cat /chroot/zipver)/h2o.jar /chroot/h2o-$(cat /chroot/zipver)/h2o/h2o.jar
+RUN mkdir /chroot/h2o && mv /chroot/h2o-$(cat /chroot/zipver)/* /chroot/h2o
+WORKDIR /chroot/h2o/h2o
+RUN jar xf h2o.jar
+RUN rm h2o.jar
+
+VOLUME /chroot/logs
+VOLUME /chroot/flag
+VOLUME /chroot/h2o
+
+# fixing java version
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    software-properties-common \
+    && add-apt-repository ppa:openjdk-r/ppa \
+    && apt-get update \
+    && apt-get install -y openjdk-21-jdk \
+    && apt-get clean
+
+# Set environment variables for Java
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+# Apache config
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends tzdata apache2 \
+    && ln -fs /usr/share/zoneinfo/Europe/Berlin /etc/localtime \
+    && dpkg-reconfigure --frontend noninteractive tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+# config mod security
+RUN apt-get update && apt-get install libapache2-mod-security2 -y
+RUN a2enmod security2
+
+ADD modsecurity.conf /etc/modsecurity/modsecurity.conf
+
+RUN service apache2 start
+
+# For Proxy
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled/
+RUN ln -s /etc/apache2/mods-available/proxy_http.load /etc/apache2/mods-enabled/
+
+COPY apache2-kctf-nsjail.conf /etc/apache2/conf-enabled/
+
+VOLUME /var/run/apache2
+
+ADD nsjail.cfg /
+
+RUN sed -i "s/version/$(cat /chroot/zipver)/g" /nsjail.cfg
+
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends cron
+RUN apt-get install -y --reinstall rsyslog
+
+ADD cleanup.sh /cleanup.sh
+RUN chmod +777 /cleanup.sh
+
+COPY cron /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN crontab /etc/cron.d/cron
+
+VOLUME /var/log
+VOLUME /run
+VOLUME /tmp
+
+# adds password and loads flag
+CMD service rsyslog start; \
+    cron;  \
+    echo "user: MD5:$(cat /flag/pass.txt)" > /chroot/h2o/realm.properties; \
+    sed -i "12 a$(cat /flag/uiflag.txt)" /chroot/h2o/h2o/www/flow/index.html; \
+    jar cmf ./META-INF/MANIFEST.MF ../h2o.jar *; \
+    kctf_setup && \
+    (kctf_drop_privs nsjail -E ROOTFLAG=$(cat /flag/rootflag.txt) --config /nsjail.cfg --port 8080 -- /startup.sh &) \
+    && (bash -c 'source /etc/apache2/envvars && APACHE_RUN_USER=user APACHE_RUN_GROUP=user /usr/sbin/apache2 -D FOREGROUND' &)\
+    && tail -f /var/log/syslog /var/log/apache2/modsec_audit.log
+

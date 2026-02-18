@@ -1,0 +1,44 @@
+# Human readable task name
+
+name: H2O Flow [Root Flag] 
+
+# Long form description.
+
+description: |+
+
+  This is a secure version of H2O flow instance, a zero-day auth bypass exploit is needed to access the dashboard.
+
+
+# The flag
+
+flag:
+
+# Task category. (one of hardware, crypto, pwn, reversing, web, net, misc)
+
+category: secure
+
+
+
+# === the fields below will be filled by SRE or automation ===
+
+
+
+# Task label
+
+label: ''
+
+# URL for web challenges
+
+link: 'http://chal-h2o.internet-ctf.kctf.cloud:1337'
+
+# host/port for non-web challenges
+
+host: ''
+
+# the URL for attachments, to be filled in by automation
+
+attachment: ''
+
+# is this challenge released? Will be set by SREs
+
+visible: true
