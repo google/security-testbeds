@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  vulnerable-cron:
+    image: cronjobprivesc:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
