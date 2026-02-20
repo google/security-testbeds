@@ -1,9 +1,12 @@
 # setup an unauthenticated nomad ui (vulnerable)
 you can install nomad cli according to the official document: https://developer.hashicorp.com/nomad/install
 OR base on ubuntu 24.04 with docker run the following command to run nomad:
+## Warnings
+1. The containers will run with `--privileged`.
+2. the container doesn't run on the Apple Silicon
 ```bash
 docker run --rm -it \
-  -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+  --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
   -p 4646:4646 \
   hashicorp/nomad:1.10 \
   agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}'
@@ -23,7 +26,7 @@ This version enables Nomad's ACL system, which requires a valid token for all AP
 ```bash
 docker run --rm -it \
   --name nomad-safe \
-  -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
+  --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
   -p 4646:4646 \
   hashicorp/nomad:1.10 \
   agent -dev -bind 0.0.0.0 -network-interface='{{ GetDefaultInterfaces | attr "name" }}' \
