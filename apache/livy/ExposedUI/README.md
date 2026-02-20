@@ -19,6 +19,11 @@ curl -X POST -H "Content-Type: application/json" -d '{"code":"import os\nprint(o
 curl http://127.0.0.1:8998/sessions/$id/statements/$statements_id
 # output.data is the stdout
 ```
+#### alternative approach
+instead, you can send the callback address to `batches` endpoint to check if the Apache Hive instance is exposed
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"file":"callback_address"}' http://localhost:8998/batches
+```
 
 ---
 
