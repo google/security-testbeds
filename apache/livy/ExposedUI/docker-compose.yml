@@ -24,8 +24,6 @@ services:
       - "bash"
       - "-c"
       - "/opt/spark/sbin/start-master.sh && tail -f /dev/null"
-    volumes:
-      - ./python:/python
 
   spark-worker:
     # reuse the image built for the spark-master
@@ -47,8 +45,6 @@ services:
       - "bash" 
       - "-c"
       - "/opt/spark/sbin/start-worker.sh spark://spark-master:7077 && tail -f /dev/null"
-    volumes:
-      - ./python:/python
 
   apache-livy:
     container_name: apache-livy
