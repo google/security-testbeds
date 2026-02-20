@@ -5,7 +5,7 @@ OR base on ubuntu 24.04 with docker run the following command to run nomad:
 1. The containers will run with `--privileged`.
 2. the container doesn't run on the Apple Silicon
 ```bash
-sudo docker run --rm -it \
+docker run --rm -it \
   --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -p 4646:4646 \
@@ -25,7 +25,7 @@ curl 'http://localhost:4646/v1/job/tsunami-job?purge=true' -X DELETE -H 'content
 # setup an authenticated nomad ui (safe)
 This version enables Nomad's ACL system, which requires a valid token for all API and UI access.
 ```bash
-sudo docker run --rm -it \
+docker run --rm -it \
   --name nomad-safe \
   --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
   -v /var/run/docker.sock:/var/run/docker.sock \
@@ -37,7 +37,7 @@ sudo docker run --rm -it \
 
 After the agent starts, bootstrap the ACL system to get a management token:
 ```bash
-sudo docker exec nomad-safe nomad acl bootstrap
+docker exec nomad-safe nomad acl bootstrap
 ```
 This will output a `Secret ID` (the management token). All subsequent API/UI requests require this token.
 
