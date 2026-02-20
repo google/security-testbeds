@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  flowable-secure:
+    image: flowable/flowable-rest
+    container_name: flowable-rest-secure
+    ports:
+      - "8080:8080"
+    networks:
+      - flowable-network
+
+  flowable-vulnerable:
+    build: .
+    container_name: flowable-rest-vulnerable
+    ports:
+      - "8081:8080"
+    networks:
+      - flowable-network
+
+networks:
+  flowable-network:
+    driver: bridge
