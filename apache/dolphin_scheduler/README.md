@@ -3,11 +3,27 @@
 Follow these steps to set up a testbed for Apache DolphinScheduler:
 
 1. **Set the DolphinScheduler Version**:
-   For this setup, we're using version 3.1.5.
+   For this setup, we're using version 3.3.2.
 
    ```bash
-   export DOLPHINSCHEDULER_VERSION=3.1.5
+   export DOLPHINSCHEDULER_VERSION=3.3.2
    ```
+
+#### Affected Versions
+
+| Version       | Release   | Py4j Gateway Exploitable |
+|---------------|-----------|--------------------------|
+| 3.1.5         | ~4 years ago  | Yes |
+| 3.1.9         | ~2 years ago  | Yes |
+| 3.2.1         | ~2 years ago  | Yes |
+| 3.2.2         | >1 year ago   | Yes |
+| 3.3.0-alpha   | 11 months ago | Yes |
+| 3.3.1         | 6 months ago  | Yes |
+| 3.3.2         | 4 months ago  | Yes |
+| 3.4.0         | 1 month ago   | No (gateway disabled by default) |
+
+
+
 
 2. **Run DolphinScheduler Standalone**:
    Run the following command to start the DolphinScheduler Standalone environment.
