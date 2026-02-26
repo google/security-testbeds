@@ -13,7 +13,7 @@ Follow these steps to set up a testbed for Apache DolphinScheduler:
    Run the following command to start the DolphinScheduler Standalone environment.
 
    ```bash
-   docker run --name dolphinscheduler-standalone-server -p 12345:12345 -p 25333:25333 -d apache/dolphinscheduler-standalone-server:"${DOLPHINSCHEDULER_VERSION}"
+   docker run  -p 12345:12345 -p 25333:25333 -d apache/dolphinscheduler-standalone-server:"${DOLPHINSCHEDULER_VERSION}"
    ```
    This setup makes the DolphinScheduler UI accessible at `http://localhost:12345/dolphinscheduler` and exposes the Py4j Gateway on port **25333**.
 
@@ -44,3 +44,17 @@ python3 py4j_gateway_client.py --host 127.0.0.1 --port 25333  "hostname"
 #### How RCE executed ?
 
 The `py4j_gateway_client.py` script connects to the DolphinScheduler Java Gateway on port 25333 (Py4j protocol over TCP), authenticates with the default token, and sends Py4j protocol messages to invoke `Runtime.getRuntime().exec(command)` on the remote JVM. The command runs with the privileges of the DolphinScheduler process. Output is captured from the process stdout/stderr.
+
+
+
+# Secure setup (non-default credentials):
+
+Below are the instructions to set up a secure Py4j gateway using a custom token and prevent unauthorized command execution.
+
+   ```bash
+   export GATEWAY_TOKEN="your-secure-token-here"
+   ```
+
+   ```bash
+   docker run  -p 12345:12345 -p 25333:25333 -e API_PYTHON_GATEWAY_AUTH_TOKEN="${GATEWAY_TOKEN}" -d apache/dolphinscheduler-standalone-server:"${DOLPHINSCHEDULER_VERSION}"
+   ```
