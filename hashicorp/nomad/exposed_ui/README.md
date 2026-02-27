@@ -1,6 +1,7 @@
 # Set Up an Unauthenticated Nomad UI (Vulnerable)
 You can install the Nomad CLI according to the official document: https://developer.hashicorp.com/nomad/install
-OR base on ubuntu 24.04 with docker run the following command to run nomad:
+
+OR to run Nomad on Ubuntu 24.04 with Docker run the following command:
 ## Warnings
 1. The containers will run with `--privileged`.
 2. the container doesn't run on the Apple Silicon
