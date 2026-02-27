@@ -23,7 +23,7 @@ curl 'http://localhost:4646/v1/jobs' -X POST  -H 'content-type: application/json
 curl 'http://localhost:4646/v1/job/tsunami-job?purge=true' -X DELETE -H 'content-type: application/json; charset=utf-8'
 ```
 
-# setup an authenticated nomad ui (safe)
+# Set Up an Authenticated Nomad UI (Safe)
 This version enables Nomad's ACL system, which requires a valid token for all API and UI access.
 ```bash
 docker run --rm -it \
