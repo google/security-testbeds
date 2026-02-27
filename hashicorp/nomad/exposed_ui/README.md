@@ -41,7 +41,7 @@ docker exec nomad-safe nomad acl bootstrap
 ```
 This will output a `Secret ID` (the management token). All subsequent API/UI requests require this token.
 
-# confirming the safe setup
+# Confirming the Safe Setup
 Without a valid token, API requests are rejected with a 403:
 ```bash
 curl 'http://localhost:4646/v1/jobs'
