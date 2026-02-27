@@ -4,7 +4,7 @@ You can install the Nomad CLI according to the official document: https://develo
 OR to run Nomad on Ubuntu 24.04 with Docker run the following command:
 ## Warnings
 1. The containers will run with `--privileged`.
-2. the container doesn't run on the Apple Silicon
+2. The container doesn't run correctly on Apple Silicon due to failure to get CPU usage when creating the job
 ```bash
 docker run --rm -it \
   --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
