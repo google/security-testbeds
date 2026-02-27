@@ -11,16 +11,16 @@ Follow these steps to set up a testbed for Apache DolphinScheduler:
 
 #### Affected Versions
 
-| Version       | Release   | Py4j Gateway Exploitable |
+| Version       | Release Date   | Py4j Gateway Exploitable |
 |---------------|-----------|--------------------------|
-| 3.1.5         | ~4 years ago  | Yes |
-| 3.1.9         | ~2 years ago  | Yes |
-| 3.2.1         | ~2 years ago  | Yes |
-| 3.2.2         | >1 year ago   | Yes |
-| 3.3.0-alpha   | 11 months ago | Yes |
-| 3.3.1         | 6 months ago  | Yes |
-| 3.3.2         | 4 months ago  | Yes |
-| 3.4.0         | 1 month ago   | No (gateway disabled by default) |
+| 3.1.5         | Apr 3, 2023  | Yes |
+| 3.1.9         | Dec 22, 2023  | Yes |
+| 3.2.1         | Feb 7, 2024  | Yes |
+| 3.2.2         | Jul 18, 2024  | Yes |
+| 3.3.0-alpha   | Apr 8, 2025   | Yes |
+| 3.3.1         | Aug 25, 2025  | Yes |
+| 3.3.2         | Oct 26, 2025  | Yes |
+| 3.4.0         | Jan 20, 2026   | No (gateway disabled by default) |
 
 
 
