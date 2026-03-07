@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Jackson 2 API Plugin
+Specification-Version: 2.17
+Implementation-Title: Jackson 2 API Plugin
+Implementation-Version: 2.17.0-379.v02de8ec9f64c
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: jackson2-api
+Short-Name: jackson2-api
+Long-Name: Jackson 2 API Plugin
+Url: https://github.com/jenkinsci/jackson2-api-plugin
+Plugin-Version: 2.17.0-379.v02de8ec9f64c
+Hudson-Version: 2.401.3
+Jenkins-Version: 2.401.3
+Plugin-Dependencies: javax-activation-api:1.2.0-6,jaxb:2.3.9-1,json-api:
+ 20231013-17.v1c97069404b_e,snakeyaml-api:2.2-111.vc6598e30cc65
+Plugin-Developers: Stephen Connolly:stephenconnolly:,Oleg Nenashev:oleg_
+ nenashev:,Matt Sicker:jvz:
+Support-Dynamic-Loading: true
+Plugin-License-Name: The Apache Software License, Version 2.0
+Plugin-License-Url: https://www.apache.org/licenses/LICENSE-2.0.txt
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/jackson2-api-
+ plugin.git
+Plugin-ScmTag: 02de8ec9f64c2f42e0cfe8a0620cb7846dffd8d0
+Plugin-ScmUrl: https://github.com/jenkinsci/jackson2-api-plugin
+Plugin-GitHash: 02de8ec9f64c2f42e0cfe8a0620cb7846dffd8d0
+Implementation-Build: 02de8ec9f64c2f42e0cfe8a0620cb7846dffd8d0
+

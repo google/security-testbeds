@@ -1,0 +1,38 @@
+<l:dependencies xmlns:l='licenses' version='2.11' artifactId='gradle-plugin' groupId='org.jenkins-ci.plugins'>
+  <l:dependency version='2.11' artifactId='gradle-plugin' groupId='org.jenkins-ci.plugins' name='Gradle Plugin' url='https://github.com/jenkinsci/gradle-plugin'>
+    <l:description>This plugin adds Gradle support to Jenkins</l:description>
+  </l:dependency>
+  <l:dependency version='1.8.0' artifactId='commons-validator' groupId='commons-validator' name='Apache Commons Validator' url='http://commons.apache.org/proper/commons-validator/'>
+    <l:description>
+    Apache Commons Validator provides the building blocks for both client side validation and server side data validation.
+    It may be used standalone or with a framework like Struts.
+  </l:description>
+  </l:dependency>
+  <l:dependency version='2.17.0' artifactId='jackson-annotations' groupId='com.fasterxml.jackson.core' name='Jackson-annotations' url='https://github.com/FasterXML/jackson'>
+    <l:description>Core annotations used for value types, used by Jackson data binding package.
+  </l:description>
+    <l:license url='https://www.apache.org/licenses/LICENSE-2.0.txt' name='The Apache Software License, Version 2.0' />
+  </l:dependency>
+  <l:dependency version='2.17.0' artifactId='jackson-core' groupId='com.fasterxml.jackson.core' name='Jackson-core' url='https://github.com/FasterXML/jackson-core'>
+    <l:description>Core Jackson processing abstractions (aka Streaming API), implementation for JSON</l:description>
+    <l:license url='https://www.apache.org/licenses/LICENSE-2.0.txt' name='The Apache Software License, Version 2.0' />
+  </l:dependency>
+  <l:dependency version='2.17.0' artifactId='jackson-databind' groupId='com.fasterxml.jackson.core' name='jackson-databind' url='https://github.com/FasterXML/jackson'>
+    <l:description>General data-binding functionality for Jackson: works on core streaming API</l:description>
+    <l:license url='https://www.apache.org/licenses/LICENSE-2.0.txt' name='The Apache Software License, Version 2.0' />
+  </l:dependency>
+  <l:dependency version='2.1' artifactId='commons-digester' groupId='commons-digester' name='Commons Digester' url='http://commons.apache.org/digester/'>
+    <l:description>
+    The Digester package lets you configure an XML to Java object mapping module
+    which triggers certain actions called rules whenever a particular 
+    pattern of nested XML elements is recognized.
+  </l:description>
+  </l:dependency>
+  <l:dependency version='3.2.2' artifactId='commons-collections' groupId='commons-collections' name='Apache Commons Collections' url='http://commons.apache.org/collections/'>
+    <l:description>Types that extend and augment the Java Collections Framework.</l:description>
+  </l:dependency>
+  <l:dependency version='1.14.9' artifactId='byte-buddy' groupId='net.bytebuddy' name='Byte Buddy (without dependencies)' url=''>
+    <l:description>Byte Buddy is a Java library for creating Java classes at run time.
+        This artifact is a build of Byte Buddy with all ASM dependencies repackaged into its own name space.</l:description>
+  </l:dependency>
+</l:dependencies>
