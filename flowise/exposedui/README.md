@@ -1,20 +1,16 @@
-# Flowise UI Exposed
+# Flowise Exposed UI
 
-Flowise is a drag & drop UI tool for building LLM applications.
-This testbed demonstrates vulnerable and non-vulnerable configurations of Flowise UI instances.
+This directory contains the deployment config for Flowise instances with and without authentication.
 
-## Vulnerable Setup
+## Deployment
 
-The vulnerable setup exposes the Flowise UI without authentication:
-
-```bash
-docker compose --env-file env-default -p flowise-exposed up -d
+```sh
+docker-compose up vuln
+docker-compose up safe
 ```
 
-## Non-vulnerable Setup
+## Vulnerable Service
+The `vuln` service runs Flowise v1.6.0 without authentication.
 
-```bash
-docker compose --env-file env-auth -p flowise-auth up -d
-```
-
-Application will be available at `http://localhost:3000/`
+## Fixed Service
+The `safe` service runs Flowise v1.6.1 with authentication enabled.
