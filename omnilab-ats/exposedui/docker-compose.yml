@@ -1,0 +1,51 @@
+services:
+  mtt:
+    image: gcr.io/android-mtt/mtt:prod
+    container_name: mtt
+    ports:
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - MTT_CONTROL_SERVER_PORT=8000
+      - OPERATION_MODE=on_premise
+      - IS_OMNILAB_BASED=true
+    restart: unless-stopped
+    networks:
+      - internal
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8001:80"
+    configs:
+      - source: nginx_config
+        target: /etc/nginx/nginx.conf
+      - source: htpasswd
+        target: /etc/nginx/.htpasswd
+    depends_on:
+      - mtt
+    restart: unless-stopped
+    networks:
+      - internal
+
+networks:
+  internal:
+
+configs:
+  nginx_config:
+    content: |
+      events { worker_connections 1024; }
+      http {
+          server {
+              listen 80;
+              location / {
+                  auth_basic "ATS";
+                  auth_basic_user_file /etc/nginx/.htpasswd;
+                  proxy_pass http://mtt:8000;
+              }
+          }
+      }
+  
+  htpasswd:
+    content: |
+      admin:$2y$05$7eaUZOK1Q7SuT9tv67PwvulFo7/ysDHS8bKM6G4rENSJZdEMlMa42

@@ -1,0 +1,18 @@
+services:
+  vuln:
+    image: flowiseai/flowise:1.6.0
+    restart: always
+    env_file:
+      - imgdata/env-default
+    volumes:
+      - .flowise_vuln:/root/.flowise
+    entrypoint: "flowise start"
+
+  safe:
+    image: flowiseai/flowise:1.6.1
+    restart: always
+    env_file:
+      - imgdata/env-auth
+    volumes:
+      - .flowise_safe:/root/.flowise
+    entrypoint: "flowise start"
