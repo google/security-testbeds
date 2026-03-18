@@ -1,0 +1,19 @@
+services:
+  n8n:
+    image: n8nio/n8n:2.9.1
+    container_name: n8n-non-vulnerable
+    restart: unless-stopped
+
+    ports:
+      - "5678:5678"
+
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:
