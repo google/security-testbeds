@@ -1,0 +1,7 @@
+services:
+  n8n:
+    image: n8nio/n8n:0.54.0
+    container_name: n8n-vulnerable
+    ports:
+      - "5678:5678"
+    restart: unless-stopped
