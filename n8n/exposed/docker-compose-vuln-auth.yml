@@ -1,0 +1,11 @@
+services:
+  n8n:
+    image: n8nio/n8n:0.54.0
+    container_name: n8n-vulnerable-auth
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=str0ngpassword!
+    restart: unless-stopped
