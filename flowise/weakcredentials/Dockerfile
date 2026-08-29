@@ -3,8 +3,8 @@ ARG FLOWISE_VERSION=3.1.0
 FROM flowiseai/flowise:${FLOWISE_VERSION}
 
 # Arguments
-ARG FLOWISE_EMAIL=admin@domain.fr
-ARG FLOWISE_PASSWD=Password1!
+ARG FLOWISE_EMAIL=admin@localhost.lan
+ARG FLOWISE_PASSWD=Dragon1!
 
 # Flowise Directory
 ENV FLOWISE_DIR=/opt/flowise

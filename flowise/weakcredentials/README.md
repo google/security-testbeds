@@ -2,16 +2,26 @@
 This directory contains the deployment config for Flowise instances protected by either strong or weak credentials.
 
 ## How to Check for Weak Credentials?
-The following curl command allows to authenticate with the user "admin@domain.fr" and the password "Password1!"
+The following curl command allows to authenticate with the user "admin@localhost.lan" and the password "Dragon1!"
 ```sh
 curl -X POST http://127.0.0.1:3000/api/v1/auth/login \
 	-H "Content-Type: application/json" \
-	-d '{"email":"admin@domain.fr","password":"Password1!"}'
+	-d '{"email":"admin@localhost.lan","password":"Dragon1!"}'
 ```
 
 If the right user and password are provided, the server returns a `200 OK` HTTP status code with a body looking like:
-```sh
-{"id":"7881f7e9-e906-4bc3-8564-5dbf454315c9","email":"admin@domain.fr","name":"Admin","roleId":"e5ebdf3f-bac9-1af5-89a7-39a6f3e890ab","activeOrganizationId":"ceaab61e-9166-40b5-909e-40a62149e29f","activeOrganizationSubscriptionId":null,"activeOrganizationCustomerId":null,"activeOrganizationProductId":"","isOrganizationAdmin":true,"activeWorkspaceId":"45f677ee-5be5-4297-87c7-fc036433cbb9","activeWorkspace":"Default Workspace","assignedWorkspaces":[{"id":"45f677ee-5be5-4297-87c7-fc036433cbb9","name":"Default Workspace","role":"owner","organizationId":"ceaab61e-9166-40b5-909e-40a62149e29f"}],"permissions":["organization","workspace"],"features":{},"isSSO":false}
+```json
+{"id":"5b658172-fab9-478c-b6a3-bcf19a4ec1b3","email":"admin@localhost.lan","name":"Admin","roleId":"6ec75515-d825-14ff-84a6-92e55c3f8991","activeOrganizationId":"4ba1ad86-6cbb-4679-a86c-8b011dfc5e10","activeOrganizationSubscriptionId":null,"activeOrganizationCustomerId":null,"activeOrganizationProductId":"","isOrganizationAdmin":true,"activeWorkspaceId":"bf8816b0-9c49-4095-a646-0f26076c351e","activeWorkspace":"Default Workspace","assignedWorkspaces":[{"id":"bf8816b0-9c49-4095-a646-0f26076c351e","name":"Default Workspace","role":"owner","organizationId":"4ba1ad86-6cbb-4679-a86c-8b011dfc5e10"}],"permissions":["organization","workspace"],"features":{},"isSSO":false}
+```
+
+If the password is wrong but the user exists, the server answers with a `401 Unauthorized` error:
+```json
+{"statusCode":401,"success":false,"message":"Incorrect Email or Password","stack":{}}
+```
+
+If the user does not exist, the server answers with a `404 Not Found` error:
+```json
+{"statusCode":404,"success":false,"message":"User Not Found","stack":{}}
 ```
 
 ## Setup with Weak Credentials
