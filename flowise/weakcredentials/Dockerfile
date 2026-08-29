@@ -1,7 +1,6 @@
-# Latest Flowise Docker Image
-ARG FLOWISE_VERSION=latest
+# Tested with flowiseai/flowise:3.1.0 Docker Image
+ARG FLOWISE_VERSION=3.1.0
 FROM flowiseai/flowise:${FLOWISE_VERSION}
-# Tested with flowiseai/flowise:3.1.0
 
 # Arguments
 ARG FLOWISE_EMAIL=admin@domain.fr
