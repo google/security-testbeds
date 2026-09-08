@@ -1,0 +1,41 @@
+FROM ubuntu:22.04
+
+LABEL authors="OSV-Scalibr Team"
+LABEL description="Vulnerable Docker socket configuration for testing"
+
+RUN apt update && apt install -y systemd
+
+# Create Docker-related directory structure
+RUN mkdir -p /var/run \
+             /etc/docker \
+             /etc/systemd/system \
+             /lib/systemd/system \
+             /usr/lib/systemd/system
+
+# Create Docker socket with INSECURE permissions (666 - world-writable)
+RUN touch /var/run/docker.sock && \
+    chmod 666 /var/run/docker.sock && \
+    chown 1000:1000 /var/run/docker.sock
+
+# Copy insecure configuration files
+COPY config/daemon-unsafe.json /etc/docker/daemon.json
+COPY config/docker-unsafe.service /etc/systemd/system/docker.service
+
+# Also place unsafe service in multiple locations for comprehensive testing
+COPY config/docker-unsafe.service /lib/systemd/system/docker.service
+
+# Set ownership for config files
+RUN chown root:root /etc/docker/daemon.json && \
+    chmod 644 /etc/docker/daemon.json
+
+RUN chown root:root /etc/systemd/system/docker.service && \
+    chmod 644 /etc/systemd/system/docker.service
+
+RUN chown root:root /lib/systemd/system/docker.service && \
+    chmod 644 /lib/systemd/system/docker.service
+
+# Create docker group (typically GID 999)
+RUN groupadd -g 999 docker || true
+
+# Keep container running for testing
+CMD ["sleep", "infinity"]
