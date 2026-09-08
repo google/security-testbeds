@@ -1,23 +1,43 @@
 services:
-  langflow:
-    image: langflowai/langflow:latest
+  langflow-vuln:
+    image: langflowai/langflow:1.5.0
     ports:
-      - "7860:7860"
+      - "8081:7860"
     depends_on:
-      - postgres
+      - postgres-vuln
     environment:
-      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@postgres:5432/langflow
-      - LANGFLOW_AUTO_LOGIN
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@postgres-vuln:5432/langflow
+      - LANGFLOW_AUTO_LOGIN=True
     networks:
-      - langflow
-  postgres:
+      - langflow-vuln
+  postgres-vuln:
     image: postgres:16
     environment:
       POSTGRES_USER: langflow
       POSTGRES_PASSWORD: langflow
       POSTGRES_DB: langflow
     networks:
-      - langflow
+      - langflow-vuln
+  langflow-safe:
+    image: langflowai/langflow:1.5.0
+    ports:
+      - "8082:7860"
+    depends_on:
+      - postgres-safe
+    environment:
+      - LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@postgres-safe:5432/langflow
+      - LANGFLOW_AUTO_LOGIN=False
+    networks:
+      - langflow-safe
+  postgres-safe:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+      POSTGRES_DB: langflow
+    networks:
+      - langflow-safe
 
 networks:
-  langflow:
+  langflow-vuln:
+  langflow-safe:
