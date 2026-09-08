@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok mind egy AI oldalsávban, AI kereséshez, olvasáshoz és íráshoz."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT oldalsáv: Használja a ChatGPT-t, GPT-4o-et, Claude3-at és a Geminijét fejlett AI kereséshez, olvasáshoz és íráshoz."
+   },
+   "appName": {
+      "message": "Sider: Csevegj minden AI-val: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI oldalsáv minden modellel"
+   }
+}

@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok hepsi tek bir AI kenar çubuğunda, AI arama, okuma ve yazma için."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT Kenar Çubuğu: İleri düzey AI arama, okuma ve yazma için ChatGPT, GPT-4o, Claude3, & Gemini'yi kullanın."
+   },
+   "appName": {
+      "message": "Sider: Tüm AI ile sohbet et: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: Tüm modellerle AI kenar çubuğu"
+   }
+}

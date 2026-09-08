@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok alles in einer KI-Seitenleiste für KI-Suche, Lesen und Schreiben."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT Seitenleiste: Verbessern Sie Workflows mit GPT-4o, Claude3, Gemini 1.5 für AI-Suche und -Schreiben."
+   },
+   "appName": {
+      "message": "Sider: Chatte mit allen KI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: KI-Seitenleiste mit allen Modellen"
+   }
+}

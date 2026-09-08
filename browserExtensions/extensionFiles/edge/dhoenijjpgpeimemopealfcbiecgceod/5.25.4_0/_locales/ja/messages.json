@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok すべてを1つのAIサイドバーに、AI検索、読み書きのために。"
+   },
+   "appDescEdge": {
+      "message": "ChatGPT サイドバー: ChatGPT、GPT-4o、Claude3、Gemini 1.5 Proで作業フローを向上。AIによる高度な検索、読み取り、書き込みを実現。"
+   },
+   "appName": {
+      "message": "Sider: すべてのAIとチャット: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: すべてのモデルを備えたAIサイドバー"
+   }
+}

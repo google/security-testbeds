@@ -1,0 +1,272 @@
+{
+   "about": {
+      "message": "О программе"
+   },
+   "add": {
+      "message": "Добавить"
+   },
+   "all": {
+      "message": "Все"
+   },
+   "autoBackup": {
+      "message": "Автоматическое резервное копирование"
+   },
+   "autoBackupDescription": {
+      "message": "Автоматическое резервное копирование настроек в папку «Загрузки» при сохранении."
+   },
+   "back": {
+      "message": "Назад"
+   },
+   "city": {
+      "message": "Город"
+   },
+   "color": {
+      "message": "Цвет"
+   },
+   "container": {
+      "message": "Контейнер"
+   },
+   "containerDescription": {
+      "message": "Инкогнито и контейнерный прокси (только для Firefox)"
+   },
+   "controlledByOtherExtensions": {
+      "message": "Настройки контролируются другими расширениями."
+   },
+   "country": {
+      "message": "Страна"
+   },
+   "default": {
+      "message": "Стандартная"
+   },
+   "delete": {
+      "message": "Удалить"
+   },
+   "deleteBrowserData": {
+      "message": "Удалить данные браузера"
+   },
+   "deleteBrowsingDataConfirm": {
+      "message": "Вы уверены, что хотите удалить cookies, хранилище IndexedDB и хранилище DOM?"
+   },
+   "deleteConfirm": {
+      "message": "Действительно хотите удалить?"
+   },
+   "disable": {
+      "message": "Отключить"
+   },
+   "documentUrl": {
+      "message": "Document URL"
+   },
+   "duplicate": {
+      "message": "Дублировать"
+   },
+   "enableSync": {
+      "message": "Включить синхронизацию"
+   },
+   "enableSyncDescription": {
+      "message": "Синхронизировать исключения, список прокси и шаблоны"
+   },
+   "error": {
+      "message": "Ошибка выполнения операции"
+   },
+   "exclude": {
+      "message": "Исключить"
+   },
+   "excludeHost": {
+      "message": "Исключить хост"
+   },
+   "export": {
+      "message": "Экспортировать настройки"
+   },
+   "extensionDescription": {
+      "message": "Простой инструмент управления прокси"
+   },
+   "extensionName": {
+      "message": "FoxyProxy"
+   },
+   "extensionNameBasic": {
+      "message": "FoxyProxy Basic"
+   },
+   "fileParseError": {
+      "message": "Ошибка содержимого файла"
+   },
+   "fileReadError": {
+      "message": "Ошибка чтения файла"
+   },
+   "fileTypeError": {
+      "message": "Неподдерживаемый формат файла"
+   },
+   "getLocation": {
+      "message": "Узнать местонахождение"
+   },
+   "globalExclude": {
+      "message": "Глобальные исключения"
+   },
+   "globalExcludeDescription": {
+      "message": "Список хостов (доменов), которые не следует проксировать"
+   },
+   "help": {
+      "message": "Помощь"
+   },
+   "hostname": {
+      "message": "Прокси IP адрес или имя DNS"
+   },
+   "hostnamePortError": {
+      "message": "Отсутствует имя хоста - Порт"
+   },
+   "import": {
+      "message": "Импортировать настройки"
+   },
+   "importFoxyProxyAccount": {
+      "message": "Импортировать FoxyProxy аккаунт"
+   },
+   "importFromOlderVersions": {
+      "message": "Импортировать из старых версий"
+   },
+   "importFromURL": {
+      "message": "Импортировать из URL"
+   },
+   "importProxyList": {
+      "message": "Импортировать список прокси"
+   },
+   "include": {
+      "message": "Включить"
+   },
+   "incognito": {
+      "message": "Инкогнито"
+   },
+   "incognitoAccessError": {
+      "message": "Firefox требует разрешения на приватный просмотр для настроек прокси."
+   },
+   "ip": {
+      "message": "IP"
+   },
+   "limitWebRTC": {
+      "message": "Ограничить WebRTC"
+   },
+   "limitWebRTCDescription": {
+      "message": "Переключить настройки WebRTC браузера"
+   },
+   "location": {
+      "message": "Расположение"
+   },
+   "log": {
+      "message": "Журнал"
+   },
+   "method": {
+      "message": "Метод"
+   },
+   "more": {
+      "message": "Больше"
+   },
+   "notAvailable": {
+      "message": "Прокси не доступны в Chrome (только в Firefox)"
+   },
+   "options": {
+      "message": "Настройки"
+   },
+   "password": {
+      "message": "Пароль пользователя"
+   },
+   "pattern": {
+      "message": "Шаблон"
+   },
+   "patterns": {
+      "message": "Шаблоны"
+   },
+   "plainHost": {
+      "message": "Обычный хост"
+   },
+   "port": {
+      "message": "Порт"
+   },
+   "proxies": {
+      "message": "Прокси"
+   },
+   "proxy": {
+      "message": "Список прокси"
+   },
+   "proxyByPatterns": {
+      "message": "Прокси из шаблона"
+   },
+   "proxyDNS": {
+      "message": "Прокси DNS"
+   },
+   "quickAdd": {
+      "message": "Быстрое добавление"
+   },
+   "random": {
+      "message": "Случайный"
+   },
+   "regexError": {
+      "message": "Ошибка регулярного выражения для шаблона"
+   },
+   "restoreDefaults": {
+      "message": "Восстановить настройки по умолчанию"
+   },
+   "restoreDefaultsConfirm": {
+      "message": "Вы уверены, что хотите восстановить все настройки по умолчанию?"
+   },
+   "result": {
+      "message": "Результат"
+   },
+   "saveOptions": {
+      "message": "Save"
+   },
+   "setProxy": {
+      "message": "Установить прокси"
+   },
+   "setTabProxy": {
+      "message": "Установить прокси вкладки"
+   },
+   "shortcut": {
+      "message": "Сочетание клавиш"
+   },
+   "shortcutDescription": {
+      "message": "Предварительный выбор прокси для ассоциации с действием сочетания клавиш"
+   },
+   "storeLocally": {
+      "message": "Сохранить локально"
+   },
+   "syncError": {
+      "message": "Ошибка синхронизации"
+   },
+   "test": {
+      "message": "Тест"
+   },
+   "tester": {
+      "message": "Проверить"
+   },
+   "theme": {
+      "message": "Тема"
+   },
+   "time": {
+      "message": "Время"
+   },
+   "title": {
+      "message": "Название"
+   },
+   "togglePassword": {
+      "message": "Переключить видимость"
+   },
+   "type": {
+      "message": "Тип прокси"
+   },
+   "unsetTabProxy": {
+      "message": "Отключить прокси вкладки"
+   },
+   "url": {
+      "message": "URL"
+   },
+   "userPassError": {
+      "message": "Введите имя пользователя и пароль."
+   },
+   "username": {
+      "message": "Имя пользователя"
+   },
+   "view": {
+      "message": "Просмотр"
+   },
+   "wildcard": {
+      "message": "Шаблон хоста"
+   }
+}

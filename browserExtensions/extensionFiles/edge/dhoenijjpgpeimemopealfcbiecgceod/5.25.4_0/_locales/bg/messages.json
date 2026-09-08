@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok всички в една AI странична лента за AI търсене, четене и писане."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT странична лента: Използвайте ChatGPT, GPT-4o, Claude3, & Gemini за напреднало AI търсене, четене и писане."
+   },
+   "appName": {
+      "message": "Sider: Чатете с всички AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI странична лента с всички модели"
+   }
+}

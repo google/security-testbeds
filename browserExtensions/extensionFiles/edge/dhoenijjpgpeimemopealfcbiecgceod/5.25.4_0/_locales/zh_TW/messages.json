@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT、DeepSeek、Gemini、Claude、Grok 全部整合在一個 AI 側邊欄中，用於 AI 搜尋、閱讀和寫作。"
+   },
+   "appDescEdge": {
+      "message": "ChatGPT 側邊欄：使用 ChatGPT、GPT-4o、Claude3 和 Gemini 1.5 Pro 進行先進 AI 搜索、閱讀和寫作，提升工作流。"
+   },
+   "appName": {
+      "message": "Sider: 與所有 AI 聊天：GPT-5、Claude、DeepSeek、Gemini、Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider：具有所有模型的 AI 側邊欄"
+   }
+}
