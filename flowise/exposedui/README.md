@@ -5,9 +5,10 @@ This directory contains the deployment config for Flowise instances with and wit
 ## Deployment
 
 ```sh
-docker-compose up vuln
-docker-compose up safe
+docker-compose up
 ```
+The vulnerable service will be exposed at port `8081` and the safe service will be exposed at port `8082`.
+
 
 ## Vulnerable Service
 The `vuln` service runs Flowise v1.6.0 without authentication.

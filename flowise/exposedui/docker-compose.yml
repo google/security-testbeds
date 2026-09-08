@@ -7,6 +7,8 @@ services:
     volumes:
       - .flowise_vuln:/root/.flowise
     entrypoint: "flowise start"
+    ports:
+      - '8081:3000'
 
   safe:
     image: flowiseai/flowise:1.6.1
@@ -16,3 +18,5 @@ services:
     volumes:
       - .flowise_safe:/root/.flowise
     entrypoint: "flowise start"
+    ports:
+      - '8082:3000'
