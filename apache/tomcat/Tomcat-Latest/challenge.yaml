@@ -1,0 +1,33 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-tomcat-latest
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/chroot/tomcat-latest-flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: tomcat-latest-secret-provider
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:e8027d37b57d09c3c56e295ea0db62b4dea76b5d5c09a443b38837f3bb744cbe
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:e674772683c3a27214d72e9826bb43fb755bbd6b3bf1d516bbca56371755ba4b
