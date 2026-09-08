@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Pipeline Graph Analysis Plugin
+Specification-Version: 0.0
+Implementation-Title: Pipeline Graph Analysis Plugin
+Implementation-Version: 216.vfd8b_ece330ca_
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: pipeline-graph-analysis
+Short-Name: pipeline-graph-analysis
+Long-Name: Pipeline Graph Analysis Plugin
+Url: https://github.com/jenkinsci/pipeline-graph-analysis-plugin
+Plugin-Version: 216.vfd8b_ece330ca_
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Dependencies: workflow-api:1213.v646def1087f9,workflow-cps:3659.v
+ 582dc37621d8,workflow-job:1295.v395eb_7400005,workflow-step-api:639.v6e
+ ca_cd8c04a_a_,workflow-support:839.v35e2736cfd5c,pipeline-input-step:46
+ 8.va_5db_051498a_4,pipeline-stage-step:305.ve96d0205c1c6
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT license
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/pipeline-grap
+ h-analysis-plugin.git
+Plugin-ScmTag: fd8bece330cad81b62f5345c8422fa1995c75b7f
+Plugin-ScmUrl: https://github.com/jenkinsci/pipeline-graph-analysis-plug
+ in
+Plugin-GitHash: fd8bece330cad81b62f5345c8422fa1995c75b7f
+Implementation-Build: fd8bece330cad81b62f5345c8422fa1995c75b7f
+

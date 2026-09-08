@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 17
+Specification-Title: GitHub plugin
+Specification-Version: 1.38
+Implementation-Title: GitHub plugin
+Implementation-Version: 1.38.0
+Plugin-Class: org.jenkinsci.plugins.github.GitHubPlugin
+Group-Id: com.coravy.hudson.plugins.github
+Artifact-Id: github
+Short-Name: github
+Long-Name: GitHub plugin
+Url: https://github.com/jenkinsci/github-plugin
+Plugin-Version: 1.38.0
+Hudson-Version: 2.414.3
+Jenkins-Version: 2.414.3
+Plugin-Dependencies: commons-lang3-api:3.13.0-62.v7d18e55f51e2,okhttp-ap
+ i:4.11.0-157.v6852a_a_fa_ec11,instance-identity:185.v303dc7c645f9,crede
+ ntials:1311.vcf0a_900b_37c2,display-url-api:2.200.vb_9327d658781,git:5.
+ 2.1,github-api:1.318-461.v7a_c09c9fa_d63,plain-credentials:143.v1b_df8b
+ _d3b_e48,scm-api:676.v886669a_199a_a_,token-macro:400.v35420b_922dcb_
+Plugin-Developers: Merkushev Kirill:lanwen:,Kanstantsin Shautsou:KostyaS
+ ha:
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://www.opensource.org/licenses/mit-license.php
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/github-plugin
+ .git
+Plugin-ScmTag: v1.38.0
+Plugin-ScmUrl: https://github.com/jenkinsci/github-plugin
+Plugin-GitHash: 0668a8707ad856e026982abb41fedefe9d33026b
+Implementation-Build: 0668a8707ad856e026982abb41fedefe9d33026b
+
