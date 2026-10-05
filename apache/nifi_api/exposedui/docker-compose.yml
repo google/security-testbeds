@@ -1,0 +1,16 @@
+services:
+  nifi-vuln:
+    container_name: nifi-vuln
+    image: apache/nifi:1.12.0
+    ports:
+      - "8081:8080"
+
+  nifi-safe:
+    container_name: nifi-safe
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin 
+      - SINGLE_USER_CREDENTIALS_PASSWORD=ggdwsfsddwfgwregwrgrheeg
+      - NIFI_WEB_HTTPS_PORT=8082
+    image: apache/nifi:2.9.0
+    ports:
+      - "8082:8082"
