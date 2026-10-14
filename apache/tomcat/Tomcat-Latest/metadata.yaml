@@ -1,0 +1,43 @@
+# Human readable task name
+
+name: Tomcat Latest  
+
+# Long form description.
+
+description: |+
+
+  The latest version of the Apache Tomcat. The root flag is located in /flag/tomcat-latest-flag.txt 
+
+# The flag
+
+flag: 
+
+# Task category. (one of hardware, crypto, pwn, reversing, web, net, misc)
+
+category: web
+
+
+
+# === the fields below will be filled by SRE or automation ===
+
+
+
+# Task label
+
+label: ''
+
+# URL for web challenges
+
+link: 'http://chal-tomcat-latest.internet-ctf.kctf.cloud:1337'
+
+# host/port for non-web challenges
+
+host: ''
+
+# the URL for attachments, to be filled in by automation
+
+attachment: ''
+
+# is this challenge released? Will be set by SREs
+
+visible: true
