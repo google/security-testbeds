@@ -1,0 +1,15 @@
+model_list:
+  - model_name: local-dummy
+    litellm_params:
+      model: openai/local-dummy
+      api_base: http://127.0.0.1:65535/v1
+      api_key: sk-local-dummy-provider-key
+
+general_settings:
+  master_key: sk-local-master-vuln
+  database_url: os.environ/DATABASE_URL
+  store_model_in_db: true
+  disable_error_logs: false
+
+litellm_settings:
+  set_verbose: false
