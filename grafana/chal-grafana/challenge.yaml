@@ -1,0 +1,69 @@
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: chal-grafana
+spec:
+  deployed: true
+  powDifficultySeconds: 0
+  network:
+    public: true
+    ports:
+      - port: 1337
+        protocol: "TCP"
+        targetPort: 1337
+  podTemplate:
+    template:
+      spec:
+        #        securityContext:
+        #          sysctls:
+        #            - name: "net.ipv4.ip_unprivileged_port_start"
+        #              value: "0"
+        containers:
+          - name: challenge
+            volumeMounts:
+              - name: flag-volume
+                mountPath: "/flag"
+        serviceAccountName: secret-readonly-sa
+        volumes:
+          - name: flag-volume
+            csi:
+              driver: secrets-store-gke.csi.k8s.io
+              readOnly: true
+              volumeAttributes:
+                secretProviderClass: grafana-secret-provider
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: kubernetes.io/os
+                      operator: In
+                      values:
+                        - linux
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - three
+              - weight: 75
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - two
+              - weight: 50
+                preference:
+                  matchExpressions:
+                    - key: node
+                      operator: In
+                      values:
+                        - one
+  healthcheck:
+    # TIP: disable the healthcheck during development
+    enabled: true
+    image: europe-west4-docker.pkg.dev/internet-ctf/challenges/healthcheck:c9e0df009164fe522b0980b81a7f62552b26adc85afd782289c5c4940fb76f9f
+  image: europe-west4-docker.pkg.dev/internet-ctf/challenges/challenge:a30fb91ce2083f28205140de772a2a1f48a96f804eba6cf65450a4236912f1c8
