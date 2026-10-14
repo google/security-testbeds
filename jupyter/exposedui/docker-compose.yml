@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  jupyter-vuln:
+    image: jupyter/base-notebook@sha256:8c903974902b0e9d45d9823c2234411de0614c5c98c4bb782b3d4f55b3e435e6
+    container_name: jupyter-vuln
+    ports:
+      - "8081:8888"
+    command: >
+      start-notebook.sh
+      --NotebookApp.token=''
+      --NotebookApp.allow_origin='*'
+      --NotebookApp.ip='0.0.0.0'
+      --NotebookApp.open_browser=False
+  jupyter-safe:
+    image: jupyter/base-notebook@sha256:8c903974902b0e9d45d9823c2234411de0614c5c98c4bb782b3d4f55b3e435e6
+    container_name: jupyter-safe
+    ports:
+      - "8082:8888"
+    command: >
+      start-notebook.sh
+      --NotebookApp.token='tsunami-not-a-secure-token'
+      --NotebookApp.allow_origin='*'
+      --NotebookApp.ip='0.0.0.0'
+      --NotebookApp.open_browser=False
