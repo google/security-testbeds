@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Vulnerable instance: No master key configured, REST API and models exposed unauthenticated
+  litellm-vulnerable:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-unauth-exposure
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+    command:
+      - "--config"
+      - "/app/config.yaml"
+      - "--port"
+      - "4000"
+      - "--host"
+      - "0.0.0.0"
+    environment:
+      - STORE_MODEL_IN_DB=False
+    restart: unless-stopped
+
+  # Safe / secured instance: LITELLM_MASTER_KEY configured to enforce authentication
+  litellm-secured:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-secured-auth
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./litellm_config.yaml:/app/config.yaml:ro
+    command:
+      - "--config"
+      - "/app/config.yaml"
+      - "--port"
+      - "4000"
+      - "--host"
+      - "0.0.0.0"
+    environment:
+      - LITELLM_MASTER_KEY=sk-test-master-key-12345
+      - STORE_MODEL_IN_DB=False
+    restart: unless-stopped
+
