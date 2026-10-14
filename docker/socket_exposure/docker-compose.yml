@@ -1,0 +1,40 @@
+version: '3.8'
+
+networks:
+  docker_socket_test:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+services:
+  docker_socket_safe:
+    container_name: docker_socket_safe
+    build:
+      context: .
+      dockerfile: DockerfileSafe
+    image: docker_socket_safe:latest
+    networks:
+      docker_socket_test:
+        ipv4_address: 172.30.0.10
+    healthcheck:
+      test: ["CMD", "test", "-f", "/var/run/docker.sock"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  docker_socket_unsafe:
+    container_name: docker_socket_unsafe
+    build:
+      context: .
+      dockerfile: DockerfileUnsafe
+    image: docker_socket_unsafe:latest
+    networks:
+      docker_socket_test:
+        ipv4_address: 172.30.0.20
+    healthcheck:
+      test: ["CMD", "test", "-f", "/var/run/docker.sock"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
