@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Pipeline: Stage View Plugin
+Specification-Version: 2.34
+Implementation-Title: Pipeline: Stage View Plugin
+Implementation-Version: 2.34
+Plugin-Class: com.cloudbees.workflow.ui.view.PluginImpl
+Group-Id: org.jenkins-ci.plugins.pipeline-stage-view
+Artifact-Id: pipeline-stage-view
+Short-Name: pipeline-stage-view
+Long-Name: Pipeline: Stage View Plugin
+Url: https://github.com/jenkinsci/pipeline-stage-view-plugin
+Plugin-Version: 2.34
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Dependencies: pipeline-rest-api:2.34,workflow-api:1213.v646def108
+ 7f9,workflow-job:1295.v395eb_7400005
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/pipeline-stag
+ e-view-plugin.git
+Plugin-ScmTag: pipeline-stage-view-2.34
+Plugin-ScmUrl: https://github.com/jenkinsci/pipeline-stage-view-plugin
+Plugin-GitHash: 35cd2955522b18784d7912da464fc7575097e382
+Implementation-Build: 35cd2955522b18784d7912da464fc7575097e382
+

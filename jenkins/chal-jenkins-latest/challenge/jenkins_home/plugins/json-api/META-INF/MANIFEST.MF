@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: JSON Api Plugin
+Specification-Version: 20240303.0
+Implementation-Title: JSON Api Plugin
+Implementation-Version: 20240303-41.v94e11e6de726
+Group-Id: io.jenkins.plugins
+Artifact-Id: json-api
+Short-Name: json-api
+Long-Name: JSON Api Plugin
+Url: https://github.com/jenkinsci/json-api-plugin
+Plugin-Version: 20240303-41.v94e11e6de726
+Hudson-Version: 2.414.3
+Jenkins-Version: 2.414.3
+Plugin-Developers: 
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT No Attribution License
+Plugin-License-Url: https://opensource.org/license/mit-0/
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/json-api-plug
+ in
+Plugin-ScmTag: 94e11e6de7264e2ac8782d46310e2330fa167ded
+Plugin-ScmUrl: https://github.com/jenkinsci/json-api-plugin
+Plugin-GitHash: 94e11e6de7264e2ac8782d46310e2330fa167ded
+Implementation-Build: 94e11e6de7264e2ac8782d46310e2330fa167ded
+

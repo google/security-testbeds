@@ -1,0 +1,1 @@
+{"version":3,"file":"pages/cloud-set.css","mappings":"AAAA,WACE","sources":["webpack://jenkins-ui/./src/main/js/pages/cloud-set/index.scss"],"sourcesContent":[".dd-handle {\n  cursor: move;\n}\n"],"names":[],"sourceRoot":""}

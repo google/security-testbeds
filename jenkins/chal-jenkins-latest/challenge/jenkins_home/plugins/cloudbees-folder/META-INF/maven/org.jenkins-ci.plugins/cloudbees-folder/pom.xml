@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jenkins-ci.plugins</groupId>
+  <artifactId>cloudbees-folder</artifactId>
+  <version>6.901.vb_4c7a_da_75da_3</version>
+  <packaging>hpi</packaging>
+  <name>Folders Plugin</name>
+  <description>This plugin allows users to create "folders" to organize jobs. Users can define custom taxonomies (like
+    by project type, organization type etc). Folders are nestable and you can define views within folders. Maintained by CloudBees, Inc.</description>
+  <url>https://github.com/jenkinsci/cloudbees-folder-plugin/</url>
+  <inceptionYear>2016</inceptionYear>
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://opensource.org/licenses/MIT</url>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/jenkinsci/cloudbees-folder-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/cloudbees-folder-plugin.git</developerConnection>
+    <tag>b4c7ada75da3cf93bd5eeb8638ab0188f28b813f</tag>
+    <url>https://github.com/jenkinsci/cloudbees-folder-plugin</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>maven.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>maven.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.jenkins.plugins</groupId>
+      <artifactId>ionicons-api</artifactId>
+      <version>56.v1b_1c8c49374e</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>credentials</artifactId>
+      <version>1311.vcf0a_900b_37c2</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jenkins-ci.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>3.51</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
