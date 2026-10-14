@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  wordpress:
+    image: wordpress
+    platform: linux/amd64
+    container_name: wordpress
+    ports:
+      - "8081:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: tsunami-notsecret-donotuse
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: tsunami-notsecret-donotuse
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: tsunami-notsecret-donotuse
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
