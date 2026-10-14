@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  consul-vuln:
+    image: consul:1.2.3
+    container_name: consul-vuln
+    ports:
+      - "8081:8500"
+    volumes:
+    - ./vuln.hcl:/consul/config/vuln.hcl
+    command: agent -config-file=/consul/config/vuln.hcl
+
+  consul-safe:
+    image: consul:1.2.3
+    container_name: consul-safe
+    ports:
+      - "8082:8500"
+    volumes:
+    - ./safe.hcl:/consul/config/safe.hcl
+    command: agent -config-file=/consul/config/safe.hcl
+
