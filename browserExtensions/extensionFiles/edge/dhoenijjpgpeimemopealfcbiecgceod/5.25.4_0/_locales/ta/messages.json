@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok அனைத்தும் ஒரே AI பக்கப்பட்டியில், AI தேடல், படித்தல் மற்றும் எழுதுதலுக்காக."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT பக்கப்பட்டி: ChatGPT, GPT-4o, Claude3, & Gemini ஐ முன்னேறிய AI தேடல், படித்தல், மற்றும் எழுதுதலுக்கு பயன்படுத்தவும்."
+   },
+   "appName": {
+      "message": "Sider: AI உடன் உரையாடுக: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "சைடர்: அனைத்து மாதிரிகளுடனும் AI பக்கப்பட்டி"
+   }
+}

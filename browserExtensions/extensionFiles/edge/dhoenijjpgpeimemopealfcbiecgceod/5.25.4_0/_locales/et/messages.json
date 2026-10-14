@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok kõik ühes AI külgribal AI otsinguks, lugemiseks ja kirjutamiseks."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT külgriba: Kasuta ChatGPT-d, GPT-4o, Claude3 & Gemini't täiustatud AI otsinguks, lugemiseks ja kirjutamiseks."
+   },
+   "appName": {
+      "message": "Sider: Vestle kõigi AI-dega: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI külgriba kõigi mudelitega"
+   }
+}

@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok ทั้งหมดในแถบด้าน AI เดียว สำหรับการค้นหา AI อ่าน และเขียน"
+   },
+   "appDescEdge": {
+      "message": "แถบข้าง ChatGPT: ใช้ ChatGPT, GPT-4o, Claude3, & Gemini สำหรับการค้นหา, อ่าน, และเขียนด้วย AI ขั้นสูง"
+   },
+   "appName": {
+      "message": "Sider: แชทกับ AI ทั้งหมด: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: แถบด้านข้าง AI ที่มีทุกรุ่น"
+   }
+}

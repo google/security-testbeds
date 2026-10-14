@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok všetko v jednej AI bočnej lište pre AI vyhľadávanie, čítanie a písanie."
+   },
+   "appDescEdge": {
+      "message": "Bočný panel ChatGPT: Použite ChatGPT, GPT-4o, Claude3, & Gemini pre pokročilé vyhľadávanie, čítanie a písanie s AI."
+   },
+   "appName": {
+      "message": "Sider: Chatuj so všetkými AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI bočný panel so všetkými modelmi"
+   }
+}
