@@ -1,0 +1,13 @@
+{
+  "name": "cve-2026-111497-testbed",
+  "version": "1.0.0",
+  "description": "Testbed for CVE-2026-111497 (Node.js + Express Brotli RCE)",
+  "license": "Apache-2.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.21.2"
+  }
+}
