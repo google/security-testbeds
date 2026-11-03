@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok همه در یک نوار کناری هوش مصنوعی، برای جستجو، خواندن و نوشتن هوش مصنوعی."
+   },
+   "appDescEdge": {
+      "message": "نوار کناری ChatGPT: برای جستجو، خواندن و نوشتن پیشرفته با استفاده از ChatGPT، GPT-4o، Claude3، & Gemini AI"
+   },
+   "appName": {
+      "message": "Sider: با همه هوش مصنوعی چت کنید: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "سایدر: نوار کناری هوش مصنوعی با همه مدل‌ها"
+   }
+}

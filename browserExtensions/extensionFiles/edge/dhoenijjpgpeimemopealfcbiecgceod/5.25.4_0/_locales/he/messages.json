@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok הכל בסרגל צד AI אחד, לחיפוש AI, קריאה וכתיבה."
+   },
+   "appDescEdge": {
+      "message": "סרגל הצד של ChatGPT: השתמש ב-ChatGPT, GPT-4o, Claude3, & Gemini לחיפוש מתקדם, קריאה וכתיבה באמצעות AI."
+   },
+   "appName": {
+      "message": "Sider: צ'אט עם כל ה-AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "סיידר: סרגל צד של AI עם כל המודלים"
+   }
+}

@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok kaikki yhdessä AI-sivupalkissa AI-hakua, lukemista ja kirjoittamista varten."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT-sivupalkki: Käytä ChatGPT:tä, GPT-4o:ää, Claude3:a & Geminia edistyneeseen AI-hakuun, lukemiseen ja kirjoittamiseen."
+   },
+   "appName": {
+      "message": "Sider: Keskustele AI:n kanssa: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI-sivupalkki kaikilla malleilla"
+   }
+}

@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok tot en una barra lateral d'IA, per a cerca d'IA, lectura i escriptura."
+   },
+   "appDescEdge": {
+      "message": "Barra lateral de ChatGPT: Utilitza ChatGPT, GPT-4o, Claude3, & Gemini per a cerques avançades amb IA, llegir i escriure."
+   },
+   "appName": {
+      "message": "Sider: Xateja amb totes les IA: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: Barra lateral d'IA amb tots els models"
+   }
+}

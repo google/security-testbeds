@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok tất cả trong một thanh bên AI, để tìm kiếm AI, đọc và viết."
+   },
+   "appDescEdge": {
+      "message": "Thanh bên ChatGPT: Sử dụng ChatGPT, GPT-4o, Claude3, & Gemini cho tìm kiếm, đọc và viết nâng cao với AI."
+   },
+   "appName": {
+      "message": "Sider: Trò chuyện với tất cả AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: Thanh bên AI với tất cả các mô hình"
+   }
+}

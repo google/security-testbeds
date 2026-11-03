@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok όλα σε μία πλαϊνή μπάρα AI, για αναζήτηση AI, ανάγνωση και γραφή."
+   },
+   "appDescEdge": {
+      "message": "Πλευρική Στήλη ChatGPT: Χρησιμοποιήστε το ChatGPT, GPT-4o, Claude3, & Gemini για προηγμένη αναζήτηση, ανάγνωση και γραφή AI."
+   },
+   "appName": {
+      "message": "Sider: Συνομιλήστε με όλα τα AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: Πλευρική γραμμή AI με όλα τα μοντέλα"
+   }
+}
