@@ -1,0 +1,31 @@
+{
+  "name": "acme/composer2-application",
+  "description": "Application using the Composer 2 installed.json format",
+  "type": "project",
+  "license": "Apache-2.0",
+  "repositories": [
+    {
+      "packagist.org": false
+    },
+    {
+      "type": "path",
+      "url": "/packages/runtime-library",
+      "options": {
+        "symlink": false
+      }
+    },
+    {
+      "type": "path",
+      "url": "/packages/dev-tool",
+      "options": {
+        "symlink": false
+      }
+    }
+  ],
+  "require": {
+    "acme/runtime-library": "2.4.0"
+  },
+  "require-dev": {
+    "acme/dev-tool": "3.1.0"
+  }
+}
