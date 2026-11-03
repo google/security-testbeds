@@ -1,0 +1,8 @@
+{
+  "name": "yarn4-external-testbed",
+  "private": true,
+  "packageManager": "yarn@4.10.3",
+  "dependencies": {
+    "typescript": "5.9.3"
+  }
+}

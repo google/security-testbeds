@@ -1,0 +1,9 @@
+{
+  "name": "yarn3-inline-testbed",
+  "private": true,
+  "packageManager": "yarn@3.8.7",
+  "dependencies": {
+    "is-number": "7.0.0",
+    "left-pad": "1.3.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "yarn4-inline-testbed",
+  "private": true,
+  "packageManager": "yarn@4.10.3",
+  "dependencies": {
+    "@babel/code-frame": "7.24.7",
+    "lodash": "4.17.21"
+  }
+}
