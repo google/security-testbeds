@@ -32,9 +32,10 @@ RUN useradd -m -s /bin/sh donoruser && \
 
 # 4. Precondition B: Target account has literal '*' in /etc/shadow and a login shell.
 #    Note: Unlike alpine:3.20 (which ships with `root:*::0:::::`), vanilla
-#    alpine:3.15 ships with `root:!::0:::::`, so we create `targetuser` with `*`
-#    in /etc/shadow.
-RUN useradd -m -s /bin/sh targetuser && \
+#    alpine:3.15 ships with `root:!::0:::::`, so we set `*` on `root` (matching
+#    newer Alpine defaults probed by scanners) as well as `targetuser`.
+RUN usermod -p '*' root && \
+    useradd -m -s /bin/sh targetuser && \
     usermod -p '*' targetuser
 
 # 5. Precondition C: PasswordAuthentication yes and PermitRootLogin yes
