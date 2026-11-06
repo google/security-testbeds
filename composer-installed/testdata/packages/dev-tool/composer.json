@@ -1,0 +1,7 @@
+{
+  "name": "acme/dev-tool",
+  "description": "Composer 2 development package test fixture",
+  "version": "3.1.0",
+  "type": "library",
+  "license": "Apache-2.0"
+}

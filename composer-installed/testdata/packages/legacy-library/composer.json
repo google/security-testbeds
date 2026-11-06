@@ -1,0 +1,7 @@
+{
+  "name": "acme/legacy-library",
+  "description": "Composer 1 installed package test fixture",
+  "version": "1.2.3",
+  "type": "library",
+  "license": "Apache-2.0"
+}

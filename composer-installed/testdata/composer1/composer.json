@@ -1,0 +1,21 @@
+{
+  "name": "acme/composer1-application",
+  "description": "Application using the Composer 1 installed.json format",
+  "type": "project",
+  "license": "Apache-2.0",
+  "repositories": [
+    {
+      "packagist.org": false
+    },
+    {
+      "type": "path",
+      "url": "/packages/legacy-library",
+      "options": {
+        "symlink": false
+      }
+    }
+  ],
+  "require": {
+    "acme/legacy-library": "1.2.3"
+  }
+}

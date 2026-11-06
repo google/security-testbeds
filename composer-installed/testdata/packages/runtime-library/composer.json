@@ -1,0 +1,7 @@
+{
+  "name": "acme/runtime-library",
+  "description": "Composer 2 runtime package test fixture",
+  "version": "2.4.0",
+  "type": "library",
+  "license": "Apache-2.0"
+}
