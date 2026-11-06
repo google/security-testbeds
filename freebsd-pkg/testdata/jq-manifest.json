@@ -1,0 +1,6 @@
+{
+  "name": "jq",
+  "origin": "textproc/jq",
+  "version": "1.7.1",
+  "arch": "freebsd:14:x86:64"
+}
