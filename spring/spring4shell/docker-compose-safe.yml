@@ -1,0 +1,9 @@
+name: spring4shell-testbed-safe
+services:
+  app:
+    image: tomcat:9.0.60-jre11-openjdk-slim-buster
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./app/index.html:/usr/local/tomcat/webapps/ROOT/index.html"
+      - "./app/spring-form-safe.war:/usr/local/tomcat/webapps/spring-form.war"
