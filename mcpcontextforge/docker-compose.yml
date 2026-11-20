@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  sandbox-vulnerable:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cve-2026-53710-vulnerable
+    ports:
+      - "8080:8080"
+    command: ["python", "server_vulnerable.py"]
+    restart: unless-stopped
+
+  sandbox-patched:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cve-2026-53710-patched
+    ports:
+      - "8081:8080"
+    command: ["python", "server_patched.py"]
+    restart: unless-stopped
