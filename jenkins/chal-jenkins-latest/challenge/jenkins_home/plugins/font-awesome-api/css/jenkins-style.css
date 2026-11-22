@@ -1,0 +1,31 @@
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* A small image button                                                                                                */
+/* ------------------------------------------------------------------------------------------------------------------- */
+
+.fa-image-button-svg {
+    fill: var(--text-color);
+    height: 16px;
+    width: 16px;
+    vertical-align: text-bottom;
+    margin-left: 0.2em;
+    color: var(--text-color);
+}
+
+.fa-image-button {
+    padding: 2px 4px 4px 0;
+    margin-left: 2px;
+}
+
+.fa-image-button-warning {
+    color: var(--unstable-build-icon-color)!important;
+}
+
+.fa-image-button:hover {
+    background-color: var(--light-grey);
+    border-radius: 5px;
+    transition: 0.2s ease;
+}
+
+svg.fa-svg-icon {
+    color: var(--text-color);
+}

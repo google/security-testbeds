@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jenkins-ci.plugins</groupId>
+  <artifactId>trilead-api</artifactId>
+  <version>2.142.v748523a_76693</version>
+  <packaging>hpi</packaging>
+  <name>Trilead API Plugin</name>
+  <description>This plugin provides access to Trilead without having to bundle Trilead in Jenkins core</description>
+  <url>https://github.com/jenkinsci/trilead-api-plugin</url>
+  <inceptionYear>2016</inceptionYear>
+  <licenses>
+    <license>
+      <name>The MIT license</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>mc1arke</id>
+      <name>Michael Clarke</name>
+      <email>michael.m.clarke@gmail.com</email>
+    </developer>
+    <developer>
+      <id>kuisathaverat</id>
+      <name>Ivan Fernandez</name>
+      <email>kuisathaverat@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/jenkinsci/trilead-api-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:jenkinsci/trilead-api-plugin.git</developerConnection>
+    <tag>748523a76693801bc2c482e68b783394c0765769</tag>
+    <url>https://github.com/jenkinsci/trilead-api-plugin</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>maven.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>maven.jenkins-ci.org</id>
+      <url>https://repo.jenkins-ci.org/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.jenkins-ci</groupId>
+      <artifactId>trilead-ssh2</artifactId>
+      <version>build-217-jenkins-274.276.v58da_75159cb_7</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.kohsuke</groupId>
+      <artifactId>trilead-putty-extension</artifactId>
+      <version>1.2</version>
+      <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.jenkins-ci</groupId>
+          <artifactId>trilead-ssh2</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.jenkins.plugins</groupId>
+      <artifactId>gson-api</artifactId>
+      <version>2.10.1-15.v0d99f670e0a_7</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jenkins-ci.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>3.53</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

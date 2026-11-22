@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Created-By: Maven Archiver 3.6.0
+Build-Jdk-Spec: 11
+Specification-Title: Resource Disposer Plugin
+Specification-Version: 0.23
+Implementation-Title: Resource Disposer Plugin
+Implementation-Version: 0.23
+Group-Id: org.jenkins-ci.plugins
+Artifact-Id: resource-disposer
+Short-Name: resource-disposer
+Long-Name: Resource Disposer Plugin
+Url: https://github.com/jenkinsci/resource-disposer-plugin
+Plugin-Version: 0.23
+Hudson-Version: 2.361.4
+Jenkins-Version: 2.361.4
+Plugin-Developers: Basil Crow:basil:me@basilcrow.com,Oliver Gondža:oliv
+ ergondza:ogondza@gmail.com
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmConnection: scm:git:https://github.com/jenkinsci/resource-disp
+ oser-plugin.git
+Plugin-ScmTag: resource-disposer-0.23
+Plugin-ScmUrl: https://github.com/jenkinsci/resource-disposer-plugin
+Plugin-GitHash: fffe3f2b48354d4000964940e4c23f118412b941
+Implementation-Build: fffe3f2b48354d4000964940e4c23f118412b941
+
