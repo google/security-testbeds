@@ -1,0 +1,36 @@
+FROM ubuntu:22.04
+
+LABEL authors="OSV-Scalibr Team"
+LABEL description="Secure Docker socket configuration for testing"
+
+RUN apt update && apt install -y systemd
+
+# Create Docker-related directory structure
+RUN mkdir -p /var/run \
+             /etc/docker \
+             /etc/systemd/system \
+             /lib/systemd/system \
+             /usr/lib/systemd/system
+
+# Create Docker socket with secure permissions (660 - rw-rw----)
+RUN touch /var/run/docker.sock && \
+    chmod 660 /var/run/docker.sock && \
+    chown root:docker /var/run/docker.sock
+
+# Copy secure configuration files
+COPY config/daemon-safe.json /etc/docker/daemon.json
+COPY config/docker-safe.service /etc/systemd/system/docker.service
+
+# Set proper ownership for Docker config
+RUN chown root:root /etc/docker/daemon.json && \
+    chmod 644 /etc/docker/daemon.json
+
+# Set proper ownership for systemd service
+RUN chown root:root /etc/systemd/system/docker.service && \
+    chmod 644 /etc/systemd/system/docker.service
+
+# Create docker group (typically GID 999)
+RUN groupadd -g 999 docker || true
+
+# Keep container running for testing
+CMD ["sleep", "infinity"]
