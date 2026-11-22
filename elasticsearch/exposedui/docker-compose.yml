@@ -1,0 +1,31 @@
+services:
+  elasticsearch-vuln:
+    container_name: elasticsearch-vuln
+    environment:
+      - cluster.name=vuln-cluster
+      - node.name=vuln-node
+      - network.host=0.0.0.0
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    image: elasticsearch:9.3.4
+    networks:
+      - vuln
+    ports:
+      - 8081:9200
+  elasticsearch-safe:
+    container_name: elasticsearch-safe
+    environment:
+      - cluster.name=safe-cluster
+      - node.name=safe-node
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    image: elasticsearch:9.3.4
+    networks:
+      - safe
+    ports:
+      - 8082:9200
+
+networks:
+  safe:
+  vuln:
