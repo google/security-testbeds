@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  ldso-preload-vulnerable:
+    build:
+      context: .
+      dockerfile: Dockerfile.vulnerable
+    container_name: ldso-preload-vulnerable
+
+  ldso-preload-safe:
+    build:
+      context: .
+      dockerfile: Dockerfile.safe
+    container_name: ldso-preload-safe
