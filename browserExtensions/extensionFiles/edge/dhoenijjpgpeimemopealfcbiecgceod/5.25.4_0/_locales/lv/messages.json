@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok viss vienā AI sānjoslā AI meklēšanai, lasīšanai un rakstīšanai."
+   },
+   "appDescEdge": {
+      "message": "ChatGPT sānjosla: Izmantojiet ChatGPT, GPT-4o, Claude3, & Gemini uzlabotai AI meklēšanai, lasīšanai un rakstīšanai."
+   },
+   "appName": {
+      "message": "Sider: Tērzē ar visiem AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI sānu josla ar visiem modeļiem"
+   }
+}

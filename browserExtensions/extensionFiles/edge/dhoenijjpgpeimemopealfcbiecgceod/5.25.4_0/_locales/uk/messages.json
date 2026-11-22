@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok все в одній бічній панелі ШІ для пошуку ШІ, читання та письма."
+   },
+   "appDescEdge": {
+      "message": "Бічна панель ChatGPT: Використовуйте ChatGPT, GPT-4o, Claude3, & Gemini для розширеного пошуку, читання та написання за допомогою AI."
+   },
+   "appName": {
+      "message": "Sider: Спілкуйтеся з усіма ШІ: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: AI-бічна панель з усіма моделями"
+   }
+}

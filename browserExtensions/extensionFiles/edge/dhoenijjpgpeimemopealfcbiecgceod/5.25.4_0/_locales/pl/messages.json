@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok wszystko w jednym pasku bocznym AI, do wyszukiwania AI, czytania i pisania."
+   },
+   "appDescEdge": {
+      "message": "Pasek boczny ChatGPT: Użyj ChatGPT, GPT-4o, Claude3, & Gemini do zaawansowanego wyszukiwania AI, czytania i pisania."
+   },
+   "appName": {
+      "message": "Sider: Rozmawiaj ze wszystkimi AI: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "Sider: Pasek boczny AI ze wszystkimi modelami"
+   }
+}

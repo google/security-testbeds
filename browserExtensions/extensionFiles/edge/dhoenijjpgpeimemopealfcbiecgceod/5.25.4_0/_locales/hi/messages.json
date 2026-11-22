@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok सभी एक AI साइडबार में, AI खोज, पढ़ने और लिखने के लिए।"
+   },
+   "appDescEdge": {
+      "message": "ChatGPT साइडबार: उन्नत AI खोज, पढ़ने, और लिखने के लिए ChatGPT, GPT-4o, Claude3, और Gemini का उपयोग करें।"
+   },
+   "appName": {
+      "message": "Sider: सभी AI के साथ चैट करें: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "साइडर: सभी मॉडलों के साथ एआई साइडबार"
+   }
+}

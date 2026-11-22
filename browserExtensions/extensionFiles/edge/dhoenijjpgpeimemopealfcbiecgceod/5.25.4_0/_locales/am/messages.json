@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok ሁሉም በአንድ AI ጎን ባር ውስጥ፣ ለAI ፍለጋ፣ ማንበብ እና መጻፍ።"
+   },
+   "appDescEdge": {
+      "message": "ChatGPT አጠገብ ቦርድ: ChatGPT, GPT-4o, Claude3, & Gemini እንደ የረጅም የAI ፍለጋ፣ ንባብ እና መጻፍ ለመጠቀም።"
+   },
+   "appName": {
+      "message": "Sider: ከሁሉም AI ጋር ይወያዩ: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "ሳይደር፡ ኤአይ አጠገር ከሁሉም ሞዴሎች ጋር"
+   }
+}

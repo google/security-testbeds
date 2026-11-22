@@ -1,0 +1,14 @@
+{
+   "appDesc": {
+      "message": "ChatGPT, DeepSeek, Gemini, Claude, Grok الكل في شريط جانبي واحد للذكاء الاصطناعي، للبحث والقراءة والكتابة بالذكاء الاصطناعي."
+   },
+   "appDescEdge": {
+      "message": "شريط جانبي ChatGPT: استخدم ChatGPT، GPT-4o، Claude3، & Gemini للبحث المتقدم بالذكاء الاصطناعي، القراءة، والكتابة."
+   },
+   "appName": {
+      "message": "Sider: تحدث مع جميع الذكاء الاصطناعي: GPT-5, Claude, DeepSeek, Gemini, Grok"
+   },
+   "appNameEdge": {
+      "message": "سايدر: شريط جانبي للذكاء الاصطناعي مع جميع النماذج"
+   }
+}
