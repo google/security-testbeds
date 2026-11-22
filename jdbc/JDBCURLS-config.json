@@ -1,0 +1,24 @@
+{
+  "jdbcUrls": [
+    "jdbc:postgresql://postgres:mysecretpassword@publichost:5432/testdb",
+    "jdbc:postgresql://postgres@publichost:5433/testdb",
+    "jdbc:postgresql://publichost:5432/testdb?user=postgres&password=mysecretpassword",
+    "jdbc:postgresql://postgres:mysecretpassword@publichost:5432,publichost:5433/testdb",
+    "postgresql://postgres:mysecretpassword@publichost:5432/testdb",
+    "jdbc:postgresql://postgres:mysecretpassword@[::1]:5432/testdb",
+    "jdbc:mysql://username:password@publichost:3306/testdb",
+    "jdbc:mysql://root@publichost:3307/testdb",
+    "jdbc:mysql://publichost:3306/testdb?user=username&password=password",
+    "jdbc:mysql://address=(host=publichost)(port=3307)/testdb",
+    "jdbc:mysql://(host=publichost,port=3307)/testdb",
+    "jdbc:mysql://username:password@[publichost:3306,publichost:3307]/testdb",
+    "jdbc:mysql://username:password@[address=(host=publichost)(port=3306),address=(host=publichost)(port=3307)]/testdb",
+    "jdbc:mysql://root:@publichost:3306,(host=publichost,port=3307)/testdb",
+    "jdbc:mysql+srv://username:password@publichost:3306/testdb",
+    "jdbc:mysql+srv:replication://username:password@publichost:3306/testdb",
+    "mysql+srv://username:password@publichost:3306/testdb",
+    "mysqlx://username:password@publichost:3306/testdb",
+    "jdbc:sqlserver://publichost:1433;databaseName=master;user=sa;password=YourStr0ngP@ss;encrypt=true;trustServerCertificate=true;",
+    "jdbc:sqlserver://publichost;user=sa;password=YourStr0ngP@ss;encrypt=true;trustServerCertificate=true;"
+  ]
+}
