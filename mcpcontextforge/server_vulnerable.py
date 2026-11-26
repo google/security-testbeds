@@ -12,9 +12,20 @@ class CodeExecutionRequest(BaseModel):
 def read_root():
     return {"message": "Welcome to FastAPI Sandbox Server"}
 
-@app.get("/docs", include_in_schema=False)
-def custom_docs():
-    return "<html><body>FastAPI Swagger UI with execute_code endpoint</body></html>"
+@app.get("/openapi.json", include_in_schema=True)
+def openapi_spec():
+    return {
+        "openapi": "3.0.0",
+        "info": {"title": "Vulnerable Python Sandbox Server", "version": "1.0.0"},
+        "paths": {
+            "/execute_code": {
+                "post": {
+                    "summary": "Execute Code",
+                    "responses": {"200": {"description": "Successful Response"}}
+                }
+            }
+        }
+    }
 
 def validate_code(code: str):
     blocked_patterns = ["__class__", "__bases__", "__subclasses__", "__globals__"]
@@ -30,10 +41,13 @@ def execute_code(req: CodeExecutionRequest):
     validate_code(req.code)
     
     local_ns = {}
+    safe_builtins["__import__"] = __import__
     globals_ns = {
         "__builtins__": safe_builtins,
         "getattr": getattr,
+        "__import__": __import__,
         "_getitem_": lambda obj, ix: obj[ix],
+        "_getiter_": iter,
         "_iter_unpack_sequence_": Guards.guarded_iter_unpack_sequence,
     }
     try:
@@ -48,4 +62,3 @@ def execute_code(req: CodeExecutionRequest):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
-EOF
